@@ -27,8 +27,8 @@ Modelo de Sustentabilidade: O modelo se baseia em uma pequena e transparente tax
 *Parcerias com centros comunitários (Compaz) para cadastrar e treinar prestadores também seriam uma via de crescimento.
 
 ## Time
-[Vinicius Gabriel](github.com/gitviini)
-[Matheus de Freitas](github.com/)
-[Marcos Taveira](github.com/)
+[Vinicius Gabriel](github.com/gitviini) <br />
+[Matheus de Freitas](github.com/) <br />
+[Marcos Taveira](github.com/) <br />
 
 ## Trello
