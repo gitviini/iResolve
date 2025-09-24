@@ -1,5 +1,4 @@
-# iResolve
-
+# <img src="./icon.svg" width="30"/> iResolve
 ## Sumário
 [Descrição](#descricao) <br />
 [Time](#time) <br />
