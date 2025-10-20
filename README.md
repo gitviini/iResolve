@@ -2,14 +2,21 @@
     <img src="icon.png" width=150/>
 </p>
 
-<h1 align="center">iResolve</h1>
+<p align="center"><b>iResolve</b></p>
 
-## Sumário
+<div align="center">
+
+![GitHub stars](https://img.shields.io/github/stars/gitviini/iResolve)
+![GitHub issues](https://img.shields.io/github/issues/gitviini/iResolve)
+
+</div>
+
+## :bookmark_tabs: Sumário
 [Descrição](#descricao) <br />
 [Trello](#trello) <br />
 [Time](#time) <br />
 
-## Descrição
+## :bookmark: Descrição
 _**ODS 1:** Erradicação da Pobreza <br />
 **1.4** Até 2030, garantir que todos os homens e mulheres, particularmente os pobres e vulneráveis, tenham direitos iguais aos recursos econômicos, bem como o acesso a serviços básicos, propriedade e controle sobre a terra e outras formas de propriedade, herança, recursos naturais, novas tecnologias apropriadas e serviços financeiros, incluindo microfinanças_
 
@@ -34,11 +41,11 @@ O pagamento é feito via plataforma (PIX ou cartão). O valor fica retido em esc
 Modelo de Sustentabilidade: O modelo se baseia em uma pequena e transparente taxa de serviço (ex: 7% a 10%) sobre o valor de cada transação. Essa taxa é significativamente menor que a de grandes aplicativos de gig economy e serve para manter a plataforma, o suporte e o sistema de pagamentos seguros. <br />
 *Parcerias com centros comunitários (Compaz) para cadastrar e treinar prestadores também seriam uma via de crescimento.
 
-## Trello
+## :bar_chart: Trello
 link: [trello iResolve](https://trello.com/invite/b/68d1d3b16aae0205c2c07d29/ATTIb0afe195adb4e00e5b0fb60bbca4226d9C51A98A/iresolve)
 ![Trello Project Image](./src/trello/image.png)
 
-## Time
+## :busts_in_silhouette: Time
 [Vinicius Gabriel](https://github.com/gitviini/) <br />
 [Matheus de Freitas](https://github.com/matheusprojects) <br />
 [Marcos Fraga](https://github.com/MarcTony0) <br />
