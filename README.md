@@ -12,10 +12,10 @@
 </div>
 
 ## :bookmark_tabs: Sumário
-[Descrição](#descricao) <br />
-[Diagrama de atividade](#diagrama-de-atividades) <br />
-[Trello](#trello) <br />
-[Time](#time) <br />
+[Descrição](#bookmark-descrição) <br />
+[Diagrama de atividade](#chart_with_downwards_trend-diagrama-de-atividades) <br />
+[Trello](#bar_chart-trello) <br />
+[Time](#busts_in_silhouette-time) <br />
 
 ## :bookmark: Descrição
 _**ODS 1:** Erradicação da Pobreza <br />
