@@ -13,6 +13,7 @@
 
 ## :bookmark_tabs: Sumário
 [Descrição](#descricao) <br />
+[Diagrama de atividade](#diagrama-de-atividades) <br />
 [Trello](#trello) <br />
 [Time](#time) <br />
 
@@ -40,6 +41,9 @@ Um chat interno para combinar detalhes e valores.
 O pagamento é feito via plataforma (PIX ou cartão). O valor fica retido em escrow (garantia) e só é liberado para o prestador quando o contratante marca o serviço como "concluído". Isso garante segurança para ambos.
 Modelo de Sustentabilidade: O modelo se baseia em uma pequena e transparente taxa de serviço (ex: 7% a 10%) sobre o valor de cada transação. Essa taxa é significativamente menor que a de grandes aplicativos de gig economy e serve para manter a plataforma, o suporte e o sistema de pagamentos seguros. <br />
 *Parcerias com centros comunitários (Compaz) para cadastrar e treinar prestadores também seriam uma via de crescimento.
+
+## :chart_with_downwards_trend: Diagrama de atividades
+![Diagrama de atividades](./diagrama_de_atividades.png)
 
 ## :bar_chart: Trello
 link: [trello iResolve](https://trello.com/invite/b/68d1d3b16aae0205c2c07d29/ATTIb0afe195adb4e00e5b0fb60bbca4226d9C51A98A/iresolve)
