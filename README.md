@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="icon.png" width=150/>
+    <img src="iresolve_preview.png"/>
 </p>
 
 <p align="center"><b>iResolve</b></p>
