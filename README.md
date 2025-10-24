@@ -18,7 +18,7 @@
 [Time](#busts_in_silhouette-time) <br />
 
 ## :bookmark: Descrição
-O Resolve no Bairro (iResolve) é uma plataforma de micro-trabalhos, desenhada para criar um ecossistema de serviços seguro e eficiente dentro de uma mesma comunidade. A ideia é formalizar e potencializar o famoso "boca a boca", permitindo que quem precisa de um serviço encontre rapidamente um prestador confiável no seu próprio bairro/município, e quem tem uma habilidade possa gerar renda de forma flexível. <br />
+O iResolve é uma plataforma de micro-trabalhos, desenhada para criar um ecossistema de serviços seguro e eficiente dentro de uma mesma comunidade. A ideia é formalizar e potencializar o famoso "boca a boca", permitindo que quem precisa de um serviço encontre rapidamente um prestador confiável no seu próprio bairro/município, e quem tem uma habilidade possa gerar renda de forma flexível. <br />
 [↪ Descrição completa](DESCRIPTION.md)
 
 [screencast](https://drive.google.com/file/d/1Z96b5DC-VthR6tXtd6-uh1292Y8Sm98j/view?usp=sharing)
