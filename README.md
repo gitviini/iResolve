@@ -24,8 +24,8 @@ O iResolve é uma plataforma de micro-trabalhos, desenhada para criar um ecossis
 
 ## :busts_in_silhouette: Time
 [🧑🏽🗣️ Vinicius Gabriel](https://github.com/gitviini/) <br />
-[🧑🏻💻 Matheus de Freitas](https://github.com/matheusprojects) <br />
-[🧑🏾🕹️ Marcos Fraga](https://github.com/MarcTony0) <br />
+[🧑🏾🕹️ Matheus de Freitas](https://github.com/matheusprojects) <br />
+[🧑🏻💻 Marcos Fraga](https://github.com/MarcTony0) <br />
 
 ## :play_or_pause_button: Screencast
 
