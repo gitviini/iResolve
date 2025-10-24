@@ -12,11 +12,11 @@
 </div>
 
 ## :bookmark_tabs: Sumário
-[Descrição](#bookmark-descrição) <br />
-[Screencast](#play_or_pause_button-screencast) <br />
-[Diagrama de atividade](#chart_with_downwards_trend-diagrama-de-atividades) <br />
-[Trello](#bar_chart-trello) <br />
-[Time](#busts_in_silhouette-time) <br />
+[:bookmark: Descrição](#bookmark-descrição) <br />
+[:busts_in_silhouette: Time](#busts_in_silhouette-time) <br />
+[:play_or_pause_button: Screencast](#play_or_pause_button-screencast) <br />
+[:chart_with_downwards_trend: Diagrama de atividades](#chart_with_downwards_trend-diagrama-de-atividades) <br />
+[:bar_chart: Trello](#bar_chart-trello) <br />
 
 ## :bookmark: Descrição
 O iResolve é uma plataforma de micro-trabalhos, desenhada para criar um ecossistema de serviços seguro e eficiente dentro de uma mesma comunidade. A ideia é formalizar e potencializar o famoso "boca a boca", permitindo que quem precisa de um serviço encontre rapidamente um prestador confiável no seu próprio bairro/município, e quem tem uma habilidade possa gerar renda de forma flexível. <br />
