@@ -38,6 +38,8 @@ O iResolve é uma plataforma de micro-trabalhos, desenhada para criar um ecossis
 ## :chart_with_downwards_trend: Diagrama de atividades
 ![Diagrama de atividades](./diagrama_de_atividades.png)
 
+## :bug: Issue/Bug tracker
+![Issue bug tracker print screen](Issue_bug_tracker.png)
 ## :bar_chart: Trello
 link: [trello iResolve](https://trello.com/invite/b/68d1d3b16aae0205c2c07d29/ATTIb0afe195adb4e00e5b0fb60bbca4226d9C51A98A/iresolve)
 ![Trello Project Image](./trello.png)
