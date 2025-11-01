@@ -1,10 +1,12 @@
-import { Component, signal } from '@angular/core';
-import { User } from './user';
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from "@angular/router";
 @Component({
   selector: 'app-root',
-  imports: [User],
+  imports: [RouterOutlet],
   template: `
-    <app-user name="vini"></app-user>
+    <section>
+      <router-outlet></router-outlet>
+    </section>
   `,
 })
 export class App {
