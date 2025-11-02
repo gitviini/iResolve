@@ -1,14 +1,15 @@
 package com.project.app.models.entities;
 
 import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "users")
 public class Users {
@@ -25,36 +26,9 @@ public class Users {
     @Column(length = 25)
     private String password;
 
-    public UUID getId() {
-        return id;
-    }
+    // TODO: A senha aqui tem length = 25, o que é muito pouco para
+    // uma senha criptografada (hash). Verificar isso depois.
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    // ... E TODOS OS GETTERS E SETTERS FORAM APAGADOS
+    // O @Data cuida disso
 }
