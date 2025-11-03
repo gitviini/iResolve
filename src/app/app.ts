@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from "@angular/router";
+import { RouterOutlet } from "@angular/router";
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
@@ -8,6 +8,7 @@ import { RouterLink, RouterOutlet } from "@angular/router";
       <router-outlet></router-outlet>
     </section>
   `,
+  styleUrl: "app.css",
 })
 export class App {
 }

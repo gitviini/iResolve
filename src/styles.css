@@ -1,1 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Inter";
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    /* LIGHT COLORS */
+    --background: #F3F4Fa;
+    --foreground: #1C1C1C;
+    --white: #F7F9FF;
+    --yellow: #FFDE63;
+    --orange: #FFBC4C;
+    --blue: #799EFF;
+    --red: #FF3737;
+    --gray: #1c1c1c30;
+
+    /* SIZES */
+    --small: 5px;
+    --medium: 15px;
+    --high: 20px;
+    --most-high: 40px;
+
+    --small-percent: 40%;
+    --medium-percent: 60%;
+    --high-percent: 80%;
+    --most-high-percent: 90%;
+
+    --small-text: 12px;
+    --medium-text: 16px;
+    --high-text: 24px;
+    --most-high-text: 32px;
+
+    background-color: var(--background);
+    font-size: var(--medium-text);
+}
+
+h1 {
+    font-size: var(--most-high-text);
+}
+
+h2 {
+    font-size: var(--high-text);
+}
+
+input {
+    font-size: var(--medium-text);
+    padding: var(--medium);
+    border-radius: var(--high);
+    border: 1px solid var(--foreground);
+    width: var(--high-percent);
+    background-color: var(--background);
+}
+
+button {
+    font-size: var(--medium-text);
+    cursor: pointer;
+
+    &.primary {
+        padding: var(--medium);
+        border-radius: var(--high);
+        border: none;
+        background-color: var(--blue);
+        color: var(--background);
+        box-shadow: inset 0 -4px 4px #1C1C1C50;
+        width: var(--high-percent);
+    }
+}
+
+a {
+    text-decoration: none;
+
+    &.primary {
+        color: var(--blue);
+    }
+
+    &.secondary {
+        color: var(--foreground);
+    }
+}
