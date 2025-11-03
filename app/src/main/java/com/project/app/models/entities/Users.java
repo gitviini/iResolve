@@ -17,18 +17,15 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(length = 20, nullable = false)
+    @Column(length = 100, nullable = false)
     private String name;
 
     @Column(length = 11, nullable = false, unique = true)
     private String cpf;
 
-    @Column(length = 25)
+    @Column(length = 60)
     private String password;
 
-    // TODO: A senha aqui tem length = 25, o que é muito pouco para
-    // uma senha criptografada (hash). Verificar isso depois.
-
-    // ... E TODOS OS GETTERS E SETTERS FORAM APAGADOS
+    // TODOS OS GETTERS E SETTERS FORAM APAGADOS
     // O @Data cuida disso
 }
