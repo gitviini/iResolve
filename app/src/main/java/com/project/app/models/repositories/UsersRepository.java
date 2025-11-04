@@ -18,5 +18,5 @@ import com.project.app.models.entities.Users;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, UUID> {
 
-    public Users findByCpf(String cpf);
+    public Optional<Users> findByCpf(String cpf);
 }
