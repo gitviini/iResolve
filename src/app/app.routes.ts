@@ -1,23 +1,12 @@
 import { Routes } from '@angular/router';
-import { Home } from "./home/home";
-import { Login } from "./auth/login/login";
-import { Register } from "./auth/register/register";
+import { Register } from "./features/auth/register/register";
 
 export const routes: Routes = [
+    //UH1 : Criar página de cadastro na rota "auth/users"
     {
-        path: "",
-        component: Home,
-        title: "Home",
-    },
-    {
-        path: "auth/login",
-        component: Login,
-        title: "Login",
-    },
-    {
-        path: "auth/register",
+        path: "auth/users",
         component: Register,
-        title: "Register",
+        title: "Cadastrar",
     }
 ]
 

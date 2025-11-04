@@ -1,0 +1,85 @@
+<main>
+    <section class="about-platform">
+        <div class="carrossel">
+            <div class="card">
+                <h1>Bem vindo(a)</h1>
+                <h2>é novo por aqui?</h2>
+            </div>
+        </div>
+        <div class="carrossel-step">
+            <div class="circle focus"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+    </section>
+    <section class="form-container">
+        <div class="bg-yellow-wave">
+        </div>
+        <h1>Cadastrar-se</h1>
+        <form [formGroup]="formRegister" (submit)="submitForm()">
+            <input 
+                id="name"
+                class="{{!formRegister.get('name')?.valid && formRegister.get('name')?.touched ? 'invalid' : ''}}"
+                name="name" 
+                formControlName="name" 
+                type="text" 
+                placeholder="Nome completo" 
+                maxlength="100" 
+                required
+            />
+            <input 
+                id="cpf" 
+                class="{{!formRegister.get('cpf')?.valid && formRegister.get('cpf')?.touched ? 'invalid' : ''}}"
+                name="cpf" 
+                formControlName="cpf" 
+                type="text" 
+                placeholder="CPF" 
+                maxlength="11" 
+                required
+            />
+            <input 
+                id="password" 
+                class="{{!formRegister.get('password')?.valid && formRegister.get('password')?.touched ? 'invalid' : ''}}"
+                name="password" 
+                formControlName="password" 
+                type="password" 
+                placeholder="Senha"
+                maxlength="20" 
+                required
+            />
+            <input 
+                id="confirm-password" 
+                class="{{!formRegister.get('confirmPassword')?.valid && formRegister.get('confirmPassword')?.touched ? 'invalid' : ''}}"
+                name="confirm_password" 
+                formControlName="confirmPassword" 
+                type="password"
+                placeholder="Confirmar senha" 
+                required
+            />
+
+            <div class="forgot-password-container">
+                <a href="" class="secondary">Esqueceu a senha?</a>
+            </div>
+
+            <button class="primary {{!formRegister.valid && formRegister.touched ? 'deactivate' : ''}}"
+                type="submit">Entrar</button>
+
+        </form>
+
+        <a [routerLink]="['/auth/login']" class="primary">
+            Não é cadastrado? Cadastrar.
+        </a>
+
+        @if (formRegister.get("cpf")?.value && formRegister.get("cpf")?.hasError("cpfNotValid") && formRegister.get("cpf")?.touched) {
+            <span class="alert">CPF inválido</span>
+        }
+        
+        @if (formRegister.get("")?.value && formRegister.get("cpf")?.hasError("cpfNotValid") && formRegister.get("cpf")?.touched) {
+            <span class="alert">Senhas não batem</span>
+        }
+
+        @if (!formRegister.valid && formRegister.touched) {
+            <span class="alert">Preencha todos os campos</span>
+        }
+    </section>
+</main>

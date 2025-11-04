@@ -1,9 +1,16 @@
-*{
+* {
     padding: 0;
     margin: 0;
 }
 
-html, body{
+html,
+body {
     width: 100%;
     height: 100%;
+}
+
+.global-toast-container {
+    position: fixed;
+    z-index: 99;
+    right: 0;
 }

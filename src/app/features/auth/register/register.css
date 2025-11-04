@@ -74,6 +74,10 @@ main {
         opacity: 0.75;
     }
 
+    .alert {
+        color: var(--red);
+    }
+
     form {
         width: var(--most-high-percent);
         padding: var(--medium);

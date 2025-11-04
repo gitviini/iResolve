@@ -19,8 +19,10 @@ body {
     --background: #F3F4Fa;
     --foreground: #1C1C1C;
     --white: #F7F9FF;
+
     --yellow: #FFDE63;
     --orange: #FFBC4C;
+    --green: #1AB142;
     --blue: #799EFF;
     --red: #FF3737;
     --gray: #1c1c1c30;
@@ -41,6 +43,11 @@ body {
     --high-text: 24px;
     --most-high-text: 32px;
 
+    /* TIMES */
+    --small-time: 0.1s;
+    --medium-time: 0.2s;
+    --high-time: 0.4s;
+
     background-color: var(--background);
     font-size: var(--medium-text);
 }
@@ -60,11 +67,22 @@ input {
     border: 1px solid var(--foreground);
     width: var(--high-percent);
     background-color: var(--background);
+    transition: var(--small-time) ease-in;
+    outline: none;
+
+    &:focus {
+        border: 1px solid var(--blue);
+    }
+
+    &.invalid {
+        border: 1px solid var(--red);
+    }
 }
 
 button {
     font-size: var(--medium-text);
     cursor: pointer;
+    transition: var(--medium-time) ease-in;
 
     &.primary {
         padding: var(--medium);
@@ -74,6 +92,10 @@ button {
         color: var(--background);
         box-shadow: inset 0 -4px 4px #1C1C1C50;
         width: var(--high-percent);
+    }
+
+    &.deactivate {
+        opacity: 0.5;
     }
 }
 
