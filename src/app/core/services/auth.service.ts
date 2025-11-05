@@ -27,14 +27,22 @@ export class AuthService {
 
   // registrar usuário [UH1]
   async registerUser(userData: UserInterface): Promise<{data: any, status: number}> {
-    const data = await fetch(this.url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData)
-    });
+    try{
 
-    return ({ data: await data.json() ?? {}, status: data.status ?? 500});
+      const data = await fetch(this.url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData)
+      });
+      
+      return ({ data: await data.json() ?? {}, status: data.status ?? 500});
+    }
+    // Erro na requisição
+    catch(error){
+      // mensagem personalizada e status de erro do servidor
+      return {data: {message: "Não foi possível realizar a ação! Tente novamente."}, status: 500};
+    }
   }
 }

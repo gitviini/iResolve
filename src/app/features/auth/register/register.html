@@ -50,17 +50,10 @@
                 name="confirm_password" formControlName="confirmPassword" type="password" placeholder="Confirmar senha"
                 required />
 
-            <div class="forgot-password-container">
-                <a [routerLink]="['/auth/forgot']" class="secondary">Esqueceu a senha?</a>
-            </div>
-
             <button class="primary {{!formRegister.valid && formRegister.touched ? 'deactivate' : ''}}"
                 type="submit">Entrar</button>
         </form>
 
-        <a [routerLink]="['/auth/login']" class="primary">
-            Já é cadastrado? Entrar.
-        </a>
 
         @if (formRegister.get("cpf")?.value && formRegister.get("cpf")?.hasError("cpfNotValid") &&
         formRegister.get("cpf")?.touched) {
@@ -75,5 +68,9 @@
         @if (!formRegister.valid && formRegister.touched) {
         <span class="alert">Preencha todos os campos</span>
         }
+
+        <a [routerLink]="['/auth/login']" class="primary">
+            Já é cadastrado? Entrar.
+        </a>
     </section>
 </main>
