@@ -53,11 +53,17 @@ body {
 }
 
 h1 {
-    font-size: var(--most-high-text);
+    font-size: clamp(var(--small-text), 5dvw, var(--most-high-text));
 }
 
 h2 {
-    font-size: var(--high-text);
+    font-size: clamp(var(--small-text), 4dvw, var(--high-text));
+}
+
+p,
+span,
+a {
+    font-size: clamp(var(--small-text), 2dvw, var(--medium-text));
 }
 
 input {

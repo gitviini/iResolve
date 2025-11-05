@@ -1,8 +1,11 @@
 main {
     width: 100%;
+    min-width: 300px;
     height: 100dvh;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 66% 1fr;
+    grid-template-rows: 1fr;
+    overflow: hidden;
 }
 
 .about-platform {
@@ -11,10 +14,14 @@ main {
     justify-content: space-between;
     align-items: center;
     height: 100dvh;
+    overflow: hidden;
 
     .carrossel {
+        display: flex;
+        flex-flow: row;
         width: 100%;
-        height: 90%;
+        height: 95%;
+        overflow: hidden; 
 
         h1 {
             color: var(--blue);
@@ -22,11 +29,34 @@ main {
 
         .card {
             display: flex;
-            flex-flow: column;
+            flex-flow: row;
             justify-content: center;
             align-items: center;
+            min-width: 100%;
             width: 100%;
             height: 100%;
+            gap: var(--medium);
+            transition: var(--high-time);
+            padding: var(--high);
+
+            &.contract {
+                flex-flow: column;
+                img {
+                    max-width: 80%;
+                }
+            }
+
+            .card-description{
+                display: flex;
+                flex-flow: column;
+                max-width: 40%;
+                gap: var(--small);
+            }
+
+            img {
+                max-height: 80%;
+                max-width: 50%;
+            }
         }
     }
 
@@ -44,7 +74,7 @@ main {
 
 
             &.focus {
-                opacity: 0.6;
+                opacity: 0.8;
             }
         }
     }
@@ -53,11 +83,13 @@ main {
 .form-container {
     display: flex;
     flex-flow: column;
+    width: 100%;
     height: 100dvh;
     justify-content: start;
     align-items: center;
     border-left: 1px solid var(--gray);
     background-color: var(--white);
+    overflow-y: auto;
 
     .bg-yellow-wave {
         background-image: url("/logo_white.svg"), url("/bg_yellow_wave.svg");
@@ -70,7 +102,6 @@ main {
     }
 
     h1 {
-        font-size: var(--high-text);
         opacity: 0.75;
     }
 
@@ -95,5 +126,17 @@ main {
             display: flex;
             justify-content: end;
         }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    main {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    main {
+        grid-template-columns: 0% 100%;
     }
 }

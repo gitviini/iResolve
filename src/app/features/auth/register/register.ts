@@ -3,6 +3,7 @@ import { FormGroup, FormControl, ReactiveFormsModule, Validators, ValidatorFn, A
 import { AuthService } from '../../../core/services/auth.service';
 import { UserInterface } from '../../../core/models/interfaces/user.interface';
 import { RouterLink } from "@angular/router";
+import carrosselEffect from './carrosselEffect';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +16,11 @@ export class Register {
   // injeção de depedência : serviço de autenticação [UH1]
   authService: AuthService = inject(AuthService);
 
+  constructor() {
+    // adiciona efeito de carrossel ao componentes
+    carrosselEffect();
+  }
+
   // instancia o form com seus controls
   formRegister = new FormGroup({
     name: new FormControl("", [Validators.required]),
@@ -23,10 +29,7 @@ export class Register {
     confirmPassword: new FormControl("", [Validators.required]),
   });
 
-  /*
-   *  UH1 : Campos incorretos
-   */
-
+ 
   /*
    *  valida se todos os campos estão preenchidos [UH1]
    *  caso inválido : retorna "cpfNotValid" error

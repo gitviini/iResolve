@@ -10,7 +10,7 @@ import { ToastInterface } from '../models/interfaces/toast.interface';
  */
 
 export class ToastService {
-  private toasts: ToastInterface[] = [];
+  toasts: ToastInterface[] = [];
   private duration = 4000;
 
   // adiciona toast a lista de toasts

@@ -5,6 +5,7 @@ import { ToastService } from './toast.service';
 @Injectable({
   providedIn: 'root'
 })
+
 /*
  *  Serviço de Autenticação de usuário [UH1]
  */
@@ -13,6 +14,16 @@ export class AuthService {
   toastService = inject(ToastService);
 
   private url = "http://localhost:8080/auth/users";
+
+  /**
+   * 
+   * verifica se usuário está loggado
+   * retorna o token de autenticação no localStorage
+   * 
+   */
+  isLogged(){
+    return localStorage.getItem("authToken")
+  }
 
   // registrar usuário [UH1]
   async registerUser(userData: UserInterface): Promise<{data: any, status: number}> {

@@ -7,6 +7,7 @@ import { ToastService } from './core/services/toast.service';
   imports: [RouterOutlet, Toast],
   template: `
     <section>
+      <!-- TOAST MENSAGES [UH1] -->
       <div class="global-toast-container">
         @for (toast of toastService.toasts; track $index) {
           <app-toast [type]="toast.type" [message]="toast.message"/>
