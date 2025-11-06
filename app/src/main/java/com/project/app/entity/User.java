@@ -1,6 +1,10 @@
-package com.project.app.models.entities;
+package com.project.app.entity;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +16,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "users")
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -25,6 +29,12 @@ public class Users {
 
     @Column(length = 60)
     private String password;
+
+    @CreationTimestamp
+    private LocalDateTime created_at;
+
+    @CreationTimestamp
+    private LocalDateTime updated_at;
 
     // TODOS OS GETTERS E SETTERS FORAM APAGADOS
     // O @Data cuida disso

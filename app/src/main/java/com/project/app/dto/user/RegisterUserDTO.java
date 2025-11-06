@@ -1,11 +1,11 @@
-package com.project.app.dto;
+package com.project.app.dto.user;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 // @Data (do Lombok) vai criar os getters e setters para nós.
 @Data
-public class UserDTO {
+public class RegisterUserDTO {
 
     // @NotBlank garante que o campo não seja nulo nem uma string vazia ("").
     // Se for, a API retornará um erro 400 (Bad Request) automaticamente.
