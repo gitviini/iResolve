@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.project.app.dto.user.LoginUserDTO;
 import com.project.app.dto.user.UserResponseDTO;
 import com.project.app.entity.User;
-import com.project.app.exception.InvalidUserCredentialsException;
+import com.project.app.exception.custom.InvalidUserCredentialsException;
 import com.project.app.repository.UserRepository;
 
 /*

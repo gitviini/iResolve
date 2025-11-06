@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.project.app.dto.user.RegisterUserDTO;
 import com.project.app.dto.user.UserResponseDTO;
 import com.project.app.entity.User;
+import com.project.app.exception.custom.UserAlreadyRegisteredException;
 import com.project.app.repository.UserRepository;
 
 /*
@@ -25,7 +26,7 @@ public class RegisterUserUseCase {
 
         // caso usário não seja salvo, lança exception de runtime
         if(registerUserCreated == null){
-            throw new RuntimeException();
+            throw new UserAlreadyRegisteredException();
         }
         
         // caso sucesso: manipula dados tornando-os adequada para resposta (User -> UserResponseDTO)
