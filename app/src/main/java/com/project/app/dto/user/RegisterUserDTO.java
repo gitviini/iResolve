@@ -1,5 +1,7 @@
 package com.project.app.dto.user;
 
+import com.project.app.entity.User;
+
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
@@ -17,4 +19,14 @@ public class RegisterUserDTO {
 
     @NotBlank(message = "O campo 'password' não pode estar vazio")
     private String password;
+
+    // converte DTO para User
+    public User toEntity(RegisterUserDTO registerUserDTO){
+        User user = new User();
+        user.setName(registerUserDTO.getName());
+        user.setCpf(registerUserDTO.getCpf());
+        user.setPassword(registerUserDTO.getPassword());
+
+        return user;
+    }
 }

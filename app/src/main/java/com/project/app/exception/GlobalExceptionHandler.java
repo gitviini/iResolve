@@ -3,6 +3,7 @@ package com.project.app.exception;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -41,6 +42,14 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.CONFLICT)
     @ExceptionHandler(UserAlreadyRegisteredException.class)
     public Map<String, Object> handleUserAlreadyRegisteredException() {
+        Map<String, Object> errors = new HashMap<>();
+        errors.put("message", "Usuário já cadastrado!");
+
+        return errors;
+    }
+    @ResponseStatus(value = HttpStatus.CONFLICT)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public Map<String, Object> handleDataIntegrityViolationException() {
         Map<String, Object> errors = new HashMap<>();
         errors.put("message", "Usuário já cadastrado!");
 

@@ -1,17 +1,12 @@
-package com.project.app.controllers.auth;
+package com.project.app.controller.auth;
 
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.project.app.dto.user.LoginUserDTO;
 import com.project.app.dto.user.RegisterUserDTO;
 import com.project.app.dto.user.UserResponseDTO;
-import com.project.app.exception.custom.InvalidUserCredentialsException;
 import com.project.app.usecase.user.LoginUserUseCase;
 import com.project.app.usecase.user.RegisterUserUseCase;
 

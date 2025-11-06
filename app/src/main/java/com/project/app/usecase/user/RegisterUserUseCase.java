@@ -1,6 +1,7 @@
 package com.project.app.usecase.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.project.app.dto.user.RegisterUserDTO;
@@ -17,28 +18,29 @@ import com.project.app.repository.UserRepository;
 public class RegisterUserUseCase {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     public UserResponseDTO execute(RegisterUserDTO registerUserDTO){
+        // caso usuário já exista, lança exception de usuário já registrado
+        if(userRepository.findByCpf(registerUserDTO.getCpf()).isPresent()){
+            throw new UserAlreadyRegisteredException();
+        }
+
         // nova entidade a partir dos dados recebidos pelo front 
-        User registerUser = toEntity(registerUserDTO);
+        User registerUser = registerUserDTO.toEntity(registerUserDTO);
+        
+        // codifica senha e armazena
+        String passwordEncoded =  passwordEncoder.encode(registerUser.getPassword());
+
+        // coloca senha codificada no usuário
+        registerUser.setPassword(passwordEncoded);
 
         // tenta salvar usuário no banco de dados e recebe resposta (null or User)
         User registerUserCreated = userRepository.save(registerUser);
-
-        // caso usário não seja salvo, lança exception de runtime
-        if(registerUserCreated == null){
-            throw new UserAlreadyRegisteredException();
-        }
         
         // caso sucesso: manipula dados tornando-os adequada para resposta (User -> UserResponseDTO)
         return UserResponseDTO.toDTO(registerUserCreated);
-    }
-
-    private User toEntity(RegisterUserDTO registerUserDTO){
-        User user = new User();
-        user.setName(registerUserDTO.getName());
-        user.setCpf(registerUserDTO.getCpf());
-        user.setPassword(registerUserDTO.getPassword());
-
-        return user;
     }
 }

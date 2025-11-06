@@ -9,9 +9,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Configurar backend para receber requests do frontend [UH2]
 */
 
-@Configuration
+/* @Configuration */
 public class WebConfig implements WebMvcConfigurer {
-    // url do frontend
+    /* // url do frontend
     private String allowedUrl = "http://localhost:4200";
     // método permitidos na comunicação
     private @NonNull String[] allowedMethos = { "GET", "POST", "PUT", "DELETE" };
@@ -27,5 +27,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(maxAge);
-    }
+    } */
 }
