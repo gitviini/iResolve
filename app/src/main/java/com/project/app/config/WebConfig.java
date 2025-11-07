@@ -9,12 +9,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * Configurar backend para receber requests do frontend [UH2]
 */
 
-/* @Configuration */
+@Configuration
 public class WebConfig implements WebMvcConfigurer {
-    /* // url do frontend
+    // url do frontend
     private String allowedUrl = "http://localhost:4200";
     // método permitidos na comunicação
-    private @NonNull String[] allowedMethos = { "GET", "POST", "PUT", "DELETE" };
+    private @NonNull String[] allowedMethos = { "GET", "POST", "PUT", "DELETE", "OPTIONS"};
     // maxAge de uma hora
     private int maxAge = 3600;
 
@@ -22,10 +22,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(@NonNull CorsRegistry corsRegistry) {
         corsRegistry.addMapping("/**")
-                .allowedOriginPatterns(allowedUrl)
+                .allowedOrigins(allowedUrl)
                 .allowedMethods(allowedMethos)
                 .allowedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(maxAge);
-    } */
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import com.project.app.dto.user.LoginUserDTO;
 import com.project.app.dto.user.RegisterUserDTO;
 import com.project.app.dto.user.UserResponseDTO;
+import com.project.app.usecase.jwt.JwtUseCase;
 import com.project.app.usecase.user.LoginUserUseCase;
 import com.project.app.usecase.user.RegisterUserUseCase;
 
@@ -30,6 +31,9 @@ public class AuthController {
 
     // injeção de dependência
     @Autowired
+    private JwtUseCase jwtUseCase;
+
+    @Autowired
     private LoginUserUseCase loginUserUseCase;
 
     @PostMapping("login")
@@ -45,8 +49,11 @@ public class AuthController {
         response.put("user", userResponseDTO);
         response.put("message", "Usuário autenticado com sucesso!");
 
-        // jwt confirm
-        // code ...
+        // gera novo token de autenticação jwt [UH2]
+        String tokenJwt = jwtUseCase.generateToken(userResponseDTO.getCpf());
+        
+        // jwt confirm [UH2]
+        response.put("token", tokenJwt);
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
