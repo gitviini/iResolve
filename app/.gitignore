@@ -34,3 +34,6 @@ build/
 
 # Ignora o banco de dados local H2
 /data
+
+# Ignora configurações locais
+application.properties
