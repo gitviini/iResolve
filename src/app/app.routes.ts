@@ -1,24 +1,18 @@
 import { Routes } from '@angular/router';
-import { Home } from "./home/home";
-import { Login } from "./auth/login/login";
-import { Register } from "./auth/register/register";
+import { Register } from "./features/auth/register/register";
 
 export const routes: Routes = [
-    {
-        path: "",
-        component: Home,
-        title: "Home",
-    },
-    {
-        path: "auth/login",
-        component: Login,
-        title: "Login",
-    },
+    /**
+     * ROTAS PÚBLICAS
+     */
+    // Criar página de cadastro na rota "auth/users" [UH1]
     {
         path: "auth/users",
         component: Register,
-        title: "Register",
+        title: "Cadastrar",
     }
+
+    // TODO : Adiciona authGuard para rotas não públicas
 ]
 
 export default routes;
