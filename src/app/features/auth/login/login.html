@@ -1,0 +1,63 @@
+<main>
+    @defer (on viewport) {
+    <section class="about-platform">
+        <div class="carrossel">
+            <div class="card">
+                <div>
+                    <h1>Bem vindo(a) de volta!</h1>
+                    <h2>Acesse sua conta</h2>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-description">
+                    <h2>Continue de onde parou</h2>
+                    <p>Gerencie seus contratos e necessidades.</p>
+                </div>
+                <img src="/examples/publicar_necessidade.svg" alt="">
+            </div>
+            <div class="card contract">
+                <img src="/examples/contrato.svg" alt="">
+                <span>Segurança e praticidade para você.</span>
+            </div>
+        </div>
+        <div class="carrossel-step">
+            <div class="circle focus"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+        </div>
+    </section>
+    }
+    @placeholder {
+    <div></div>
+    }
+
+    <section class="form-container">
+        <div class="bg-yellow-wave"></div>
+        <h1>Entrar</h1>
+        
+        <form [formGroup]="formLogin" (submit)="submitForm()">
+            <input id="cpf"
+                class="{{!formLogin.get('cpf')?.valid && formLogin.get('cpf')?.touched ? 'invalid' : ''}}"
+                name="cpf" formControlName="cpf" type="text" placeholder="CPF" maxlength="11" required />
+            
+            <input id="password"
+                class="{{!formLogin.get('password')?.valid && formLogin.get('password')?.touched ? 'invalid' : ''}}"
+                name="password" formControlName="password" type="password" placeholder="Senha" required />
+
+            <div class="forgot-password-container">
+                <a [routerLink]="['/auth/forgot']" class="secondary" style="font-size: var(--small-text);">Esqueci minha senha</a>
+            </div>
+
+            <button class="primary {{!formLogin.valid && formLogin.touched ? 'deactivate' : ''}}"
+                type="submit">Acessar</button>
+        </form>
+
+        @if (!formLogin.valid && formLogin.touched) {
+            <span class="alert">Preencha todos os campos</span>
+        }
+
+        <a [routerLink]="['/auth/users']" class="primary" style="margin-top: 20px;">
+            Não tem conta? Cadastre-se.
+        </a>
+    </section>
+</main>

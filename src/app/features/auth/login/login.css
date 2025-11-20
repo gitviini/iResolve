@@ -1,0 +1,142 @@
+main {
+    width: 100%;
+    min-width: 300px;
+    height: 100dvh;
+    display: grid;
+    grid-template-columns: 66% 1fr;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+}
+
+.about-platform {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100dvh;
+    overflow: hidden;
+
+    .carrossel {
+        display: flex;
+        flex-flow: row;
+        width: 100%;
+        height: 95%;
+        overflow: hidden; 
+
+        h1 {
+            color: var(--blue);
+        }
+
+        .card {
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+            align-items: center;
+            min-width: 100%;
+            width: 100%;
+            height: 100%;
+            gap: var(--medium);
+            transition: var(--high-time);
+            padding: var(--high);
+
+            &.contract {
+                flex-flow: column;
+                img {
+                    max-width: 80%;
+                }
+            }
+
+            .card-description{
+                display: flex;
+                flex-flow: column;
+                max-width: 40%;
+                gap: var(--small);
+            }
+
+            img {
+                max-height: 80%;
+                max-width: 50%;
+            }
+        }
+    }
+
+    .carrossel-step {
+        display: flex;
+        gap: var(--small);
+        padding: var(--medium) 0;
+
+        .circle {
+            width: var(--small);
+            height: var(--small);
+            border-radius: var(--medium);
+            background-color: var(--foreground);
+            opacity: 0.3;
+
+
+            &.focus {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+.form-container {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    height: 100dvh;
+    justify-content: start;
+    align-items: center;
+    border-left: 1px solid var(--gray);
+    background-color: var(--white);
+    overflow-y: auto;
+
+    .bg-yellow-wave {
+        background-image: url("/logo_white.svg"), url("/bg_yellow_wave.svg");
+        background-size: 50px, 80%;
+        background-position-y: 0, -15px;
+        background-repeat: repeat, repeat-x;
+        opacity: 0.75;
+        width: 100%;
+        height: 110px;
+    }
+
+    h1 {
+        opacity: 0.75;
+    }
+
+    .alert {
+        color: var(--red);
+    }
+
+    form {
+        width: var(--most-high-percent);
+        padding: var(--medium);
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        gap: var(--medium);
+
+        input {
+            background-color: var(--white);
+        }
+
+        .forgot-password-container {
+            width: var(--high-percent);
+            display: flex;
+            justify-content: end;
+        }
+    }
+}
+
+@media screen and (max-width: 900px) {
+    main {
+        grid-template-columns: 50% 50%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    main {
+        grid-template-columns: 0% 100%;
+    }
+}
