@@ -11,8 +11,9 @@ body {
 
 .global-toast-container {
     position: fixed;
-    z-index: 99;
+    z-index: 9999; /* Coloque um valor bem alto para garantir */
     right: 0;
+    top: 20px; /* Ajuste opcional para não grudar no topo */
 }
 
 @media screen and (max-width: 700px) {
