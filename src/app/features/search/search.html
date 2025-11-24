@@ -1,0 +1,63 @@
+<div class="search-page">
+    
+    <div class="search-header">
+        <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" 
+                   [(ngModel)]="searchTerm" 
+                   (keyup.enter)="onSearch()"
+                   placeholder="Buscar por nome ou bairro (ex: Torre)">
+            <button *ngIf="searchTerm" (click)="searchTerm=''; onSearch()" class="clear-btn">✕</button>
+        </div>
+
+        <div class="filters-container">
+            <button *ngFor="let filter of availableFilters"
+                    class="filter-pill"
+                    [class.active]="selectedFilter === filter"
+                    (click)="toggleFilter(filter)">
+                🏷️ {{ filter }}
+            </button>
+        </div>
+    </div>
+
+    <div class="results-container">
+        <h3 *ngIf="providers.length > 0">Prestadores encontrados</h3>
+        
+        <div class="providers-grid">
+            @for (provider of providers; track $index) {
+                <div class="provider-card">
+                    <div class="card-top">
+                        <img [src]="provider.avatarUrl || 'assets/default-avatar.png'" class="avatar">
+                        <div class="info">
+                            <div class="name-row">
+                                <strong>{{ provider.name }}</strong>
+                                <span class="rating" *ngIf="provider.rating">⭐ {{ provider.rating }}</span>
+                            </div>
+                            <div class="location">📍 {{ provider.neighborhood || 'Sem local' }}</div>
+                        </div>
+                        <span *ngIf="provider.isVerified" class="verified-badge" title="Verificado">✔️</span>
+                    </div>
+                    
+                    <div class="skills-row">
+                        <span class="skill-tag" *ngFor="let skill of (provider.skills ? provider.skills.split(',') : [])">
+                            {{ skill }}
+                        </span>
+                    </div>
+
+                    <div class="card-actions">
+                        <button class="btn-outline">❤️</button>
+                        <button class="btn-outline">💬 Chat</button>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div *ngIf="!loading && providers.length === 0" class="empty-state">
+            <p>Nenhum prestador encontrado com esses filtros.</p>
+        </div>
+
+        <div class="load-more-area" *ngIf="providers.length > 0">
+            <button (click)="loadMore()" class="btn-primary">Ver mais</button>
+        </div>
+    </div>
+</div>

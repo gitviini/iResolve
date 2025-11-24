@@ -1,0 +1,168 @@
+.search-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Barra de Busca */
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.search-input-wrapper input {
+    border: none;
+    outline: none;
+    flex: 1;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.clear-btn {
+    background: none; border: none; cursor: pointer; color: #999;
+}
+
+/* Filtros */
+.filters-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.filter-pill {
+    background: #eee;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.filter-pill.active {
+    background: var(--blue);
+    color: white;
+}
+
+/* Grid de Cards */
+.providers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.provider-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s;
+    border: 1px solid #f0f0f0;
+}
+
+.provider-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.avatar {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #eee;
+}
+
+.info {
+    flex: 1;
+}
+
+.name-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+.rating {
+    font-size: 14px;
+    background: #fff8e1;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+.location {
+    color: #666;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.verified-badge {
+    position: absolute;
+    bottom: 0;
+    left: 45px;
+    background: white;
+    border-radius: 50%;
+}
+
+.skills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.skill-tag {
+    background: #f3f4fa;
+    color: #555;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-outline {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.btn-outline:hover {
+    background: #f9f9f9;
+}
+
+.btn-primary {
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.empty-state {
+    text-align: center;
+    color: #777;
+    padding: 40px;
+}

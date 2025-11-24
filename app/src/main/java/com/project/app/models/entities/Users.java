@@ -28,4 +28,16 @@ public class Users {
 
     // TODOS OS GETTERS E SETTERS FORAM APAGADOS
     // O @Data cuida disso
+
+    private String neighborhood; // Ex: "Torre"
+    
+    private String skills;       // Ex: "Pedreiro, Pintor"
+    
+    private Double rating;       // Ex: 4.5
+    
+    private boolean isVerified;  // Para o selo azul
+    
+    @Column(columnDefinition = "TEXT")
+    private String avatarUrl;    // Foto do perfil (Base64 ou URL)
+
 }
