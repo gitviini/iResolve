@@ -1,0 +1,109 @@
+<div class="profile-container">
+    
+    <div class="header-bg">
+        </div>
+
+    <div class="profile-content">
+        
+        <div class="top-section">
+            <div class="avatar-wrapper">
+                <img [src]="(isEditing ? editForm.avatarUrl : user.avatarUrl) || 'assets/default-avatar.png'" class="avatar">
+                <label *ngIf="isEditing" class="edit-avatar-btn" for="avatarUpload">📷</label>
+                <input id="avatarUpload" type="file" (change)="onFileSelected($event)" hidden *ngIf="isEditing">
+            </div>
+
+            <div class="top-actions" *ngIf="!isEditing">
+                <button class="btn-white">📇 Contrato</button>
+                <button class="btn-white" (click)="toggleEdit()">✏️ Editar</button>
+            </div>
+        </div>
+
+        <div class="view-mode" *ngIf="!isEditing">
+            <div class="user-identity">
+                <h1>{{ user.name }}</h1>
+                <span *ngIf="user.isVerified" class="verified-badge">✔️ Verificado</span>
+                <p class="email-cpf">{{ user.cpf || 'CPF não informado' }}</p> </div>
+
+            <div class="stats-row">
+                <div class="stat">
+                    <strong>⭐ {{ user.rating || '5,0' }}</strong>
+                </div>
+                <div class="divider"></div>
+                <div class="stat">
+                    <strong>30</strong>
+                    <span>Necessidades</span>
+                </div>
+                <div class="divider"></div>
+                <div class="stat">
+                    <strong>15</strong>
+                    <span>Prestações</span>
+                </div>
+            </div>
+
+            <div class="info-block">
+                <div class="location-row">
+                    <span>📍 <strong>{{ user.neighborhood || 'Local não informado' }}</strong></span>
+    
+                    <button 
+                        class="status-badge" 
+                        [class.available]="isAvailable" 
+                        [class.unavailable]="!isAvailable"
+                        (click)="toggleAvailability()">
+                        {{ isAvailable ? 'Disponível' : 'Indisponível' }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="info-block">
+                <h3>Sobre mim</h3>
+                <p>{{ user.biography || 'Nenhuma biografia adicionada.' }}</p>
+            </div>
+
+            <div class="info-block">
+                <h3>Habilidades</h3>
+                <div class="skills-list">
+                    <span class="skill-pill" *ngFor="let skill of getSkillsArray(user.skills)">
+                        🏷️ {{ skill }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="edit-mode" *ngIf="isEditing">
+            
+            <div class="input-group">
+                <span class="icon">T</span>
+                <input type="text" [(ngModel)]="editForm.name" placeholder="Nome Completo">
+            </div>
+
+            <div class="input-group">
+                <span class="icon">📍</span>
+                <input type="text" [(ngModel)]="editForm.neighborhood" placeholder="Bairro - CEP">
+            </div>
+
+            <div class="input-group textarea-group">
+                <label>Sobre mim</label>
+                <textarea [(ngModel)]="editForm.biography" rows="4" maxlength="100"></textarea>
+                <span class="counter">{{ editForm.biography?.length || 0 }}/100</span>
+            </div>
+
+            <div class="input-group">
+                <span class="icon">🏷️</span>
+                <input type="text" [(ngModel)]="newSkill" (keyup.enter)="addSkill()" placeholder="Adicionar habilidade + Enter">
+            </div>
+            
+            <div class="skills-list">
+                <span class="skill-pill edit" *ngFor="let skill of getSkillsArray(editForm.skills)">
+                    {{ skill }} 
+                    <span (click)="removeSkill(skill)" class="remove-icon">✕</span>
+                </span>
+            </div>
+
+            <div class="actions-footer">
+                <button class="btn-cancel" (click)="toggleEdit()">Cancelar 🗑️</button>
+                <button class="btn-save" (click)="save()">Salvar ✈️</button>
+            </div>
+        </div>
+
+    </div>
+</div>

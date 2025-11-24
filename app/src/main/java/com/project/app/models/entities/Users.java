@@ -40,4 +40,6 @@ public class Users {
     @Column(columnDefinition = "TEXT")
     private String avatarUrl;    // Foto do perfil (Base64 ou URL)
 
+    @Column(columnDefinition = "TEXT")
+    private String biography;
 }

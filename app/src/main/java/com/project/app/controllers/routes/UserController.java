@@ -7,8 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.app.dto.UserResponseDTO;
+import com.project.app.dto.UserUpdateDTO;
 import com.project.app.models.entities.Users;
 import com.project.app.models.repositories.UsersRepository;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/users")
@@ -17,23 +21,30 @@ public class UserController {
     @Autowired
     private UsersRepository usersRepository;
 
+    // --- UH5: BUSCAR PRESTADORES ---
     @GetMapping
     public ResponseEntity<?> searchProviders(
-            @RequestParam(required = false) String term,  // O que digitou na busca
-            @RequestParam(required = false) String skill, // Filtro de tag (ex: Pedreiro)
+            @RequestParam(required = false) String term,
+            @RequestParam(required = false) String skill,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "30") int size
     ) {
         try {
             PageRequest pageable = PageRequest.of(page, size);
             
-            // Chama a busca no repositório
             Page<Users> result = usersRepository.searchProviders(term, skill, pageable);
 
-            // Transforma a lista de Users (com senha) em UserResponseDTO (seguro)
+            // ATENÇÃO: Atualizamos este construtor para incluir CPF e Biografia (novos campos)
             Page<UserResponseDTO> dtos = result.map(u -> new UserResponseDTO(
-                u.getId(), u.getName(), u.getNeighborhood(), u.getSkills(), 
-                u.getRating(), u.isVerified(), u.getAvatarUrl()
+                u.getId(), 
+                u.getName(), 
+                u.getCpf(),           // Novo
+                u.getNeighborhood(), 
+                u.getSkills(), 
+                u.getRating(), 
+                u.isVerified(), 
+                u.getAvatarUrl(),
+                u.getBiography()      // Novo
             ));
 
             return ResponseEntity.ok(dtos);
@@ -41,5 +52,48 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Falha ao pesquisar prestadores");
         }
+    }
+
+    // --- UH12: VER PERFIL ---
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getProfile(@PathVariable UUID id) {
+        Optional<Users> userOpt = usersRepository.findById(id);
+
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.status(404).body("Usuário não encontrado");
+        }
+
+        Users u = userOpt.get();
+        
+        return ResponseEntity.ok(new UserResponseDTO(
+            u.getId(), u.getName(), u.getCpf(), u.getNeighborhood(), u.getSkills(), 
+            u.getRating(), u.isVerified(), u.getAvatarUrl(), u.getBiography()
+        ));
+    }
+
+    // --- UH12: ATUALIZAR PERFIL ---
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateProfile(@PathVariable UUID id, @RequestBody UserUpdateDTO data) {
+        Optional<Users> userOpt = usersRepository.findById(id);
+
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.status(404).body("Usuário não encontrado");
+        }
+
+        Users user = userOpt.get();
+
+        // Atualiza apenas se o dado foi enviado (não é nulo)
+        if (data.getName() != null) user.setName(data.getName());
+        if (data.getNeighborhood() != null) user.setNeighborhood(data.getNeighborhood());
+        if (data.getBiography() != null) user.setBiography(data.getBiography());
+        if (data.getSkills() != null) user.setSkills(data.getSkills());
+        if (data.getAvatarUrl() != null) user.setAvatarUrl(data.getAvatarUrl());
+
+        usersRepository.save(user);
+
+        return ResponseEntity.ok(new UserResponseDTO(
+            user.getId(), user.getName(), user.getCpf(), user.getNeighborhood(), user.getSkills(), 
+            user.getRating(), user.isVerified(), user.getAvatarUrl(), user.getBiography()
+        ));
     }
 }

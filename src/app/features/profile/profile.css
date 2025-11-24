@@ -1,0 +1,275 @@
+.profile-container {
+    background-color: #fff;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Fundo Azul com Padrão */
+.header-bg {
+    height: 120px;
+    background-color: #AEC5FF;
+    background-image: radial-gradient(#ffffff 15%, transparent 16%), radial-gradient(#ffffff 15%, transparent 16%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    opacity: 0.8;
+}
+
+.profile-content {
+    padding: 0 20px;
+    position: relative;
+    top: -50px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Avatar */
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.avatar-wrapper {
+    position: relative;
+}
+
+.avatar {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    background: #FFD700;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.edit-avatar-btn {
+    position: absolute;
+    bottom: 5px; right: 0;
+    background: white;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.top-actions {
+    display: flex;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.btn-white {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 5px;
+}
+
+/* Info Usuário */
+.user-identity h1 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.verified-badge {
+    color: #555;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.email-cpf {
+    color: #666;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Estatísticas */
+.stats-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.stat {
+    text-align: center;
+    display: flex; flex-direction: column;
+}
+
+.divider {
+    width: 1px;
+    background: #ddd;
+}
+
+/* Blocos de Info */
+.info-block {
+    margin-bottom: 20px;
+}
+
+.location-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Botão de Status Interativo (NOVO) */
+.status-badge {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-badge.available {
+    background-color: #00E676; 
+    color: #004D40;
+}
+.status-badge.available:hover {
+    background-color: #00c853;
+}
+
+.status-badge.unavailable {
+    background-color: #FF5252; 
+    color: #FFFFFF;
+}
+.status-badge.unavailable:hover {
+    background-color: #ff1744;
+}
+
+/* Habilidades */
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.skill-pill {
+    background: #E0E0E0;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    display: inline-flex; /* Garante alinhamento */
+    align-items: center;
+    gap: 8px; /* Espaço entre texto e X */
+}
+
+.skill-pill.edit {
+    background: #ddd;
+    padding-right: 10px; /* Ajuste fino */
+}
+
+/* Estilo do X de remover */
+.remove-icon {
+    cursor: pointer;
+    color: #666;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.remove-icon:hover {
+    background-color: #ff5c5c; /* Fundo vermelho ao passar o mouse */
+    color: white;
+}
+
+/* MODO EDIÇÃO (CORRIGIDO: Input Transparente) */
+.input-group {
+    margin-bottom: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc; /* Borda aqui na caixa */
+    border-radius: 30px;
+    padding: 0 15px;
+    background-color: white; /* Fundo branco aqui */
+    height: 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.input-group .icon {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #555;
+    width: 20px;
+    text-align: center;
+}
+
+/* O input fica invisível mas funcional dentro da caixa */
+.input-group input {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+    height: 100%;
+}
+
+/* Textarea */
+.textarea-group {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.textarea-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #1C1C1C;
+}
+
+textarea {
+    width: 100%;
+    border: none;
+    background: transparent;
+    outline: none;
+    resize: none;
+    font-family: inherit;
+    font-size: 14px;
+    color: #555;
+}
+
+.counter {
+    align-self: flex-end;
+    font-size: 10px;
+    color: #888;
+}
+
+/* Botões Rodapé */
+.actions-footer {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-cancel, .btn-save {
+    flex: 1;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex; justify-content: center; gap: 10px;
+}
+
+.btn-cancel { background: #FF5C5C; }
+.btn-save { background: #799EFF; }

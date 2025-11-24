@@ -5,8 +5,11 @@ import { Register } from "./features/auth/register/register";
 // Importando a TELA (Publicar Necessidade)
 import { PublishNeed } from './features/needs/publish-need/publish-need';
 
-// Importando a NOVA TELA (Buscar Prestadores)
+// Importando a TELA (Buscar Prestadores)
 import { Search } from './features/search/search';
+
+// Importando a NOVA TELA (Perfil)
+import { Profile } from './features/profile/profile';
 
 export const routes: Routes = [
     // 1. Regra: Se acessar o site vazio (""), manda para o "/home"
@@ -34,7 +37,13 @@ export const routes: Routes = [
     {
     path: "search",
     component: Search,
-    title: "Buscar Prestadores"
+    title: "Buscar Prestadores",
+    },
+
+    {
+        path: "profile/:id", // Recebe o ID do usuário
+        component: Profile,
+        title: "Perfil"
     }
     // (Sem a rota de Login pois ela não existe nesta branch)
 ];
