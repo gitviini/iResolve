@@ -1,0 +1,76 @@
+<main>
+    <header class="pattern-header">
+        <div class="header-overlay"></div>
+        <div class="connection-container">
+            <div class="avatar-group">
+                <div class="avatar-wrapper">
+                    <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Jorge" alt="Prestador">
+                </div>
+                <span class="name">{{ contract.providerName }}</span>
+            </div>
+
+            <div class="handshake-icon">
+                🤝
+            </div>
+
+            <div class="avatar-group">
+                <div class="avatar-wrapper">
+                    <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Vinicius" alt="Contratante">
+                </div>
+                <span class="name">{{ contract.contractorName }}</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="content-scroll">
+        <h3 class="section-title">Necessidade</h3>
+
+        <div class="service-card">
+            <div class="card-header">
+                <div class="user-info">
+                    <img src="https://api.dicebear.com/9.x/avataaars/svg?seed=Jorge" class="mini-avatar">
+                    <span class="username">{{ contract.providerName }}</span>
+                    <img src="/icons/sucess.svg" class="badge" alt="Verificado">
+                </div>
+                <span class="value">{{ contract.value | currency:'BRL' }}</span>
+            </div>
+
+            <h4 class="service-title">{{ contract.title }}</h4>
+            <div class="location">
+                📍 {{ contract.location }}
+            </div>
+
+            <p class="description">
+                {{ contract.description }}
+            </p>
+
+            <div class="service-images">
+                <div class="img-box">🐶</div>
+                <div class="img-box">🐕</div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>Como funciona o contrato?</h3>
+            <p>
+                No <strong>iResolve</strong> o valor é colocado em <strong>garantia</strong> antes da realização do serviço e liberado ao prestador após a conclusão satisfatória.
+            </p>
+        </div>
+    </section>
+
+    <footer class="actions-footer">
+        <button class="btn-cancel" (click)="cancel()" [disabled]="isLoading">
+            Cancelar 🗑️
+        </button>
+        
+        <button class="btn-confirm" (click)="confirmPayment()" [disabled]="isLoading || contract.status === 'PAID_ESCROW'">
+            @if (isLoading) {
+                Processando...
+            } @else if (contract.status === 'PAID_ESCROW') {
+                Pago ✅
+            } @else {
+                Continuar ➝
+            }
+        </button>
+    </footer>
+</main>

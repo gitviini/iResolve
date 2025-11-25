@@ -3,6 +3,7 @@ import { Register } from "./features/auth/register/register";
 import { Login } from "./features/auth/login/login";
 import { authGuard } from './core/guards/auth-guard'; // Importe o Guard
 import { VerificationComponent } from './features/verification/verification.component';
+import { PaymentComponent } from './features/payment/payment.component';
 
 // Componente temporário para a Home (apenas para teste)
 import { Component } from '@angular/core';
@@ -50,6 +51,12 @@ export const routes: Routes = [
         component: VerificationComponent,
         canActivate: [authGuard],
         title: "Verificar Identidade"
+    },
+    {
+        path: "payment",
+        component: PaymentComponent,
+        canActivate: [authGuard],
+        title: "Contratar e Pagar"
     }
 ];
 
