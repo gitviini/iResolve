@@ -8,6 +8,7 @@ import { PaymentComponent } from './features/payment/payment.component';
 import { Component } from '@angular/core';
 import { CheckoutComponent } from './features/payment/checkout/checkout.component';
 import { RateComponent } from './features/review/reviews/rate/rate.component';
+import { ChatComponent } from './features/chat/chat.component';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -71,6 +72,13 @@ export const routes: Routes = [
         component: RateComponent,
         canActivate: [authGuard],
         title: "Avaliar Serviço"
+    },
+    // Rota UH9
+    {
+        path: "chat",
+        component: ChatComponent,
+        canActivate: [authGuard],
+        title: "Chat"
     }
 ];
 
