@@ -1,0 +1,68 @@
+<main>
+    <header class="header">
+        <button class="back-btn" (click)="goBack()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </button>
+        <h2>Método de pagamento</h2>
+    </header>
+
+    <section class="content">
+        
+        <div class="payment-option" [class.selected]="selectedMethod === 'PIX'" (click)="selectMethod('PIX')">
+            <div class="option-info">
+                <div class="icon-box">💠</div> <span>Pix</span>
+            </div>
+            <div class="radio-circle"></div>
+        </div>
+
+        <div class="card-group">
+            <div class="payment-option" [class.selected]="selectedMethod === 'CARD'" (click)="selectMethod('CARD')">
+                <div class="option-info">
+                    <div class="icon-box">💳</div>
+                    <span>Cartão</span>
+                </div>
+                <div class="radio-circle">
+                    <div class="inner-circle" *ngIf="selectedMethod === 'CARD'"></div>
+                </div>
+            </div>
+
+            @if (selectedMethod === 'CARD') {
+                <div class="saved-card">
+                    <div class="card-icon">🔴</div> <div class="card-text">
+                        <span class="card-name">Crédito Nubank</span>
+                        <span class="card-number">•••• 456</span>
+                    </div>
+                </div>
+                
+                <button class="add-method-btn">
+                    <span>+</span> Adicionar método
+                </button>
+            }
+        </div>
+
+    </section>
+
+    <footer class="footer-summary">
+        <div class="summary-row">
+            <span>Transferência</span>
+            <span>{{ summary.base | currency:'BRL' }}</span>
+        </div>
+        <div class="summary-row fee">
+            <span>Taxa de serviço</span>
+            <span>{{ summary.fee | currency:'BRL' }}</span>
+        </div>
+        
+        <div class="divider"></div>
+
+        <div class="summary-row total">
+            <span>Valor total</span>
+            <span>{{ summary.total | currency:'BRL' }}</span>
+        </div>
+
+        <button class="pay-btn" (click)="pay()" [disabled]="isLoading">
+            {{ isLoading ? 'Processando...' : 'Pagar' }}
+        </button>
+    </footer>
+</main>

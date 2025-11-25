@@ -7,6 +7,7 @@ import { PaymentComponent } from './features/payment/payment.component';
 
 // Componente temporário para a Home (apenas para teste)
 import { Component } from '@angular/core';
+import { CheckoutComponent } from './features/payment/checkout/checkout.component';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -57,6 +58,12 @@ export const routes: Routes = [
         component: PaymentComponent,
         canActivate: [authGuard],
         title: "Contratar e Pagar"
+    },
+    {
+        path: "payment/checkout",
+        component: CheckoutComponent, 
+        canActivate: [authGuard],
+        title: "Pagamento"
     }
 ];
 

@@ -6,13 +6,12 @@ import { ContractDetails } from '../models/interfaces/payment.interface';
 })
 export class PaymentService {
 
-  // Mock de dados para a tela (Simulando o que viria do backend)
   private mockContract: ContractDetails = {
     id: '123',
     title: 'Passear com cachorro',
     value: 100.00,
     location: 'Torre - Recife',
-    description: 'Vou viajar e preciso de alguém para passear com meu cachorro Rex por 3 dias. Ele é dócil.',
+    description: 'Vou viajar e preciso de alguém para passear com meu cachorro Rex por 3 dias.',
     providerName: 'Jorge Lucio',
     contractorName: 'Vinicius Gabriel',
     status: 'PENDING'
@@ -22,14 +21,21 @@ export class PaymentService {
     return this.mockContract;
   }
 
-  // Simula o pagamento [Checklist Item 1]
-  async processPayment(contractId: string): Promise<boolean> {
-    // Simula delay de rede
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Atualiza status para "Pagamento em Garantia" [Checklist Item 2]
+  // [NOVO] Calcula os valores finais para o checkout
+  getPaymentSummary() {
+    const baseValue = this.mockContract.value;
+    const serviceFee = 3.00; // Taxa fixa ou % (ex: 3%)
+    return {
+      base: baseValue,
+      fee: serviceFee,
+      total: baseValue + serviceFee
+    };
+  }
+
+  // Finaliza o pagamento
+  async finalizePayment(method: 'PIX' | 'CARD'): Promise<boolean> {
+    await new Promise(resolve => setTimeout(resolve, 2000)); // Simula delay
     this.mockContract.status = 'PAID_ESCROW';
-    
     return true;
   }
 }

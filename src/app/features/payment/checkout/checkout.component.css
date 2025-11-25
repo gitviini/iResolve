@@ -1,0 +1,200 @@
+main {
+    width: 100%;
+    height: 100dvh;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Header */
+.header {
+    background-color: #B8D0FF;
+    background-image: radial-gradient(#799EFF 15%, transparent 16%);
+    background-size: 20px 20px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    padding-top: 40px; /* Espaço status bar */
+    position: relative;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    margin-right: 15px;
+}
+
+h2 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Conteúdo */
+.content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Opções de Pagamento */
+.payment-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px; /* Arredondado forte */
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: white;
+}
+
+.payment-option.selected {
+    border-color: #333;
+    background-color: #fff;
+}
+
+.option-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    color: #333;
+}
+
+.icon-box {
+    font-size: 18px;
+}
+
+/* Radio Button Customizado */
+.radio-circle {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.payment-option.selected .radio-circle {
+    border-color: #333;
+}
+
+.inner-circle {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+}
+
+/* Grupo do Cartão */
+.card-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid #333; /* Borda preta quando selecionado */
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.card-group .payment-option {
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #eee;
+}
+
+.saved-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background-color: #f0f0f0; /* Cinza claro */
+}
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+}
+
+.card-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.card-number {
+    color: #777;
+    font-size: 11px;
+}
+
+.add-method-btn {
+    background: none;
+    border: none;
+    padding: 15px;
+    text-align: left;
+    color: #555;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.add-method-btn span {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+/* Footer Resumo */
+.footer-summary {
+    padding: 20px;
+    background-color: var(--white);
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.summary-row.total {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.divider {
+    height: 1px;
+    background-color: #ddd;
+    margin: 10px 0;
+}
+
+.pay-btn {
+    width: 100%;
+    height: 50px;
+    background-color: #799EFF; /* Azul do tema */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(121, 158, 255, 0.4);
+}
+
+.pay-btn:disabled {
+    background-color: #ccc;
+    box-shadow: none;
+}
