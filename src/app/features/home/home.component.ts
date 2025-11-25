@@ -3,13 +3,10 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-// Services
-// Note que usamos apenas dois '../' para voltar à pasta 'app'
 import { OpportunityService } from '../../core/services/opportunity.service';
 import { ProviderService } from '../../core/services/provider.service';
 import { ToastService } from '../../core/services/toast.service';
 
-// Interfaces
 import { Opportunity } from '../../core/models/interfaces/opportunity.interface';
 import { Provider } from '../../core/models/interfaces/provider.interface';
 
@@ -21,38 +18,34 @@ import { Provider } from '../../core/models/interfaces/provider.interface';
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  // Injeção de dependências
   opportunityService = inject(OpportunityService);
   providerService = inject(ProviderService);
   toastService = inject(ToastService);
   router = inject(Router);
 
-  // Estado da Tela
-  activeTab: 'PROVIDERS' | 'NEEDS' = 'PROVIDERS'; // Aba inicial
+  activeTab: 'PROVIDERS' | 'NEEDS' = 'PROVIDERS'; 
   searchTerm: string = '';
 
-  // Dados
   opportunities: Opportunity[] = [];
   providers: Provider[] = [];
+  
+  // Controle de loading do scroll infinito
+  isLoadingMore = false; 
 
   ngOnInit(): void {
-    // Carrega a lista de Vagas (Oportunidades)
     this.opportunityService.getOpportunities().subscribe(data => {
       this.opportunities = data;
     });
 
-    // Carrega a lista de Prestadores
     this.providerService.getProviders().subscribe(data => {
       this.providers = data;
     });
   }
 
-  // --- Lógica das Abas e Busca ---
-
   switchTab(tab: 'PROVIDERS' | 'NEEDS') {
     this.activeTab = tab;
-    this.searchTerm = ''; // Limpa a busca ao trocar de aba
-    this.onSearch();      // Reseta a listagem para o original
+    this.searchTerm = ''; 
+    this.onSearch();      
   }
 
   onSearch() {
@@ -63,22 +56,36 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  // --- Navegação Principal (Cards) ---
+  // [UH13] Scroll Infinito
+  onScroll(event: any) {
+    // Só carrega mais se estiver na aba de NECESSIDADES e não estiver carregando
+    if (this.activeTab === 'NEEDS' && !this.isLoadingMore) {
+      const element = event.target;
+      // Verifica se chegou no final do scroll (com uma margem de 50px)
+      if (element.scrollHeight - element.scrollTop <= element.clientHeight + 50) {
+        this.loadMoreItems();
+      }
+    }
+  }
+
+  loadMoreItems() {
+    this.isLoadingMore = true;
+    // Simula delay de carregamento
+    setTimeout(() => {
+      this.opportunityService.loadMore();
+      this.isLoadingMore = false;
+    }, 1000);
+  }
 
   openChat(id: string) {
-    // Navega para o chat (UH9)
     this.router.navigate(['/chat']);
   }
 
   goToPublish() {
-    // Navega para publicar necessidade (UH3)
     this.router.navigate(['/needs/publish']);
   }
 
-  // --- Navegação do Menu Inferior (Bottom Nav) ---
-
   goToHome() {
-    // Rola suavemente para o topo e reseta filtros se quiser
     window.scrollTo({ top: 0, behavior: 'smooth' });
     if (this.searchTerm) {
       this.searchTerm = '';
@@ -87,11 +94,8 @@ export class HomeComponent implements OnInit {
   }
 
   goToSearch() {
-    // Foca no input de busca para facilitar
     const input = document.querySelector<HTMLInputElement>('.search-box input');
-    if (input) {
-      input.focus();
-    }
+    if (input) input.focus();
   }
 
   goToChatList() {
@@ -99,6 +103,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToProfile() {
-    this.router.navigate(['/profile']); // Agora vai para a tela real!
+    this.router.navigate(['/profile']);
   }
-  }
+}

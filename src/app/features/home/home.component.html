@@ -30,7 +30,7 @@
         </button>
     </div>
 
-    <section class="feed-container">
+    <section class="feed-container" (scroll)="onScroll($event)">
         
         @if (activeTab === 'PROVIDERS') {
             @for (provider of providers; track provider.id) {
@@ -47,22 +47,18 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="location">📍 {{ provider.location }}</div>
-
                     <div class="skills">
                         @for (skill of provider.skills; track $index) {
                             <span class="tag">🏷️ {{ skill }}</span>
                         }
                     </div>
-
                     <div class="card-footer">
                         <button class="icon-btn">🤍</button>
                         <button class="icon-btn chat-btn" (click)="openChat(provider.id)">💬</button>
                     </div>
                 </div>
             }
-
             @if (providers.length === 0) {
                 <div class="empty-state">Nenhum prestador encontrado.</div>
             }
@@ -75,18 +71,33 @@
                         <div class="user-info">
                             <img [src]="item.contractorAvatar" class="avatar">
                             <span class="name">{{ item.contractorName }}</span>
+                            <img *ngIf="item.isVerified" src="/icons/sucess.svg" class="badge" width="14">
                         </div>
                         <span class="price">{{ item.price | currency:'BRL' }}</span>
                     </div>
                     <h3 class="card-title">{{ item.title }}</h3>
                     <div class="location">📍 {{ item.location }} <span class="time">• {{ item.timePosted }}</span></div>
                     <div class="description"><p>{{ item.description }}</p></div>
+                    
+                    <div class="card-images" *ngIf="item.images.length > 0">
+                        @for (img of item.images; track $index) {
+                            <img [src]="img" class="thumb">
+                        }
+                    </div>
+
                     <div class="card-footer">
                         <button class="icon-btn">🤍</button>
                         <button class="icon-btn chat-btn" (click)="openChat(item.id)">💬 Tenho Interesse</button>
                     </div>
                 </div>
             }
+            
+            @if (isLoadingMore) {
+                <div style="text-align: center; padding: 20px; color: #888;">
+                    Carregando mais... ↻
+                </div>
+            }
+
             @if (opportunities.length === 0) {
                 <div class="empty-state">Nenhuma vaga encontrada.</div>
             }
@@ -95,20 +106,9 @@
     </section>
 
     <nav class="bottom-nav">
-        <button class="nav-item active" (click)="goToHome()">
-            🏠
-        </button>
-        
-        <button class="nav-item" (click)="goToSearch()">
-            🔍
-        </button>
-        
-        <button class="nav-item" (click)="goToChatList()">
-            💬
-        </button>
-        
-        <button class="nav-item" (click)="goToProfile()">
-            👤
-        </button>
+        <button class="nav-item active" (click)="goToHome()">🏠</button>
+        <button class="nav-item" (click)="goToSearch()">🔍</button>
+        <button class="nav-item" (click)="goToChatList()">💬</button>
+        <button class="nav-item" (click)="goToProfile()">👤</button>
     </nav>
 </main>
