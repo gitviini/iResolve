@@ -99,6 +99,6 @@ export class HomeComponent implements OnInit {
   }
 
   goToProfile() {
-    this.toastService.add("Perfil em construção!", "warning");
+    this.router.navigate(['/profile']); // Agora vai para a tela real!
   }
-}
+  }

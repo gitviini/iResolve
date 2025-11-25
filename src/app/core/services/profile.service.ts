@@ -1,0 +1,52 @@
+import { Injectable } from '@angular/core';
+import { UserProfile } from '../models/interfaces/profile.interface';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProfileService {
+
+  // Mock Inicial
+  private mockProfile: UserProfile = {
+    id: '1',
+    name: 'Vinicius Gabriel',
+    email: 'vgsb@cesar.school',
+    avatarUrl: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Vinicius',
+    rating: 5.0,
+    needsCount: 30,
+    servicesCount: 15,
+    location: 'Torre - 50620-520',
+    status: 'AVAILABLE',
+    bio: 'Me chamo Vinicius Gabriel, curso ADS na Cesar School e adoro música.',
+    skills: ['Pedreiro', 'Pintor'],
+    myNeeds: [
+      {
+        id: '101',
+        title: 'Passear com cachorro',
+        price: 100.00,
+        location: 'Torre',
+        description: 'Preciso de alguém para passear com meu cachorro...',
+        contractorName: 'Vinicius', // Ele mesmo
+        contractorAvatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Vinicius',
+        isVerified: true,
+        images: ['https://placedog.net/500/280?id=1'],
+        timePosted: 'Agora'
+      }
+    ]
+  };
+
+  private profile$ = new BehaviorSubject<UserProfile>(this.mockProfile);
+
+  getProfile() {
+    return this.profile$.asObservable();
+  }
+
+  // Simula a atualização [Checklist Item 2]
+  async updateProfile(updatedData: UserProfile): Promise<boolean> {
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Delay
+    this.mockProfile = updatedData;
+    this.profile$.next(this.mockProfile);
+    return true;
+  }
+}

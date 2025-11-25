@@ -1,0 +1,98 @@
+<main *ngIf="profile">
+    <header class="pattern-header">
+        <div class="header-actions">
+            <button class="action-chip white">
+                📄 Contratos
+            </button>
+            
+            <button class="action-chip white" (click)="toggleEdit()" *ngIf="!isEditing">
+                ✏️ Editar
+            </button>
+            <button class="action-chip save" (click)="save()" *ngIf="isEditing" [disabled]="isLoading">
+                {{ isLoading ? '...' : '💾 Salvar' }}
+            </button>
+        </div>
+    </header>
+
+    <section class="profile-content">
+        <div class="avatar-wrapper">
+            <img [src]="profile.avatarUrl" alt="Profile">
+            <button class="camera-btn" *ngIf="isEditing">📷</button>
+        </div>
+
+        <div class="main-info">
+            <h2 *ngIf="!isEditing">{{ profile.name }}</h2>
+            <input *ngIf="isEditing" [(ngModel)]="editForm.name" class="edit-input name-input">
+
+            <p class="email">{{ profile.email }}</p>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat">
+                <span class="value">⭐ {{ profile.rating | number:'1.1-1' }}</span>
+                <span class="label">Avaliação</span>
+            </div>
+            <div class="divider"></div>
+            <div class="stat">
+                <span class="value">{{ profile.needsCount }}</span>
+                <span class="label">Necessidades</span>
+            </div>
+            <div class="divider"></div>
+            <div class="stat">
+                <span class="value">{{ profile.servicesCount }}</span>
+                <span class="label">Prestações</span>
+            </div>
+        </div>
+
+        <div class="location-status">
+            <div class="loc-info">
+                <span>📍</span>
+                <span *ngIf="!isEditing">{{ profile.location }}</span>
+                <input *ngIf="isEditing" [(ngModel)]="editForm.location" class="edit-input">
+            </div>
+            <div class="status-badge available" *ngIf="profile.status === 'AVAILABLE'">
+                Disponível
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Sobre mim</h3>
+            <p *ngIf="!isEditing">{{ profile.bio }}</p>
+            <textarea *ngIf="isEditing" [(ngModel)]="editForm.bio" rows="3" class="edit-input"></textarea>
+        </div>
+
+        <div class="section">
+            <h3>Habilidades</h3>
+            <div class="skills-container">
+                @for (skill of profile.skills; track $index) {
+                    <span class="skill-tag">🏷️ {{ skill }}</span>
+                }
+                <button *ngIf="isEditing" class="add-skill">+</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Minhas Necessidades</h3>
+            @for (item of profile.myNeeds; track item.id) {
+                <div class="mini-card">
+                    <div class="mini-header">
+                        <img [src]="item.contractorAvatar" class="mini-avatar">
+                        <div class="mini-info">
+                            <strong>{{ item.contractorName }}</strong>
+                            <small>{{ item.timePosted }}</small>
+                        </div>
+                        <strong class="price">R$ {{ item.price }}</strong>
+                    </div>
+                    <p class="mini-title">{{ item.title }}</p>
+                </div>
+            }
+        </div>
+    </section>
+
+    <nav class="bottom-nav">
+        <a [routerLink]="['/home']" class="nav-item">🏠</a>
+        <a [routerLink]="['/home']" class="nav-item">🔍</a>
+        <a [routerLink]="['/chat']" class="nav-item">💬</a>
+        <a class="nav-item active">👤</a>
+    </nav>
+</main>

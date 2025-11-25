@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Register } from "./features/auth/register/register";
 import { Login } from "./features/auth/login/login";
 import { authGuard } from './core/guards/auth-guard';
+import { ProfileComponent } from './features/profile/profile.component';
 
 // Import dos Componentes das Features
 import { HomeComponent } from './features/home/home.component';
@@ -93,6 +94,14 @@ export const routes: Routes = [
         component: RateComponent,
         canActivate: [authGuard],
         title: "Avaliar Serviço"
+    },
+
+    //UH12 - Perfil
+    {
+        path: "profile",
+        component: ProfileComponent,
+        canActivate: [authGuard],
+        title: "Meu Perfil"
     }
 ];
 
