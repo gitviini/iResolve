@@ -4,10 +4,10 @@ import { Login } from "./features/auth/login/login";
 import { authGuard } from './core/guards/auth-guard'; // Importe o Guard
 import { VerificationComponent } from './features/verification/verification.component';
 import { PaymentComponent } from './features/payment/payment.component';
-
 // Componente temporário para a Home (apenas para teste)
 import { Component } from '@angular/core';
 import { CheckoutComponent } from './features/payment/checkout/checkout.component';
+import { RateComponent } from './features/review/reviews/rate/rate.component';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -64,6 +64,13 @@ export const routes: Routes = [
         component: CheckoutComponent, 
         canActivate: [authGuard],
         title: "Pagamento"
+    },
+    // Rota UH8
+    {
+        path: "reviews/rate",
+        component: RateComponent,
+        canActivate: [authGuard],
+        title: "Avaliar Serviço"
     }
 ];
 
