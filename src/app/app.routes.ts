@@ -1,26 +1,22 @@
 import { Routes } from '@angular/router';
 import { Register } from "./features/auth/register/register";
 import { Login } from "./features/auth/login/login";
-import { authGuard } from './core/guards/auth-guard'; // Importe o Guard
-import { VerificationComponent } from './features/verification/verification.component';
+import { authGuard } from './core/guards/auth-guard';
+
+// Import dos Componentes das Features
+import { HomeComponent } from './features/home/home.component';
+import { PublishComponent } from './features/needs/publish/publish.component'; // <--- O erro era a falta deste
 import { PaymentComponent } from './features/payment/payment.component';
-// Componente temporário para a Home (apenas para teste)
-import { Component } from '@angular/core';
 import { CheckoutComponent } from './features/payment/checkout/checkout.component';
-import { RateComponent } from './features/review/reviews/rate/rate.component';
+import { RateComponent } from './features/review/rate/rate.component'; // Atenção: 'review' no singular
 import { ChatComponent } from './features/chat/chat.component';
-@Component({
-  selector: 'app-home',
-  standalone: true,
-  template: `<h1>Bem-vindo! Você está logado.</h1>`
-})
-class HomeComponent {}
+import { VerificationComponent } from './features/verification/verification.component';
 
 export const routes: Routes = [
     // Redirecionamento inicial
     {
         path: "",
-        redirectTo: "home", // Mudamos para home para testar o Guard
+        redirectTo: "home",
         pathMatch: "full"
     },
     
@@ -41,44 +37,62 @@ export const routes: Routes = [
         title: "Recuperar Senha"
     },
 
-    // --- ROTAS PRIVADAS (Protegidas pelo Guard) ---
+    // --- ROTAS PRIVADAS (Protegidas) ---
+    
+    // UH10 - Home (Mural)
     {
         path: "home",
-        component: HomeComponent, // Use seu componente Home real aqui futuramente
-        canActivate: [authGuard], // <--- AQUI ESTÁ A PROTEÇÃO DO CHECKLIST
+        component: HomeComponent, // Agora aponta para o arquivo correto!
+        canActivate: [authGuard],
         title: "Início"
     },
+
+    // UH3 - Publicar
+    {
+        path: "needs/publish",
+        component: PublishComponent,
+        canActivate: [authGuard],
+        title: "Publicar Necessidade"
+    },
+
+    // UH4 - Verificação
     {
         path: "verification",
         component: VerificationComponent,
         canActivate: [authGuard],
         title: "Verificar Identidade"
     },
-    {
-        path: "payment",
-        component: PaymentComponent,
-        canActivate: [authGuard],
-        title: "Contratar e Pagar"
-    },
-    {
-        path: "payment/checkout",
-        component: CheckoutComponent, 
-        canActivate: [authGuard],
-        title: "Pagamento"
-    },
-    // Rota UH8
-    {
-        path: "reviews/rate",
-        component: RateComponent,
-        canActivate: [authGuard],
-        title: "Avaliar Serviço"
-    },
-    // Rota UH9
+
+    // UH9 - Chat
     {
         path: "chat",
         component: ChatComponent,
         canActivate: [authGuard],
         title: "Chat"
+    },
+
+    // UH6 - Contrato/Pagamento
+    {
+        path: "payment",
+        component: PaymentComponent,
+        canActivate: [authGuard],
+        title: "Detalhes do Contrato"
+    },
+
+    // UH7 - Checkout
+    {
+        path: "payment/checkout",
+        component: CheckoutComponent,
+        canActivate: [authGuard],
+        title: "Pagamento"
+    },
+
+    // UH8 - Avaliação
+    {
+        path: "reviews/rate",
+        component: RateComponent,
+        canActivate: [authGuard],
+        title: "Avaliar Serviço"
     }
 ];
 

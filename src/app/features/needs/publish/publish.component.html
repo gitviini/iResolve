@@ -1,0 +1,88 @@
+<main>
+    <header class="header">
+        <button class="back-btn" (click)="cancel()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </button>
+        <h2>Publicar Necessidade</h2>
+    </header>
+
+    <form [formGroup]="form" class="content-scroll">
+        
+        <div class="input-group">
+            <div class="icon-input">
+                <span>T</span>
+                <input type="text" formControlName="title" placeholder="Título (ex: Pintar muro de casa)">
+            </div>
+            <div class="char-count">{{ form.get('title')?.value?.length || 0 }}/25</div>
+        </div>
+
+        <div class="input-group">
+            <div class="icon-input textarea-box">
+                <span style="align-self: flex-start; margin-top: 5px;">≡</span>
+                <textarea formControlName="description" rows="4" placeholder="Estou reformando e preciso de ajuda..."></textarea>
+            </div>
+            <div class="char-count">{{ form.get('description')?.value?.length || 0 }}/100</div>
+        </div>
+
+        <div class="section-label">🏷️ Categoria</div>
+        <div class="chips-container">
+            @for (cat of availableCategories; track $index) {
+                <div class="chip" 
+                     [class.active]="selectedCategory === cat"
+                     (click)="selectCategory(cat)">
+                    {{ cat }}
+                </div>
+            }
+        </div>
+
+        <div class="input-group money-group">
+            <div class="icon-input money">
+                <span>$</span>
+                <input type="number" formControlName="value" placeholder="0,00">
+            </div>
+            <div class="suggestion" *ngIf="form.get('value')?.value">R$ {{ form.get('value')?.value }},00 ℹ️</div>
+        </div>
+
+        <div class="input-group">
+            <div class="icon-input">
+                <span>📍</span>
+                <input type="text" formControlName="location" placeholder="Localização (ex: Madalena - 50610-530)">
+            </div>
+        </div>
+
+        <div class="images-section">
+            <div class="section-header">
+                <span>🖼️ Imagens</span>
+                <span class="char-count">{{ selectedImages.length }}/3</span>
+            </div>
+            
+            <div class="images-grid">
+                @if (selectedImages.length < 3) {
+                    <label class="add-image-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                        <input type="file" (change)="onFileSelected($event)" accept="image/*" hidden>
+                    </label>
+                }
+
+                @for (img of selectedImages; track $index) {
+                    <div class="img-preview" [style.backgroundImage]="'url(' + img.url + ')'">
+                        <button class="remove-btn" (click)="removeImage($index)">×</button>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </form>
+
+    <footer class="actions-footer">
+        <button class="btn-cancel" (click)="cancel()">
+            Cancelar 🗑️
+        </button>
+        
+        <button class="btn-publish" (click)="submit()" [disabled]="isLoading">
+            {{ isLoading ? '...' : 'Publicar' }} ✈️
+        </button>
+    </footer>
+</main>

@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ReviewService } from '../../../../core/services/review.service';
-import { ToastService } from '../../../../core/services/toast.service';
-import { ReviewInterface } from '../../../../core/models/interfaces/review.interface';
+import { ReviewService } from '../../../core/services/review.service';
+import { ToastService } from '../../../core/services/toast.service';
+import { ReviewInterface } from '../../../core/models/interfaces/review.interface';
 
 @Component({
   selector: 'app-rate',
