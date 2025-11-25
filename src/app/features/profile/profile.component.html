@@ -50,9 +50,13 @@
                 <span *ngIf="!isEditing">{{ profile.location }}</span>
                 <input *ngIf="isEditing" [(ngModel)]="editForm.location" class="edit-input">
             </div>
-            <div class="status-badge available" *ngIf="profile.status === 'AVAILABLE'">
-                Disponível
-            </div>
+            
+            <button class="status-badge" 
+                    [class.available]="profile.status === 'AVAILABLE'"
+                    [class.busy]="profile.status === 'BUSY'"
+                    (click)="openCalendar()">
+                {{ profile.status === 'AVAILABLE' ? 'Disponível' : 'Indisponível' }} ⚙️
+            </button>
         </div>
 
         <div class="section">
@@ -95,4 +99,57 @@
         <a [routerLink]="['/chat']" class="nav-item">💬</a>
         <a class="nav-item active">👤</a>
     </nav>
+
+    <div class="modal-overlay" *ngIf="showCalendarModal">
+        <div class="modal-card">
+            <div class="modal-header-row">
+                <h3>Minha Disponibilidade</h3>
+                <button class="close-btn" (click)="closeCalendar()">✕</button>
+            </div>
+
+            <div class="global-status-box" [class.busy]="tempStatus === 'BUSY'" (click)="toggleGlobalStatus()">
+                <div class="status-info">
+                    <span class="label">Status Geral</span>
+                    <span class="status-text">{{ tempStatus === 'AVAILABLE' ? 'Disponível para trabalho' : 'Indisponível (Férias/Folga)' }}</span>
+                </div>
+                <div class="toggle-switch">
+                    <div class="switch-ball"></div>
+                </div>
+            </div>
+
+            <div class="calendar-wrapper" [class.disabled]="tempStatus === 'BUSY'">
+                
+                <div class="calendar-nav">
+                    <button (click)="changeMonth(-1)">‹</button>
+                    <span>{{ currentDate | date:'MMMM yyyy' }}</span>
+                    <button (click)="changeMonth(1)">›</button>
+                </div>
+
+                <div class="weekdays-grid">
+                    @for (d of weekDays; track $index) {
+                        <span>{{ d }}</span>
+                    }
+                </div>
+
+                <div class="days-grid">
+                    @for (item of calendarDays; track $index) {
+                        <div class="day-cell" 
+                             [class.empty]="!item.day"
+                             [class.blocked]="item.fullDate && tempBlockedDates.includes(item.fullDate!)"
+                             (click)="toggleDate(item.fullDate)">
+                            {{ item.day }}
+                        </div>
+                    }
+                </div>
+                
+                <div class="legend">
+                    <span class="dot red"></span> Dias bloqueados
+                </div>
+            </div>
+
+            <button class="save-agenda-btn" (click)="saveAvailability()">
+                Salvar Alterações
+            </button>
+        </div>
+    </div>
 </main>

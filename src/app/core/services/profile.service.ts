@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProfileService {
 
-  // Mock Inicial
   private mockProfile: UserProfile = {
     id: '1',
     name: 'Vinicius Gabriel',
@@ -18,6 +17,8 @@ export class ProfileService {
     servicesCount: 15,
     location: 'Torre - 50620-520',
     status: 'AVAILABLE',
+    // Exemplo de datas bloqueadas (formato ISO)
+    blockedDates: ['2023-11-15', '2023-11-20'], 
     bio: 'Me chamo Vinicius Gabriel, curso ADS na Cesar School e adoro música.',
     skills: ['Pedreiro', 'Pintor'],
     myNeeds: [
@@ -27,7 +28,7 @@ export class ProfileService {
         price: 100.00,
         location: 'Torre',
         description: 'Preciso de alguém para passear com meu cachorro...',
-        contractorName: 'Vinicius', // Ele mesmo
+        contractorName: 'Vinicius',
         contractorAvatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Vinicius',
         isVerified: true,
         images: ['https://placedog.net/500/280?id=1'],
@@ -42,10 +43,18 @@ export class ProfileService {
     return this.profile$.asObservable();
   }
 
-  // Simula a atualização [Checklist Item 2]
   async updateProfile(updatedData: UserProfile): Promise<boolean> {
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
     this.mockProfile = updatedData;
+    this.profile$.next(this.mockProfile);
+    return true;
+  }
+
+  // [UH11] Atualizado para aceitar string[]
+  async updateAvailability(status: 'AVAILABLE' | 'BUSY', dates: string[]): Promise<boolean> {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    this.mockProfile.status = status;
+    this.mockProfile.blockedDates = dates;
     this.profile$.next(this.mockProfile);
     return true;
   }

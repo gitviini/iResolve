@@ -1,4 +1,4 @@
-import { Opportunity } from "./opportunity.interface"; // Reutilizando para a lista de necessidades
+import { Opportunity } from "./opportunity.interface";
 
 export interface UserProfile {
     id: string;
@@ -9,8 +9,9 @@ export interface UserProfile {
     needsCount: number;
     servicesCount: number;
     location: string;
-    status: 'AVAILABLE' | 'BUSY'; // Disponível / Ocupado
+    status: 'AVAILABLE' | 'BUSY';
+    blockedDates: string[]; // MUDOU: Agora é lista de strings 'YYYY-MM-DD'
     bio: string;
     skills: string[];
-    myNeeds: Opportunity[]; // Lista de vagas criadas pelo usuário
+    myNeeds: Opportunity[];
 }
