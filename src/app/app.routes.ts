@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { Register } from "./features/auth/register/register";
 import { Login } from "./features/auth/login/login";
 import { authGuard } from './core/guards/auth-guard'; // Importe o Guard
+import { VerificationComponent } from './features/verification/verification.component';
 
 // Componente temporário para a Home (apenas para teste)
 import { Component } from '@angular/core';
@@ -43,6 +44,12 @@ export const routes: Routes = [
         component: HomeComponent, // Use seu componente Home real aqui futuramente
         canActivate: [authGuard], // <--- AQUI ESTÁ A PROTEÇÃO DO CHECKLIST
         title: "Início"
+    },
+    {
+        path: "verification",
+        component: VerificationComponent,
+        canActivate: [authGuard],
+        title: "Verificar Identidade"
     }
 ];
 
