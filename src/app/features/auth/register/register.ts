@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserInterface } from '../../../core/models/interfaces/user.interface';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import carrosselEffect from './carrosselEffect';
 
 @Component({
@@ -15,8 +15,13 @@ import carrosselEffect from './carrosselEffect';
 export class Register {
   // injeção de depedência : serviço de autenticação [UH1]
   authService: AuthService = inject(AuthService);
+  router = inject(Router);
 
   constructor() {
+    // Checklist: Se já logado, manda para home
+    if (this.authService.isLogged()) {
+      this.router.navigate(['/']);
+    }
     // adiciona efeito de carrossel ao componentes
     carrosselEffect();
   }
