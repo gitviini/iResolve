@@ -12,6 +12,7 @@ import { ContractDetails } from '../../core/models/interfaces/payment.interface'
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })
+
 export class PaymentComponent implements OnInit {
   paymentService = inject(PaymentService);
   toastService = inject(ToastService);
