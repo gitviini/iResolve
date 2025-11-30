@@ -6,7 +6,6 @@ import { ToastService } from '../../../core/services/toast.service';
 
 @Component({
   selector: 'app-checkout',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'

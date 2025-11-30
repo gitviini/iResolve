@@ -7,7 +7,6 @@ import { VerificationStatus } from '../../core/models/interfaces/verification.in
 
 @Component({
   selector: 'app-verification',
-  standalone: true,
   imports: [RouterLink],
   // CORREÇÃO AQUI: Os nomes devem bater com os arquivos da sua pasta (sem '.component')
   templateUrl: './verification.html',

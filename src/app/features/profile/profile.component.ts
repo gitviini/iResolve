@@ -8,7 +8,6 @@ import { UserProfile } from '../../core/models/interfaces/profile.interface';
 
 @Component({
   selector: 'app-profile',
-  standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'

@@ -12,7 +12,6 @@ import { Provider } from '../../core/models/interfaces/provider.interface';
 
 @Component({
   selector: 'app-home',
-  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

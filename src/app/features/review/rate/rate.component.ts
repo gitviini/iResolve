@@ -8,7 +8,6 @@ import { ReviewInterface } from '../../../core/models/interfaces/review.interfac
 
 @Component({
   selector: 'app-rate',
-  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './rate.component.html',
   styleUrl: './rate.component.css'

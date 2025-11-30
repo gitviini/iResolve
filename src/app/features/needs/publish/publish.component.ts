@@ -8,7 +8,6 @@ import { NeedInterface } from '../../../core/models/interfaces/need.interface';
 
 @Component({
   selector: 'app-publish',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './publish.component.html',
   styleUrl: './publish.component.css'
