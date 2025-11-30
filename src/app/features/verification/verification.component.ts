@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 // Note os dois pontos (../../) para voltar para a pasta 'app'
-import { VerificationService } from '../../core/services/verification.service';
-import { ToastService } from '../../core/services/toast.service';
+import { VerificationService } from '../../core/services/verification/verification.service';
+import { ToastService } from '../../core/services/toast/toast.service';
 import { VerificationStatus } from '../../core/models/interfaces/verification.interface';
 
 @Component({

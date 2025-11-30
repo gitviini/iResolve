@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Provider } from '../models/interfaces/provider.interface';
+import { Provider } from '../../models/interfaces/provider.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

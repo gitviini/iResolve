@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NeedService } from '../../../core/services/need.service';
-import { ToastService } from '../../../core/services/toast.service';
+import { NeedService } from '../../../core/services/need/need.service';
+import { ToastService } from '../../../core/services/toast/toast.service';
 import { NeedInterface } from '../../../core/models/interfaces/need.interface';
 
 @Component({

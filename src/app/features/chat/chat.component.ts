@@ -2,7 +2,7 @@ import { Component, ElementRef, inject, OnInit, ViewChild, AfterViewChecked } fr
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ChatService } from '../../core/services/chat.service';
+import { ChatService } from '../../core/services/chat/chat.service';
 import { ChatMessage, ChatUser } from '../../core/models/interfaces/chat.interface';
 
 @Component({

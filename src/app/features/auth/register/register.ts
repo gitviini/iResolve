@@ -8,7 +8,7 @@ import {
 	AbstractControl,
 	ValidationErrors,
 } from "@angular/forms";
-import { AuthService } from "../../../core/services/auth.service";
+import { AuthService } from "../../../core/services/auth/auth.service";
 import { UserInterface } from "../../../core/models/interfaces/user.interface";
 import { Router, RouterLink } from "@angular/router";
 import carrosselEffect from "./carrosselEffect";

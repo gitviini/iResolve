@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PaymentService } from '../../core/services/payment.service';
-import { ToastService } from '../../core/services/toast.service';
+import { PaymentService } from '../../core/services/payment/payment.service';
+import { ToastService } from '../../core/services/toast/toast.service';
 import { ContractDetails } from '../../core/models/interfaces/payment.interface';
 
 @Component({

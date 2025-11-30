@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UserProfile } from '../models/interfaces/profile.interface';
+import { UserProfile } from '../../models/interfaces/profile.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({

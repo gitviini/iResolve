@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NeedInterface } from '../models/interfaces/need.interface';
+import { NeedInterface } from '../../models/interfaces/need.interface';
 
 @Injectable({
   providedIn: 'root'

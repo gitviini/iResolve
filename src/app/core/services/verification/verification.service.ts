@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { ToastService } from './toast.service';
-import { AuthService } from './auth.service';
-import { VerificationResponse } from '../models/interfaces/verification.interface';
+import { ToastService } from './../toast/toast.service';
+import { AuthService } from './../auth/auth.service';
+import { VerificationResponse } from '../../models/interfaces/verification.interface';
 
 @Injectable({
   providedIn: 'root'

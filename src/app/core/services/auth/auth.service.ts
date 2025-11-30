@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
-import { UserInterface } from '../models/interfaces/user.interface';
-import { LoginInterface } from '../models/interfaces/login.interface';
-import { ToastService } from './toast.service';
+import { UserInterface } from '../../models/interfaces/user.interface';
+import { LoginInterface } from '../../models/interfaces/login.interface';
+import { ToastService } from '../toast/toast.service';
 
 @Injectable({
   providedIn: 'root'

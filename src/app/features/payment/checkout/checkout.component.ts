@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { PaymentService } from '../../../core/services/payment.service';
-import { ToastService } from '../../../core/services/toast.service';
+import { PaymentService } from '../../../core/services/payment/payment.service';
+import { ToastService } from '../../../core/services/toast/toast.service';
 
 @Component({
   selector: 'app-checkout',

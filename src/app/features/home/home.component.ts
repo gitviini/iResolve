@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { OpportunityService } from '../../core/services/opportunity.service';
-import { ProviderService } from '../../core/services/provider.service';
-import { ToastService } from '../../core/services/toast.service';
+import { ProviderService } from '../../core/services/provider/provider.service';
+import { ToastService } from '../../core/services/toast/toast.service';
 
 import { Opportunity } from '../../core/models/interfaces/opportunity.interface';
 import { Provider } from '../../core/models/interfaces/provider.interface';

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ChatMessage, ChatUser } from '../models/interfaces/chat.interface';
+import { ChatMessage, ChatUser } from '../../models/interfaces/chat.interface';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
