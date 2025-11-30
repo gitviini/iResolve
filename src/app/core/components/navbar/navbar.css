@@ -1,0 +1,34 @@
+/* --- Menu Inferior --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    z-index: 200;
+}
+
+.navbar-item {
+    color: var(--blue);
+    opacity: 0.75;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    transition: all 0.2s;
+    span {
+       font-size: var(--high-text);
+    }
+}
+
+.navbar-item.active {
+    opacity: 1;
+    transform: scale(1.1);
+}

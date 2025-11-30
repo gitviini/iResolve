@@ -5,10 +5,11 @@ import { RouterLink } from '@angular/router';
 import { ProfileService } from '../../core/services/profile/profile.service';
 import { ToastService } from '../../core/services/toast/toast.service';
 import { UserProfile } from '../../core/models/interfaces/profile.interface';
+import { Navbar } from '../../core/components/navbar/navbar';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, Navbar],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })

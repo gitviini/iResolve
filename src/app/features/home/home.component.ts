@@ -9,10 +9,11 @@ import { ToastService } from '../../core/services/toast/toast.service';
 
 import { Opportunity } from '../../core/models/interfaces/opportunity.interface';
 import { Provider } from '../../core/models/interfaces/provider.interface';
+import { Navbar } from '../../core/components/navbar/navbar';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Navbar],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

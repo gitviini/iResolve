@@ -10,7 +10,9 @@ export class AuthService {
   toastService = inject(ToastService);
 
   // URL base (ajuste se necessário, ex: http://localhost:8080)
-  private url = "http://localhost:8080/auth";
+  // TODO : trocar link em produção
+  // private url = "http://localhost:8080/auth";
+  private url = "http://localhost:3000";
 
   /**
    * Verifica se usuário está logado

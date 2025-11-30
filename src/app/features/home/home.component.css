@@ -212,35 +212,3 @@ main {
     background-color: var(--primary-blue);
     color: white;
 }
-
-/* --- Menu Inferior --- */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    background-color: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    z-index: 200;
-}
-
-.nav-item {
-    background: none;
-    border: none;
-    font-size: 24px;
-    color: #CBD5E0;
-    cursor: pointer;
-    padding: 10px;
-    transition: all 0.2s;
-}
-
-.nav-item.active {
-    color: var(--primary-blue);
-    transform: scale(1.1);
-}
