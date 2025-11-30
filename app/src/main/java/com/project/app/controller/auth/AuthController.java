@@ -7,9 +7,9 @@ import org.springframework.http.HttpStatus;
 import com.project.app.dto.user.LoginUserDTO;
 import com.project.app.dto.user.RegisterUserDTO;
 import com.project.app.dto.user.UserResponseDTO;
+import com.project.app.usecase.auth.LoginUserUseCase;
+import com.project.app.usecase.auth.RegisterUserUseCase;
 import com.project.app.usecase.jwt.JwtUseCase;
-import com.project.app.usecase.user.LoginUserUseCase;
-import com.project.app.usecase.user.RegisterUserUseCase;
 
 import jakarta.validation.Valid;
 

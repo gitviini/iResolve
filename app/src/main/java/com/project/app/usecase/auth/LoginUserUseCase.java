@@ -1,4 +1,4 @@
-package com.project.app.usecase.user;
+package com.project.app.usecase.auth;
 
 import java.util.Optional;
 
