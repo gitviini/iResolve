@@ -18,6 +18,8 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     // Tratamento de NullPointerException
     public Optional<User> findByCpf(String cpf);
 
+    Optional<User> findByNickname(String nickname);
+
     // --- BUSCA DE USUARIOS [UH5] ---
     // Essa consulta por Nome OU Bairro, e filtra por Habilidade
     @Query("SELECT u FROM User u WHERE " +
