@@ -31,6 +31,7 @@
     @for (item of opportunities; track $index) {
     <app-needcard
       [id]="item.id"
+      [nick]="item.contractorNick"
       [avatarUrl]="item.contractorAvatar"
       [name]="item.contractorName"
       [isVerified]="item.isVerified"
