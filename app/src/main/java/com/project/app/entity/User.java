@@ -13,6 +13,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import com.project.app.entity.enums.VerificationStatus;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Data
 @Entity
@@ -24,6 +27,9 @@ public class User {
 
     @Column(length = 100, nullable = false)
     private String name;
+
+    @Column(length = 50, unique = true)
+    private String nickname;
 
     @Column(length = 11, nullable = false, unique = true)
     private String cpf;
@@ -52,4 +58,11 @@ public class User {
 
     @Column(columnDefinition = "TEXT")
     private String biography;
+
+    // NOVOS CAMPOS DA UH4:
+    @Enumerated(EnumType.STRING)
+    private VerificationStatus verificationStatus = VerificationStatus.NONE;
+
+    @Column(columnDefinition = "TEXT")
+    private String documentImage; // Foto do documento em Base64
 }
