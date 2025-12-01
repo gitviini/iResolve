@@ -1,39 +1,31 @@
-HELP.md
+# --- FRONT-END (Angular/Node) ---
+node_modules/
+dist/
+.angular/
+.sass-cache/
+connect.lock
+coverage/
+lib/
+npm-debug.log
+testem.log
+
+# --- BACK-END (Java/Maven) ---
 target/
-.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+*.class
+*.log
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
+# --- IDEs e S.O. ---
 .idea
+.vscode/
 *.iws
 *.iml
 *.ipr
+.DS_Store
+Thumbs.db
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-
-# Ignora o banco de dados local H2
+# --- BANCO DE DADOS LOCAL ---
 /data
-
-# Ignora configurações locais
-application.properties
+*.db
