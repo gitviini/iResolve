@@ -11,8 +11,6 @@ import com.project.app.dto.user.UserUpdateDTO;
 import com.project.app.entity.User;
 import com.project.app.repository.UserRepository;
 
-import lombok.NonNull;
-
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,18 +34,9 @@ public class UserController {
             
             Page<User> result = userRepository.searchProviders(term, skill, pageable);
 
-            // ATENÇÃO: Atualizamos este construtor para incluir CPF e Biografia (novos campos)
-            Page<UserResponseDTO> dtos = result.map(u -> new UserResponseDTO(
-                u.getId(), 
-                u.getName(), 
-                u.getCpf(),           // Novo
-                u.getNeighborhood(), 
-                u.getSkills(), 
-                u.getRating(), 
-                u.isVerified(), 
-                u.getAvatarUrl(),
-                u.getBiography()      // Novo
-            ));
+            // CORREÇÃO: Usamos o método 'toDTO' em vez de 'new UserResponseDTO(...)'
+            // Isso evita erros de contagem de argumentos!
+            Page<UserResponseDTO> dtos = result.map(UserResponseDTO::toDTO);
 
             return ResponseEntity.ok(dtos);
 
@@ -57,26 +46,41 @@ public class UserController {
     }
 
     // --- UH12: VER PERFIL ---
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getProfile(@PathVariable UUID id) {
-        Optional<User> userOpt = userRepository.findById(id);
+    @GetMapping("/{nickname}")
+    public ResponseEntity<?> getProfile(@PathVariable String nickname) {
+        Optional<User> userOpt = userRepository.findByNickname(nickname);
+
+        // Fallback para ID se não achar por nickname
+        if (userOpt.isEmpty()) {
+            try {
+                UUID id = UUID.fromString(nickname);
+                userOpt = userRepository.findById(id);
+            } catch (IllegalArgumentException e) {
+                // Ignora
+            }
+        }
 
         if (userOpt.isEmpty()) {
             return ResponseEntity.status(404).body("Usuário não encontrado");
         }
 
-        User u = userOpt.get();
-        
-        return ResponseEntity.ok(new UserResponseDTO(
-            u.getId(), u.getName(), u.getCpf(), u.getNeighborhood(), u.getSkills(), 
-            u.getRating(), u.isVerified(), u.getAvatarUrl(), u.getBiography()
-        ));
+        // CORREÇÃO: Usando toDTO aqui também
+        return ResponseEntity.ok(UserResponseDTO.toDTO(userOpt.get()));
     }
 
     // --- UH12: ATUALIZAR PERFIL ---
-    @PutMapping("/{id}")
-    public ResponseEntity<?> updateProfile(@PathVariable @NonNull UUID id, @RequestBody UserUpdateDTO data) {
-        Optional<User> userOpt = userRepository.findById(id);
+    @PutMapping("/{nickname}")
+    public ResponseEntity<?> updateProfile(@PathVariable String nickname, @RequestBody UserUpdateDTO data) {
+        Optional<User> userOpt = userRepository.findByNickname(nickname);
+
+        if (userOpt.isEmpty()) {
+            try {
+                UUID id = UUID.fromString(nickname);
+                userOpt = userRepository.findById(id);
+            } catch (IllegalArgumentException e) {
+                // Ignora
+            }
+        }
 
         if (userOpt.isEmpty()) {
             return ResponseEntity.status(404).body("Usuário não encontrado");
@@ -84,7 +88,7 @@ public class UserController {
 
         User user = userOpt.get();
 
-        // Atualiza apenas se o dado foi enviado (não é nulo)
+        // Atualiza apenas se o dado foi enviado
         if (data.getName() != null) user.setName(data.getName());
         if (data.getNeighborhood() != null) user.setNeighborhood(data.getNeighborhood());
         if (data.getBiography() != null) user.setBiography(data.getBiography());
@@ -93,9 +97,6 @@ public class UserController {
 
         userRepository.save(user);
 
-        return ResponseEntity.ok(new UserResponseDTO(
-            user.getId(), user.getName(), user.getCpf(), user.getNeighborhood(), user.getSkills(), 
-            user.getRating(), user.isVerified(), user.getAvatarUrl(), user.getBiography()
-        ));
+        return ResponseEntity.ok(UserResponseDTO.toDTO(user));
     }
 }
