@@ -21,7 +21,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    // --- UH5: BUSCAR PRESTADORES ---
+    // --- UH5: BUSCAR PRESTADORES (Inalterado) ---
     @GetMapping
     public ResponseEntity<?> searchProviders(
             @RequestParam(required = false) String term,
