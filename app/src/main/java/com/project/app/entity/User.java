@@ -25,6 +25,9 @@ public class User {
     @Column(length = 100, nullable = false)
     private String name;
 
+    @Column(length = 50, unique = true)
+    private String nickname;
+
     @Column(length = 11, nullable = false, unique = true)
     private String cpf;
 
@@ -52,4 +55,5 @@ public class User {
 
     @Column(columnDefinition = "TEXT")
     private String biography;
+
 }

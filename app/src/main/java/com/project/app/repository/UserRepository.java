@@ -25,4 +25,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
            "AND (:skill IS NULL OR LOWER(u.skills) LIKE LOWER(CONCAT('%', :skill, '%'))) " +
            "ORDER BY u.isVerified DESC, u.rating DESC")
     Page<User> searchProviders(@Param("term") String term, @Param("skill") String skill, Pageable pageable);
+
+    Optional<User> findByNickname(String nickname);
+    boolean existsByNickname(String nickname);
 }

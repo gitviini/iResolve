@@ -1,39 +1,34 @@
+# --- ANGULAR / NODE (Adicionado agora) ---
+node_modules/
+dist/
+.angular/
+.sass-cache/
+connect.lock
+coverage/
+lib/
+npm-debug.log
+testem.log
+/reports
+
+# --- JAVA / SPRING BOOT ---
 HELP.md
 target/
-.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+*.class
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
+# --- IDEs (VSCode, IntelliJ, Eclipse) ---
 .idea
 *.iws
 *.iml
 *.ipr
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
 .vscode/
+.classpath
+.project
+.settings/
+bin/
 
-# Ignora o banco de dados local H2
+# --- BANCO DE DADOS & ARQUIVOS LOCAIS ---
 /data
-
-# Ignora configurações locais
-application.properties
+*.log
