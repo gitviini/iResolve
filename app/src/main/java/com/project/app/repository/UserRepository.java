@@ -18,6 +18,9 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     // Tratamento de NullPointerException
     public Optional<User> findByCpf(String cpf);
 
+    Optional<User> findByNickname(String nickname);
+    boolean existsByNickname(String nickname);
+
     // --- BUSCA DE USUARIOS [UH5] ---
     // Essa consulta por Nome OU Bairro, e filtra por Habilidade
     @Query("SELECT u FROM User u WHERE " +
@@ -26,6 +29,5 @@ public interface UserRepository extends JpaRepository<User, UUID> {
            "ORDER BY u.isVerified DESC, u.rating DESC")
     Page<User> searchProviders(@Param("term") String term, @Param("skill") String skill, Pageable pageable);
 
-    Optional<User> findByNickname(String nickname);
-    boolean existsByNickname(String nickname);
+    
 }

@@ -16,6 +16,7 @@ public class UserResponseDTO {
     private UUID id;
     private String name;
     private String cpf;
+    private String nickname; // NOVO
     private String neighborhood;
     private String skills;
     private Double rating;
@@ -30,6 +31,7 @@ public class UserResponseDTO {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
+        this.nickname = nickname; // Adicionado
         this.neighborhood = neighborhood;
         this.skills = skills;
         this.rating = rating;
@@ -38,10 +40,23 @@ public class UserResponseDTO {
         this.biography = biography;
     }
 
+    // Método estático para converter Entity -> DTO
     public static UserResponseDTO toDTO(User user) {
-        UserResponseDTO userResponseDTO = new UserResponseDTO();
-        userResponseDTO.setName(user.getName());
-        userResponseDTO.setCpf(user.getCpf());
-        return userResponseDTO;
+        UserResponseDTO dto = new UserResponseDTO();
+        
+        // Copia TODOS os dados do usuário para a resposta
+        dto.setId(user.getId());
+        dto.setName(user.getName());
+        dto.setCpf(user.getCpf());
+        dto.setNickname(user.getNickname()); // O mais importante agora!
+        
+        dto.setNeighborhood(user.getNeighborhood());
+        dto.setSkills(user.getSkills());
+        dto.setRating(user.getRating());
+        dto.setVerified(user.isVerified());
+        dto.setAvatarUrl(user.getAvatarUrl());
+        dto.setBiography(user.getBiography());
+        
+        return dto;
     }
 }
