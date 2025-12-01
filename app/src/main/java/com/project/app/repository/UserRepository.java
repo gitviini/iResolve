@@ -19,7 +19,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     public Optional<User> findByCpf(String cpf);
 
     Optional<User> findByNickname(String nickname);
-    boolean existsByNickname(String nickname);
 
     // --- BUSCA DE USUARIOS [UH5] ---
     // Essa consulta por Nome OU Bairro, e filtra por Habilidade

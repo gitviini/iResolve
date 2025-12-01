@@ -34,6 +34,8 @@ public class UserController {
             
             Page<User> result = userRepository.searchProviders(term, skill, pageable);
 
+            // CORREÇÃO: Usamos o método 'toDTO' em vez de 'new UserResponseDTO(...)'
+            // Isso evita erros de contagem de argumentos!
             Page<UserResponseDTO> dtos = result.map(UserResponseDTO::toDTO);
 
             return ResponseEntity.ok(dtos);
@@ -43,19 +45,18 @@ public class UserController {
         }
     }
 
-    // --- UH12: VER PERFIL (Adaptado para Nickname) ---
+    // --- UH12: VER PERFIL ---
     @GetMapping("/{nickname}")
     public ResponseEntity<?> getProfile(@PathVariable String nickname) {
-        // 1. Tenta buscar pelo Nickname (Padrão novo)
         Optional<User> userOpt = userRepository.findByNickname(nickname);
 
-        // 2. Se não achou, tenta ver se o "nickname" enviado é, na verdade, um ID antigo (Fallback)
+        // Fallback para ID se não achar por nickname
         if (userOpt.isEmpty()) {
             try {
                 UUID id = UUID.fromString(nickname);
                 userOpt = userRepository.findById(id);
             } catch (IllegalArgumentException e) {
-                // Não é um UUID válido, então realmente o usuário não existe
+                // Ignora
             }
         }
 
@@ -63,13 +64,13 @@ public class UserController {
             return ResponseEntity.status(404).body("Usuário não encontrado");
         }
 
+        // CORREÇÃO: Usando toDTO aqui também
         return ResponseEntity.ok(UserResponseDTO.toDTO(userOpt.get()));
     }
 
-    // --- UH12: ATUALIZAR PERFIL (Adaptado para Nickname) ---
+    // --- UH12: ATUALIZAR PERFIL ---
     @PutMapping("/{nickname}")
     public ResponseEntity<?> updateProfile(@PathVariable String nickname, @RequestBody UserUpdateDTO data) {
-        // Mesma lógica de busca híbrida para encontrar quem vamos atualizar
         Optional<User> userOpt = userRepository.findByNickname(nickname);
 
         if (userOpt.isEmpty()) {
@@ -87,7 +88,7 @@ public class UserController {
 
         User user = userOpt.get();
 
-        // Atualiza campos
+        // Atualiza apenas se o dado foi enviado
         if (data.getName() != null) user.setName(data.getName());
         if (data.getNeighborhood() != null) user.setNeighborhood(data.getNeighborhood());
         if (data.getBiography() != null) user.setBiography(data.getBiography());

@@ -1,4 +1,4 @@
-# --- ANGULAR / NODE (Adicionado agora) ---
+# --- FRONT-END (Angular/Node) ---
 node_modules/
 dist/
 .angular/
@@ -8,27 +8,24 @@ coverage/
 lib/
 npm-debug.log
 testem.log
-/reports
 
-# --- JAVA / SPRING BOOT ---
-HELP.md
+# --- BACK-END (Java/Maven) ---
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 *.class
+*.log
 
-# --- IDEs (VSCode, IntelliJ, Eclipse) ---
+# --- IDEs e S.O. ---
 .idea
+.vscode/
 *.iws
 *.iml
 *.ipr
-.vscode/
-.classpath
-.project
-.settings/
-bin/
+.DS_Store
+Thumbs.db
 
-# --- BANCO DE DADOS & ARQUIVOS LOCAIS ---
+# --- BANCO DE DADOS LOCAL ---
 /data
-*.log
+*.db
