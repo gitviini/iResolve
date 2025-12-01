@@ -38,6 +38,12 @@ public class Contract {
 
     private LocalDateTime createdAt;
 
+    // CAMPOS DA UH7 (Histórico Financeiro)
+    private BigDecimal platformFee; // Quanto a plataforma ganhou
+    private BigDecimal netValue;    // Quanto o prestador recebeu
+    
+    private LocalDateTime finishedAt; // Quando acabou
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

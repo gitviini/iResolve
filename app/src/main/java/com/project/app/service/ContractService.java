@@ -16,6 +16,13 @@ import com.project.app.usecase.jwt.JwtUseCase;
 
 import jakarta.transaction.Transactional;
 
+// --- IMPORTS ADICIONADOS PARA A UH7 ---
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDateTime;
+import java.util.UUID;
+// --------------------------------------
+
 @Service
 public class ContractService {
 
@@ -24,6 +31,7 @@ public class ContractService {
     @Autowired private UserRepository userRepository;
     @Autowired private JwtUseCase jwtUseCase;
 
+    // --- LÓGICA DA UH6 (JÁ EXISTIA) ---
     @Transactional
     public Contract hireProvider(String token, HireDTO dto) {
         // 1. Identificar quem está contratando (Dono da Necessidade)
@@ -68,6 +76,54 @@ public class ContractService {
         needRepository.save(need);
 
         // 7. Salvar Contrato
+        return contractRepository.save(contract);
+    }
+
+    // --- NOVA LÓGICA DA UH7 (ADICIONE ISSO) ---
+    @Transactional
+    public Contract finishService(UUID contractId, String token) {
+        // 1. Identificar quem está tentando finalizar (Tem que ser o Contratante)
+        String tokenReal = token.replace("Bearer ", "");
+        String userCpf = jwtUseCase.extractCpf(tokenReal);
+        User user = userRepository.findByCpf(userCpf)
+            .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        // 2. Buscar o contrato
+        Contract contract = contractRepository.findById(contractId)
+            .orElseThrow(() -> new RuntimeException("Contrato não encontrado"));
+
+        // 3. Validações
+        // A: Só o dono da necessidade (contratante) pode finalizar
+        if (!contract.getNeed().getUser().getId().equals(user.getId())) {
+            throw new RuntimeException("Apenas o contratante pode finalizar o serviço.");
+        }
+        
+        // B: O serviço tem que estar em andamento/pago (IN_ESCROW)
+        if (contract.getStatus() != ContractStatus.IN_ESCROW) {
+            throw new RuntimeException("Este contrato não pode ser finalizado (Status atual: " + contract.getStatus() + ")");
+        }
+
+        // 4. Cálculos Financeiros (Taxa de 10%)
+        BigDecimal grossValue = contract.getAgreedValue();
+        BigDecimal feePercentage = new BigDecimal("0.10"); // 10%
+        
+        // Calcula a taxa e arredonda de forma segura (HALF_EVEN é o padrão bancário)
+        BigDecimal fee = grossValue.multiply(feePercentage).setScale(2, RoundingMode.HALF_EVEN);
+        // Calcula o valor líquido (Bruto - Taxa)
+        BigDecimal net = grossValue.subtract(fee);
+
+        // 5. Atualizar Contrato com os valores e status
+        contract.setPlatformFee(fee);
+        contract.setNetValue(net);
+        contract.setStatus(ContractStatus.COMPLETED); // Finalizado
+        contract.setFinishedAt(LocalDateTime.now());  // Data de agora
+
+        // 6. Atualizar Necessidade (Para 'DONE')
+        Need need = contract.getNeed();
+        need.setStatus(NeedStatus.DONE);
+        needRepository.save(need);
+
+        // 7. Salvar e Retornar
         return contractRepository.save(contract);
     }
 }
