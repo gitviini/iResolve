@@ -11,11 +11,13 @@ import { RouterLink } from '@angular/router';
 
 export class Needcard {
   // owner infos
+  nick = input<string>();
   avatarUrl = input<string>();
   name = input<string>();
   isVerified = input<boolean>();
   
   // need infos
+  id = input<string>();
   title = input<string>();
   location = input<string>();
   description = input<string>();

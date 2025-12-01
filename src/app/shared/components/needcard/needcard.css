@@ -1,4 +1,5 @@
 .container-needcard{
+    color: initial;
     display: flex;
     flex-flow: column;
     width: 100%;
@@ -24,6 +25,11 @@
     gap: var(--small);
     padding: var(--medium);
     border-bottom: 1px solid var(--gray);
+
+    span {
+        white-space: nowrap;
+    }
+    
     .owner-image{
         width: var(--small-image);
         border-radius: 100%;

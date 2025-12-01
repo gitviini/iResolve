@@ -1,5 +1,6 @@
 export interface Provider {
     id: string;
+    nick: string;
     name: string;
     avatarUrl: string;
     rating: number; // 0 a 5

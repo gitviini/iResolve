@@ -1,11 +1,13 @@
 <main>
   <div class="top-bar">
     <div class="container-profile-search-box">
-      <img
-        src="https://media.licdn.com/dms/image/v2/D4D03AQF9baYOEkwovw/profile-displayphoto-shrink_100_100/B4DZXQI2WRHwAU-/0/1742953735954?e=1766016000&v=beta&t=2efa-gGGTbd4tsNyVghMjdTLB_MySWfPmeHSV4CVLVM"
-        alt=""
-        class="profile"
-      />
+      <a [routerLink]="['/profile']">
+        <img
+          src="https://media.licdn.com/dms/image/v2/D4D03AQF9baYOEkwovw/profile-displayphoto-shrink_100_100/B4DZXQI2WRHwAU-/0/1742953735954?e=1766016000&v=beta&t=2efa-gGGTbd4tsNyVghMjdTLB_MySWfPmeHSV4CVLVM"
+          alt=""
+          class="profile"
+        />
+      </a>
       <div class="search-box">
         <span class="ph ph-magnifying-glass"></span>
         <input
@@ -20,61 +22,15 @@
       </div>
     </div>
 
-    <!-- <div class="tabs">
-            <button 
-                class="tab-btn" 
-                [class.active]="activeTab === 'PROVIDERS'"
-                (click)="switchTab('PROVIDERS')">
-                Prestadores
-            </button>
-            <button 
-                class="tab-btn" 
-                [class.active]="activeTab === 'NEEDS'"
-                (click)="switchTab('NEEDS')">
-                Necessidade
-            </button>
-        </div> -->
-
     <button class="primary" (click)="goToPublish()">
       <span class="ph ph-file-text icon"></span> Publicar Necessidade
     </button>
   </div>
 
   <section class="feed-container">
-    <!-- @if (activeTab === 'PROVIDERS') {
-            @for (provider of providers; track provider.id) {
-                <div class="provider-card">
-                    <div class="card-header">
-                        <div class="user-info">
-                            <img [src]="provider.avatarUrl" class="avatar">
-                            <div class="text-info">
-                                <span class="name">
-                                    {{ provider.name }}
-                                    <img *ngIf="provider.isVerified" src="/icons/sucess.svg" width="12">
-                                </span>
-                                <div class="rating">⭐ {{ provider.rating }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="location">📍 {{ provider.location }}</div>
-                    <div class="skills">
-                        @for (skill of provider.skills; track $index) {
-                            <span class="tag">🏷️ {{ skill }}</span>
-                        }
-                    </div>
-                    <div class="card-footer">
-                        <button class="icon-btn">🤍</button>
-                        <button class="icon-btn chat-btn" (click)="openChat(provider.id)">💬</button>
-                    </div>
-                </div>
-            }
-            @if (providers.length === 0) {
-                <div class="empty-state">Nenhum prestador encontrado.</div>
-            }
-        } -->
-
-    @for (item of opportunities; track item.id) {
+    @for (item of opportunities; track $index) {
     <app-needcard
+      [id]="item.id"
       [avatarUrl]="item.contractorAvatar"
       [name]="item.contractorName"
       [isVerified]="item.isVerified"
@@ -84,41 +40,12 @@
       [description]="item.description"
       [images]="item.images"
     />
-    <!-- <div class="opportunity-card">
-      <div class="card-header">
-        <div class="user-info">
-          <img [src]="item.contractorAvatar" class="avatar" />
-          <span class="name">{{ item.contractorName }}</span>
-          <img *ngIf="item.isVerified" src="/icons/sucess.svg" class="badge" width="14" />
-        </div>
-        <span class="price">{{ item.price | currency : 'BRL' }}</span>
-      </div>
-      <h3 class="card-title">{{ item.title }}</h3>
-      <div class="location">
-        📍 {{ item.location }} <span class="time">• {{ item.timePosted }}</span>
-      </div>
-      <div class="description">
-        <p>{{ item.description }}</p>
-      </div>
-
-      <div class="card-images" *ngIf="item.images.length > 0">
-        @for (img of item.images; track $index) {
-        <img [src]="img" class="thumb" />
-        }
-      </div>
-
-      <div class="card-footer">
-        <button class="icon-btn">🤍</button>
-        <button class="icon-btn chat-btn" (click)="openChat(item.id)">💬 Tenho Interesse</button>
-      </div>
-    </div>
-    } -->
     } @if (isLoadingMore) {
     <div style="text-align: center; padding: 20px; color: #888">Carregando mais... ↻</div>
-    } @else {
-    <div style="text-align: center; padding: 20px; color: #888">Fim do feed</div>
-    } @if (opportunities.length === 0) {
+    } @else if (opportunities.length === 0) {
     <div class="empty-state">Nenhuma vaga encontrada.</div>
+    }@else {
+    <div style="text-align: center; padding: 20px; color: #888">Fim do feed</div>
     }
   </section>
 

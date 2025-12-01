@@ -12,6 +12,7 @@ import { CheckoutComponent } from './features/payment/checkout/checkout.componen
 import { RateComponent } from './features/review/rate/rate.component'; // Atenção: 'review' no singular
 import { ChatComponent } from './features/chat/chat.component';
 import { VerificationComponent } from './features/verification/verification.component';
+import { Search } from './features/search/search';
 
 export const routes: Routes = [
     // Redirecionamento inicial
@@ -47,6 +48,15 @@ export const routes: Routes = [
         canActivate: [authGuard],
         title: "Início"
     },
+
+    
+    {
+        path: "search",
+        component: Search, // Agora aponta para o arquivo correto!
+        canActivate: [authGuard],
+        title: "Pesquisar"
+    },
+
 
     // UH3 - Publicar
     {

@@ -7,7 +7,7 @@ import { ContractDetails } from '../../core/models/interfaces/payment.interface'
 
 @Component({
   selector: 'app-payment',
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })

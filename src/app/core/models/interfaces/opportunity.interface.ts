@@ -1,5 +1,6 @@
 export interface Opportunity {
     id: string;
+    contractorNick: string;
     contractorName: string;
     contractorAvatar: string;
     isVerified: boolean;

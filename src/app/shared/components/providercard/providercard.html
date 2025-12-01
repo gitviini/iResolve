@@ -1,1 +1,26 @@
-<p>providercard works!</p>
+<a [routerLink]="['/chat', nick()]">
+  <article class="container-providercard">
+    <header class="header-providercard">
+      <img [src]="avatarUrl()" alt="" class="owner-image" />
+      <span class="owner-name">{{ name() }}</span>
+      <span [class.ph-seal-check]="isVerified()" class="ph is-verified"></span>
+      <div style="width: 100%"></div>
+      <span class="ph-fill ph-star star"></span>
+      <span>{{rating()}}</span>
+    </header>
+    <section class="body-providercard">
+      <div class="container-location">
+        <span class="ph ph-map-pin"></span>
+        <span>{{ location() }}</span>
+      </div>
+      <div class="container-skills">
+        @for (skill of skills(); track $index){
+        <div class="skill">
+            <span class="ph ph-tag"></span>
+            <span>{{skill}}</span>
+        </div>
+        }
+      </div>
+    </section>
+  </article>
+</a>

@@ -9,7 +9,7 @@ import { Navbar } from '../../core/components/navbar/navbar';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, FormsModule, RouterLink, Navbar],
+  imports: [CommonModule, FormsModule, Navbar],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })

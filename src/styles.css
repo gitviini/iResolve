@@ -110,6 +110,18 @@ button {
         width: var(--high-percent);
     }
 
+    &.secondary {
+        padding: var(--medium);
+        border: none;
+        background-color: transparent;
+        color: var(--foreground);
+        width: var(--high-percent);
+
+        &:hover {
+            background-color: #0001;
+        }
+    }
+
     &.deactivate {
         opacity: 0.5;
     }
@@ -129,4 +141,8 @@ a {
 
 .icon{
     font-size: var(--medium-text);
+
+    &::before {
+        font-size: var(--medium-text);
+    }
 }

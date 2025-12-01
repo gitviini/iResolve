@@ -1,0 +1,73 @@
+<main>
+  <div class="top-bar">
+    <div class="container-search-box">
+      <div class="search-box">
+        <span class="ph ph-magnifying-glass"></span>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Pesquisar necessidades"
+          (input)="onSearch()"
+        />
+        <span *ngIf="searchTerm" (click)="searchTerm = ''; onSearch()" class="clear-btn icon"
+          >✕</span
+        >
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button
+        class="tab-btn secondary"
+        [class.active]="activeTab === 'PROVIDERS'"
+        (click)="switchTab('PROVIDERS')"
+      >
+        Prestadores
+      </button>
+      <button
+        class="tab-btn secondary"
+        [class.active]="activeTab === 'NEEDS'"
+        (click)="switchTab('NEEDS')"
+      >
+        Necessidade
+      </button>
+    </div>
+  </div>
+
+  <section class="feed-container">
+    @if (activeTab === 'PROVIDERS') { @for (provider of providers; track $index) {
+    <app-providercard
+      [nick]="provider.nick"
+      [name]="provider.name"
+      [avatarUrl]="provider.avatarUrl"
+      [isVerified]="provider.isVerified"
+      [rating]="provider.rating"
+      [location]="provider.location"
+      [skills]="provider.skills"
+    />
+    } } @else { @for (item of opportunities; track $index) {
+    <app-needcard
+      [id]="item.id"
+      [avatarUrl]="item.contractorAvatar"
+      [nick]="item.contractorNick"
+      [name]="item.contractorName"
+      [isVerified]="item.isVerified"
+      [price]="item.price"
+      [title]="item.title"
+      [location]="item.location"
+      [description]="item.description"
+      [images]="item.images"
+    />
+    } } @if (isLoadingMore) {
+    <div style="text-align: center; padding: 20px; color: #888">Carregando mais... ↻</div>
+    } @else if (activeTab === "NEEDS" ? opportunities.length === 0 : providers.length === 0) {
+    @if(activeTab === "NEEDS"){
+    <div class="empty-state">Nenhuma vaga encontrada.</div>
+    } @else {
+    <div class="empty-state">Nenhum prestador encontrado.</div>
+    } } @else {
+    <div style="text-align: center; padding: 20px; color: #888">Fim do feed</div>
+    }
+  </section>
+
+  <app-navbar></app-navbar>
+</main>
