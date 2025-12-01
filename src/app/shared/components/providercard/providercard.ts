@@ -6,11 +6,13 @@ import { Component, input } from '@angular/core';
   templateUrl: './providercard.html',
   styleUrl: './providercard.css',
 })
+
 export class Providercard {
-  title = input<string>();
-  description = input<string>();
-  category = input<string>();
-  value = input<number>();
-  images = input<File[]>();
-  status = input<'OPEN' | 'IN_PROGRESS' | 'CLOSED'>();
+  // provider infos
+  name = input<string>();
+  avatarUrl = input<string>();
+  rating = input<number>();
+  location = input<string>();
+  skills = input<string>();
+  isVerified = input<boolean>();
 }

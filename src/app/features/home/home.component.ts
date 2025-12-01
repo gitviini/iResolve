@@ -10,12 +10,13 @@ import { ToastService } from '../../core/services/toast/toast.service';
 import { Opportunity } from '../../core/models/interfaces/opportunity.interface';
 import { Provider } from '../../core/models/interfaces/provider.interface';
 import { Navbar } from '../../core/components/navbar/navbar';
+import { Needcard } from '../../shared/components/needcard/needcard';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, FormsModule, Navbar],
+  imports: [CommonModule, FormsModule, Navbar, Needcard],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
   opportunityService = inject(OpportunityService);
@@ -23,56 +24,67 @@ export class HomeComponent implements OnInit {
   toastService = inject(ToastService);
   router = inject(Router);
 
-  activeTab: 'PROVIDERS' | 'NEEDS' = 'PROVIDERS'; 
+  page = 1;
+  maxPage = 1;
+  /* activeTab: 'PROVIDERS' | 'NEEDS' = 'PROVIDERS';  */
   searchTerm: string = '';
 
   opportunities: Opportunity[] = [];
   providers: Provider[] = [];
-  
+
   // Controle de loading do scroll infinito
-  isLoadingMore = false; 
+  isLoadingMore = false;
 
   ngOnInit(): void {
-    this.opportunityService.getOpportunities().subscribe(data => {
-      this.opportunities = data;
+    this.opportunityService.getOpportunities().subscribe({
+      next: (_data) => {
+        const { data, pages } = _data;
+        this.maxPage = pages;
+        this.opportunities = data;
+      },
     });
 
-    this.providerService.getProviders().subscribe(data => {
+    this.providerService.getProviders().subscribe((data) => {
       this.providers = data;
     });
+
+    onscroll = (event: any) => {
+      if (!this.isLoadingMore && this.page < this.maxPage) {
+        const element = event.target.scrollingElement;
+        // Verifica se chegou no final do scroll (com uma margem de 50px)
+        if (element.scrollHeight - element.scrollTop <= element.clientHeight + 70) {
+          this.loadMoreItems();
+        }
+      }
+    };
   }
 
-  switchTab(tab: 'PROVIDERS' | 'NEEDS') {
+  /* switchTab(tab: 'PROVIDERS' | 'NEEDS') {
     this.activeTab = tab;
     this.searchTerm = ''; 
-    this.onSearch();      
-  }
+    this.onSearch();
+  } */
 
   onSearch() {
-    if (this.activeTab === 'NEEDS') {
-      this.opportunityService.search(this.searchTerm);
-    } else {
-      this.providerService.search(this.searchTerm);
-    }
-  }
-
-  // [UH13] Scroll Infinito
-  onScroll(event: any) {
-    // Só carrega mais se estiver na aba de NECESSIDADES e não estiver carregando
-    if (this.activeTab === 'NEEDS' && !this.isLoadingMore) {
-      const element = event.target;
-      // Verifica se chegou no final do scroll (com uma margem de 50px)
-      if (element.scrollHeight - element.scrollTop <= element.clientHeight + 50) {
-        this.loadMoreItems();
-      }
-    }
+    this.opportunityService.search(this.searchTerm);
   }
 
   loadMoreItems() {
     this.isLoadingMore = true;
+    this.page++;
+
     // Simula delay de carregamento
     setTimeout(() => {
-      this.opportunityService.loadMore();
+      this.opportunityService.loadMore(this.page).subscribe({
+        next: (_data) => {
+          const { data } = _data;
+
+          this.opportunities = [...this.opportunities, ...data];
+        },
+        error: (err) => {
+          console.error('Erro ao carregar necessidades:', err);
+        },
+      });
       this.isLoadingMore = false;
     }, 1000);
   }
@@ -83,26 +95,5 @@ export class HomeComponent implements OnInit {
 
   goToPublish() {
     this.router.navigate(['/needs/publish']);
-  }
-
-  goToHome() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (this.searchTerm) {
-      this.searchTerm = '';
-      this.onSearch();
-    }
-  }
-
-  goToSearch() {
-    const input = document.querySelector<HTMLInputElement>('.search-box input');
-    if (input) input.focus();
-  }
-
-  goToChatList() {
-    this.router.navigate(['/chat']);
-  }
-
-  goToProfile() {
-    this.router.navigate(['/profile']);
   }
 }
