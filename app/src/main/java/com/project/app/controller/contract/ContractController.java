@@ -1,6 +1,7 @@
 package com.project.app.controller.contract;
 
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,27 @@ public class ContractController {
 
     @Autowired
     private ContractService contractService;
+
+    @PutMapping("/{id}/finish")
+    public ResponseEntity<?> finishContract(
+            @PathVariable UUID id,
+            @RequestHeader("Authorization") String token) {
+        
+        try {
+            Contract contract = contractService.finishService(id, token);
+            
+            return ResponseEntity.ok(Map.of(
+                "message", "Serviço finalizado! Pagamento liberado ao prestador.",
+                "grossValue", contract.getAgreedValue(),
+                "platformFee", contract.getPlatformFee(),
+                "netValue", contract.getNetValue(), // Valor que vai pro prestador
+                "status", contract.getStatus()
+            ));
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
+        }
+    }
 
     @PostMapping
     public ResponseEntity<?> hire(@RequestHeader("Authorization") String token, 
