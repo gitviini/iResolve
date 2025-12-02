@@ -34,7 +34,7 @@ public class Need {
     @Column(nullable = false, length = 1000) // Permite descrições longas
     private String description;
 
-    @Column(name = "suggested_value", nullable = false) // MUDANÇA AQUI
+    @Column(name = "suggested_value", nullable = false)
     private BigDecimal value;
 
     private String category;
@@ -45,6 +45,10 @@ public class Need {
 
     @Column(columnDefinition = "TEXT") // Base64 é gigante, precisa ser TEXT
     private String imageBase64;
+
+    private String contractorNick;
+    private String contractorName;
+    private String contractorAvatar;
 
     private LocalDateTime createdAt;
 

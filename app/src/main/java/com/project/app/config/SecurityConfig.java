@@ -35,15 +35,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        // TODO : Retirar em produção
                         .requestMatchers(publicUrl)
                         .permitAll()
                         .anyRequest()
                         .authenticated())
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .headers(headers -> headers
-                        // TODO : Retirar em produção
-                        .frameOptions(frameOptions -> frameOptions.sameOrigin()));
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
