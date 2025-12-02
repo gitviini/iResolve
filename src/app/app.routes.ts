@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes } from "@angular/router";
 import { Register } from "./features/auth/register/register";
 import { Login } from "./features/auth/login/login";
 import { authGuard } from './core/guards/auth-guard';

@@ -13,6 +13,7 @@ import carrosselEffect from '../register/carrosselEffect';
   templateUrl: './login.html',
   styleUrl: './login.css'
 })
+
 export class Login implements OnInit {
   authService = inject(AuthService);
   router = inject(Router);
@@ -53,7 +54,8 @@ export class Login implements OnInit {
       
       this.authService.toastService.add("Login realizado com sucesso!", "sucess");
       this.router.navigate(['/']); 
-    } 
+    }
+     
     // Erro
     else {
       const message = data.message || "Erro ao realizar login.";

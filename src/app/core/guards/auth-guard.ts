@@ -10,16 +10,16 @@ import { inject } from '@angular/core';
  */
 
 export const authGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-  const authService = inject(AuthService);
+	const router = inject(Router);
+	const authService = inject(AuthService);
 
-  if (!authService.isLogged()) {
-    const registerPath = router.parseUrl("/auth/users");
+	if (!authService.isLogged()) {
+		const registerPath = router.parseUrl("/auth/users");
 
-    return new RedirectCommand(registerPath, {
-      skipLocationChange: true,
-    });
-  }
+		return new RedirectCommand(registerPath, {
+			skipLocationChange: true,
+		});
+	}
 
-  return true;
+	return true;
 };
