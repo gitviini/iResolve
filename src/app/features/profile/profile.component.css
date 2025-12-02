@@ -1,0 +1,486 @@
+/* --- ESTRUTURA GERAL DO PERFIL --- */
+main {
+  background-color: #f8f9fa;
+  min-height: 100dvh;
+  padding-bottom: 80px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header Azul */
+.pattern-header {
+  background-color: #b8d0ff;
+  background-image: radial-gradient(#799eff 15%, transparent 16%);
+  background-size: 20px 20px;
+  height: 140px;
+  position: relative;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.header-actions {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.action-chip {
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s;
+}
+
+.action-chip.white {
+  background-color: white;
+  color: #333;
+}
+.action-chip.save {
+  background-color: #4caf50;
+  color: white;
+}
+.action-chip:active {
+  transform: scale(0.95);
+}
+
+/* Avatar e Info */
+.profile-content {
+  padding: 0 20px;
+  margin-top: -50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-wrapper {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.avatar-wrapper img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid white;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.camera-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #799eff;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.main-info {
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.main-info h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+.email {
+  color: #777;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.edit-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  background-color: white;
+  margin-bottom: 5px;
+}
+.name-input {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Estatísticas */
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+
+  .star {
+    color: var(--yellow);
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.value {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+.label {
+  font-size: 11px;
+  color: #888;
+  margin-top: 4px;
+}
+.divider {
+  width: 1px;
+  background-color: #eee;
+}
+
+/* Local e Status */
+.location-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loc-info {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Botão de Status (Abre Modal) */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.status-badge.available {
+  background-color: #e6f7ea;
+  color: #28a745;
+  border: 1px solid #28a745;
+}
+.status-badge.busy {
+  background-color: #ffebee;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+}
+
+/* Seções Gerais */
+.section {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.section h3 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+.section p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.skill {
+  background-color: var(--background);
+  padding: var(--small);
+  border-radius: calc(var(--medium) - var(--small));
+}
+.add-skill {
+  background: #ddd;
+  border: none;
+  width: 30px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+/* Mini Cards */
+.mini-card {
+  background: white;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+.mini-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.mini-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.mini-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 12px;
+}
+.mini-title {
+  font-size: 13px;
+  color: #333;
+}
+
+/* --- UH11: MODAL DE CALENDÁRIO (O QUE ESTAVA FALTANDO) --- */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000; /* Bem alto para ficar na frente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+}
+
+.modal-card {
+  background: white;
+  width: 90%;
+  max-width: 360px;
+  border-radius: 24px;
+  padding: 25px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.modal-header-row h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+}
+
+/* Toggle Status Geral */
+.global-status-box {
+  background-color: #f0fdf4;
+  border: 1px solid #dcfce7;
+  padding: 15px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.global-status-box.busy {
+  background-color: #fef2f2;
+  border-color: #fee2e2;
+}
+
+.status-info {
+  display: flex;
+  flex-direction: column;
+}
+.status-info .label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #666;
+  font-weight: bold;
+}
+.status-info .status-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #166534;
+}
+.global-status-box.busy .status-text {
+  color: #991b1b;
+}
+
+/* GRID DO CALENDÁRIO (ESSENCIAL PARA NÃO FICAR EM LISTA) */
+.calendar-wrapper {
+  transition: opacity 0.3s;
+}
+.calendar-wrapper.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.calendar-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #333;
+  text-transform: capitalize;
+}
+.calendar-nav button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #799eff;
+}
+
+.weekdays-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 colunas */
+  text-align: center;
+  margin-bottom: 10px;
+}
+.weekdays-grid span {
+  font-size: 12px;
+  font-weight: bold;
+  color: #aaa;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 colunas para os dias */
+  gap: 5px;
+  text-align: center;
+}
+
+.day-cell {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: 0.1s;
+}
+.day-cell.empty {
+  background: transparent;
+  cursor: default;
+}
+.day-cell:not(.empty):hover {
+  background-color: #e0e0e0;
+}
+
+/* Dia Bloqueado (Vermelho) */
+.day-cell.blocked {
+  background-color: #ff6b6b;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(255, 107, 107, 0.3);
+}
+
+.legend {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #777;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ff6b6b;
+}
+
+.save-agenda-btn {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #799eff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Bottom Nav */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #eee;
+  z-index: 100;
+}
+.nav-item {
+  font-size: 24px;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.5;
+}
+.nav-item.active {
+  opacity: 1;
+}

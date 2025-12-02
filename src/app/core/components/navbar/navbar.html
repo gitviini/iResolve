@@ -1,0 +1,7 @@
+<nav class="bottom-nav">
+    @for(link of linkList; track $index){
+        <a [routerLink]="link.href" [class.active]="link.active" class="navbar-item">
+            <span [class.ph-fill]="link.active" class="ph {{link.icon}}"></span>
+        </a>
+    }
+</nav>

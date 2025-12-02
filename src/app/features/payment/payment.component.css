@@ -1,0 +1,215 @@
+main {
+    width: 100%;
+    height: 100dvh;
+    background-color: var(--background);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* --- Header --- */
+.pattern-header {
+    background-color: #B8D0FF; /* Azul claro do fundo */
+    background-image: radial-gradient(#799EFF 15%, transparent 16%); /* Bolinhas */
+    background-size: 20px 20px;
+    padding: 40px 20px 20px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.connection-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: rgba(255,255,255,0.4);
+    padding: 15px 25px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+.avatar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.avatar-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid var(--white);
+    overflow: hidden;
+    background-color: var(--white);
+}
+
+.avatar-wrapper img {
+    width: 100%;
+    height: 100%;
+}
+
+.name {
+    font-size: 10px;
+    color: #555;
+    font-weight: 600;
+}
+
+.handshake-icon {
+    font-size: 24px;
+}
+
+/* --- Conteúdo --- */
+.content-scroll {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    padding-bottom: 100px; /* Espaço para o footer */
+}
+
+.section-title {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Card de Serviço */
+.service-card {
+    background-color: var(--white);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mini-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.username {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.badge {
+    width: 14px;
+}
+
+.value {
+    font-weight: bold;
+    color: var(--foreground);
+}
+
+.service-title {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.location {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.4;
+    margin-bottom: 10px;
+}
+
+.service-images {
+    display: flex;
+    gap: 10px;
+}
+
+.img-box {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* Info Section */
+.info-section h3 {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.info-section p {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* --- Footer --- */
+.actions-footer {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    background-color: var(--white);
+    padding: 10px;
+    border-radius: 50px; /* Pílula gigante */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+button {
+    flex: 1;
+    height: 45px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+button:active {
+    filter: brightness(0.9);
+}
+
+.btn-cancel {
+    background-color: #FF6B6B; /* Vermelho claro */
+    color: white;
+}
+
+.btn-confirm {
+    background-color: #799EFF; /* Azul do tema */
+    color: white;
+}
+
+.btn-confirm:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

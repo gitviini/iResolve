@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
 import { LoginInterface } from '../../../core/models/interfaces/login.interface';
 // Importando o efeito que você já criou no Register
 import carrosselEffect from '../register/carrosselEffect'; 

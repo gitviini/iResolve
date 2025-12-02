@@ -1,0 +1,62 @@
+<main>
+    <header class="mobile-header">
+        <div class="pattern-overlay"></div>
+        <div class="header-content">
+            <a [routerLink]="['/home']" class="back-btn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </a>
+            <h2>Verificação de Identidade</h2>
+        </div>
+    </header>
+
+    <section class="content-container">
+        <p class="description">
+            Envie uma foto legível do seu documento de identidade. Os dados são usados apenas para verificação e armazenados com segurança.
+        </p>
+
+        <input type="file" id="cameraInput" (change)="onFileSelected($event)" accept="image/*" capture="environment" hidden>
+        <input type="file" id="galleryInput" (change)="onFileSelected($event)" accept="image/*" hidden>
+
+        <div class="actions-group">
+            <label for="cameraInput" class="action-btn blue-btn">
+                Tirar Foto
+            </label>
+
+            <label for="galleryInput" class="action-btn blue-btn">
+                Enviar do Dispositivo
+            </label>
+        </div>
+
+        <div class="submit-area">
+            <button 
+                class="action-btn submit-btn" 
+                (click)="submitDocument()"
+                [disabled]="!selectedFile || isLoading">
+                
+                @if (isLoading) {
+                    <span>Enviando...</span>
+                } @else {
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="12" y1="18" x2="12" y2="12"></line>
+                        <line x1="9" y1="15" x2="15" y2="15"></line>
+                    </svg>
+                    <span>Enviar Para Verificação</span>
+                }
+            </button>
+
+            <div class="file-display">
+                {{ fileName || 'Ex: Image.png' }}
+            </div>
+        </div>
+
+        @if (previewUrl) {
+            <div class="mini-preview">
+                <img [src]="previewUrl" alt="Preview">
+            </div>
+        }
+    </section>
+</main>

@@ -1,6 +1,6 @@
-import { CanActivateFn, RedirectCommand, Router } from "@angular/router";
-import { AuthService } from "../services/auth.service";
-import { inject } from "@angular/core";
+import { CanActivateFn, RedirectCommand, Router } from '@angular/router';
+import { AuthService } from '../services/auth/auth.service';
+import { inject } from '@angular/core';
 
 /**
  * Guarda as rotas não públicas

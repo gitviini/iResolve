@@ -1,0 +1,54 @@
+<main>
+  <div class="top-bar">
+    <div class="container-profile-search-box">
+      <a [routerLink]="['/profile']">
+        <img
+          [src]="profile?.avatarUrl"
+          alt="profile image"
+          class="profile"
+        />
+      </a>
+      <div class="search-box">
+        <span class="ph ph-magnifying-glass"></span>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Pesquisar necessidades"
+          (input)="onSearch()"
+        />
+        <span *ngIf="searchTerm" (click)="searchTerm = ''; onSearch()" class="clear-btn icon"
+          >✕</span
+        >
+      </div>
+    </div>
+
+    <button class="primary" (click)="goToPublish()">
+      <span class="ph ph-file-text icon"></span> Publicar Necessidade
+    </button>
+  </div>
+
+  <section class="feed-container">
+    @for (item of opportunities; track $index) {
+    <app-needcard
+      [id]="item.id"
+      [nick]="item.contractorNick"
+      [avatarUrl]="item.contractorAvatar"
+      [name]="item.contractorName"
+      [isVerified]="item.isVerified"
+      [price]="item.price"
+      [title]="item.title"
+      [address]="item.address"
+      [description]="item.description"
+      [images]="item.images"
+    />
+    } @if (isLoadingMore) {
+    <div style="text-align: center; padding: 20px; color: #888">Carregando mais... ↻</div>
+    } @else if (opportunities.length === 0) {
+    <div class="empty-state">Nenhuma vaga encontrada.</div>
+    }@else {
+    <div style="text-align: center; padding: 20px; color: #888">Fim do feed</div>
+    }
+  </section>
+
+  <app-navbar></app-navbar>
+</main>

@@ -18,7 +18,7 @@ body {
     /* LIGHT COLORS */
     --background: #F3F4Fa;
     --foreground: #1C1C1C;
-    --white: #F7F9FF;
+    --white: #fff;
 
     --yellow: #FFDE63;
     --orange: #FFBC4C;
@@ -32,6 +32,12 @@ body {
     --medium: 15px;
     --high: 20px;
     --most-high: 40px;
+
+    --small-image: 25px;
+    --medium-image: 50px;
+    --high-image: 100px;
+
+    --container-size: 70px;
 
     --small-percent: 40%;
     --medium-percent: 60%;
@@ -86,9 +92,13 @@ input {
 }
 
 button {
+    display: flex;
     font-size: var(--medium-text);
     cursor: pointer;
     transition: var(--medium-time) ease-in;
+    justify-content: center;
+    align-items: center;
+    gap: var(--small);
 
     &.primary {
         padding: var(--medium);
@@ -98,6 +108,18 @@ button {
         color: var(--background);
         box-shadow: inset 0 -4px 4px #1C1C1C50;
         width: var(--high-percent);
+    }
+
+    &.secondary {
+        padding: var(--medium);
+        border: none;
+        background-color: transparent;
+        color: var(--foreground);
+        width: var(--high-percent);
+
+        &:hover {
+            background-color: #0001;
+        }
     }
 
     &.deactivate {
@@ -114,5 +136,13 @@ a {
 
     &.secondary {
         color: var(--foreground);
+    }
+}
+
+.icon{
+    font-size: var(--medium-text);
+
+    &::before {
+        font-size: var(--medium-text);
     }
 }

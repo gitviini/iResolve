@@ -1,0 +1,167 @@
+main {
+    width: 100%;
+    height: 100dvh;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+}
+
+.pattern-header {
+    background-color: #B8D0FF;
+    background-image: radial-gradient(#799EFF 15%, transparent 16%);
+    background-size: 20px 20px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    margin-bottom: -40px;
+    z-index: 1;
+}
+
+.header-content h2 {
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    padding-top: 0;
+    z-index: 2;
+}
+
+.avatar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.avatar-container img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid var(--white);
+    background-color: var(--white);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.avatar-container h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.avatar-container p {
+    font-size: 12px;
+    color: #777;
+}
+
+.title {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.subtitle {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+    max-width: 80%;
+}
+
+.stars-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.star-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.1s;
+}
+
+.star-btn:active {
+    transform: scale(1.2);
+}
+
+.star-btn svg {
+    stroke: #ccc;
+    fill: transparent;
+    transition: all 0.2s;
+}
+
+.star-btn svg.filled {
+    stroke: var(--orange);
+    fill: var(--yellow);
+}
+
+.comment-section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: var(--blue);
+    background-color: white;
+}
+
+.actions-footer {
+    width: 100%;
+    margin-top: auto;
+    display: flex;
+    gap: 15px;
+}
+
+button {
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-cancel {
+    flex: 1;
+    background-color: #f0f0f0;
+    color: #666;
+}
+
+.btn-confirm {
+    flex: 2;
+    background-color: var(--blue);
+    color: white;
+    box-shadow: 0 4px 10px rgba(121, 158, 255, 0.4);
+}
+
+.btn-confirm:disabled {
+    background-color: #ccc;
+    box-shadow: none;
+    cursor: not-allowed;
+}

@@ -1,0 +1,28 @@
+<!-- <a [routerLink]="['/chat', nick(), id()]"> -->
+<a [routerLink]="['/chat']">
+  <article class="container-needcard">
+    <header class="header-needcard">
+      <img [src]="avatarUrl()" alt="" class="owner-image" />
+      <span class="owner-name">{{ name() }}</span>
+      <span [class.ph-seal-check]="isVerified()" class="ph is-verified"></span>
+      <div style="width: 100%"></div>
+      <span class="price">{{ price() | currency : 'BRL' }}</span>
+    </header>
+    <section class="body-needcard">
+      <h3 class="title">{{ title() }}</h3>
+      <div class="container-location">
+        <span class="ph ph-map-pin"></span>
+        <span>{{ address() }}</span>
+      </div>
+      <div class="container-description">
+        <span class="ph ph-text-align-center"></span>
+        <span>{{ description() }}</span>
+      </div>
+      <div class="container-images">
+        @for (image of images(); track $index){
+        <img [src]="image" alt="" class="image" />
+        }
+      </div>
+    </section>
+  </article>
+</a>

@@ -1,0 +1,76 @@
+<main>
+    <header class="chat-header">
+        <button class="back-btn" (click)="goBack()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        
+        <div class="user-info">
+            <div class="avatar-wrapper">
+                <img [src]="targetUser.avatarUrl" alt="Avatar">
+            </div>
+            <div class="user-details">
+                <span class="name">
+                    {{ targetUser.name }} 
+                    <img src="/icons/sucess.svg" width="14" *ngIf="targetUser.isVerified">
+                </span>
+            </div>
+        </div>
+
+        <button class="contract-btn" (click)="goToPayment()">
+            Contratar
+        </button>
+    </header>
+
+    <section class="messages-area" #scrollContainer>
+        
+        @for (msg of messages; track msg.id) {
+            
+            @if (msg.isServiceCard) {
+                <div class="message-row me">
+                    <div class="service-card-bubble">
+                        <div class="card-header">
+                            <span class="service-title">🔗 Passear com cachorro</span>
+                            <span class="service-price">R$100,00</span>
+                        </div>
+                        <div class="card-details">
+                            <span>📍 Torre</span>
+                            <span>📅 Sair p/ 3 dias...</span>
+                        </div>
+                        <div class="card-divider"></div>
+                        <span class="card-footer">Olá, que horas seria o passeio?</span>
+                    </div>
+                </div>
+            } 
+            @else {
+                <div class="message-row" [ngClass]="msg.senderId === 'ME' ? 'me' : 'other'">
+                    <div class="bubble">
+                        @if (msg.imageUrl) {
+                            <img [src]="msg.imageUrl" class="msg-image">
+                        }
+                        
+                        @if (msg.text) {
+                            <p>{{ msg.text }}</p>
+                        }
+                        
+                        <span class="time">{{ msg.timestamp | date:'HH:mm' }}</span>
+                    </div>
+                </div>
+            }
+        }
+
+    </section>
+
+    <footer class="chat-footer">
+        <button class="add-btn">+</button>
+        <input 
+            type="text" 
+            placeholder="Mensagem ..." 
+            [(ngModel)]="newMessage"
+            (keydown.enter)="sendMessage()">
+        <button class="send-btn" (click)="sendMessage()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+        </button>
+    </footer>
+</main>
