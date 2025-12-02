@@ -9,6 +9,8 @@ import { ToastService } from '../../core/services/toast/toast.service';
 import { Opportunity } from '../../core/models/interfaces/opportunity.interface';
 import { Navbar } from '../../core/components/navbar/navbar';
 import { Needcard } from '../../shared/components/needcard/needcard';
+import { ProfileService } from '../../core/services/profile/profile.service';
+import { UserProfile } from '../../core/models/interfaces/profile.interface';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +20,7 @@ import { Needcard } from '../../shared/components/needcard/needcard';
 })
 export class HomeComponent implements OnInit {
   opportunityService = inject(OpportunityService);
+  profileService = inject(ProfileService);
   toastService = inject(ToastService);
   router = inject(Router);
 
@@ -25,24 +28,43 @@ export class HomeComponent implements OnInit {
   maxPage = 1;
   searchTerm: string = '';
 
+  profile: UserProfile | undefined;
   opportunities: Opportunity[] = [];
 
   // Controle de loading do scroll infinito
   isLoadingMore = false;
+
+  setProfile(){
+    this.profileService.getProfile().subscribe({
+      next: (data:any) =>{
+        this.profile = data;
+      },
+      error: (err) =>{
+        this.toastService.add("Erro ao carregar informações do usuário", 'error');
+      }
+    })
+  }
+
 
   // --- INIT OPPORTUNITIES ---
   setOpportunities() {
     this.page = 1;
     this.opportunityService.getOpportunities().subscribe({
       next: (_data) => {
-        const { data, pages } = _data;
-        this.maxPage = pages;
-        this.opportunities = data;
+        const { content, totalPages } = _data;
+        console.log(_data)
+        this.maxPage = totalPages;
+        this.opportunities = content;
       },
+      error: (err) => {
+        this.toastService.add("Erro ao carregar necessidades", 'error');
+      }
     });
   }
 
   ngOnInit(): void {
+    this.setProfile();
+
     this.setOpportunities();
 
     // --- SCROLL HANDLER ---
@@ -68,7 +90,7 @@ export class HomeComponent implements OnInit {
         this.opportunities = data
       },
       error: (err) => {
-        console.log(err)
+        this.toastService.add("Erro ao procurar necessidades", 'error');
       }
     })
   }
@@ -87,7 +109,7 @@ export class HomeComponent implements OnInit {
           this.opportunities = [...this.opportunities, ...data];
         },
         error: (err) => {
-          console.error('Erro ao carregar necessidades:', err);
+          this.toastService.add("Erro ao carregar mais necessidades", 'error');
         },
       });
       this.isLoadingMore = false;

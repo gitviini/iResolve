@@ -1,150 +1,158 @@
 <main *ngIf="profile">
-    <header class="pattern-header">
-        <div class="header-actions">
-            <button class="action-chip white">
-                📄 Contratos
-            </button>
-            
-            <button class="action-chip white" (click)="toggleEdit()" *ngIf="!isEditing">
-                ✏️ Editar
-            </button>
-            <button class="action-chip save" (click)="save()" *ngIf="isEditing" [disabled]="isLoading">
-                {{ isLoading ? '...' : '💾 Salvar' }}
-            </button>
-        </div>
-    </header>
+  <header class="pattern-header">
+    <div class="header-actions">
+      <!-- <a [routerLink]="['/contracts']" class="action-chip white"><span class="ph ph-file-text"></span> Contratos</a> -->
 
-    <section class="profile-content">
-        <div class="avatar-wrapper">
-            <img [src]="profile.avatarUrl" alt="Profile">
-            <button class="camera-btn" *ngIf="isEditing">📷</button>
-        </div>
+      <button class="action-chip white" (click)="toggleEdit()" *ngIf="!isEditing">
+        <span class="ph ph-pencil"></span> Editar
+      </button>
+      <button class="action-chip save" (click)="save()" *ngIf="isEditing" [disabled]="isLoading">
+        {{ isLoading ? '...' : 'Salvar' }}
+      </button>
 
-        <div class="main-info">
-            <h2 *ngIf="!isEditing">{{ profile.name }}</h2>
-            <input *ngIf="isEditing" [(ngModel)]="editForm.name" class="edit-input name-input">
-
-            <p class="email">{{ profile.email }}</p>
-        </div>
-
-        <div class="stats-row">
-            <div class="stat">
-                <span class="value">⭐ {{ profile.rating | number:'1.1-1' }}</span>
-                <span class="label">Avaliação</span>
-            </div>
-            <div class="divider"></div>
-            <div class="stat">
-                <span class="value">{{ profile.needsCount }}</span>
-                <span class="label">Necessidades</span>
-            </div>
-            <div class="divider"></div>
-            <div class="stat">
-                <span class="value">{{ profile.servicesCount }}</span>
-                <span class="label">Prestações</span>
-            </div>
-        </div>
-
-        <div class="location-status">
-            <div class="loc-info">
-                <span>📍</span>
-                <span *ngIf="!isEditing">{{ profile.location }}</span>
-                <input *ngIf="isEditing" [(ngModel)]="editForm.location" class="edit-input">
-            </div>
-            
-            <button class="status-badge" 
-                    [class.available]="profile.status === 'AVAILABLE'"
-                    [class.busy]="profile.status === 'BUSY'"
-                    (click)="openCalendar()">
-                {{ profile.status === 'AVAILABLE' ? 'Disponível' : 'Indisponível' }} ⚙️
-            </button>
-        </div>
-
-        <div class="section">
-            <h3>Sobre mim</h3>
-            <p *ngIf="!isEditing">{{ profile.bio }}</p>
-            <textarea *ngIf="isEditing" [(ngModel)]="editForm.bio" rows="3" class="edit-input"></textarea>
-        </div>
-
-        <div class="section">
-            <h3>Habilidades</h3>
-            <div class="skills-container">
-                @for (skill of profile.skills; track $index) {
-                    <span class="skill-tag">🏷️ {{ skill }}</span>
-                }
-                <button *ngIf="isEditing" class="add-skill">+</button>
-            </div>
-        </div>
-
-        <div class="section">
-            <h3>Minhas Necessidades</h3>
-            @for (item of profile.myNeeds; track item.id) {
-                <div class="mini-card">
-                    <div class="mini-header">
-                        <img [src]="item.contractorAvatar" class="mini-avatar">
-                        <div class="mini-info">
-                            <strong>{{ item.contractorName }}</strong>
-                            <small>{{ item.timePosted }}</small>
-                        </div>
-                        <strong class="price">R$ {{ item.price }}</strong>
-                    </div>
-                    <p class="mini-title">{{ item.title }}</p>
-                </div>
-            }
-        </div>
-    </section>
-
-    <app-navbar></app-navbar>
-
-    <div class="modal-overlay" *ngIf="showCalendarModal">
-        <div class="modal-card">
-            <div class="modal-header-row">
-                <h3>Minha Disponibilidade</h3>
-                <button class="close-btn" (click)="closeCalendar()">✕</button>
-            </div>
-
-            <div class="global-status-box" [class.busy]="tempStatus === 'BUSY'" (click)="toggleGlobalStatus()">
-                <div class="status-info">
-                    <span class="label">Status Geral</span>
-                    <span class="status-text">{{ tempStatus === 'AVAILABLE' ? 'Disponível para trabalho' : 'Indisponível (Férias/Folga)' }}</span>
-                </div>
-                <div class="toggle-switch">
-                    <div class="switch-ball"></div>
-                </div>
-            </div>
-
-            <div class="calendar-wrapper" [class.disabled]="tempStatus === 'BUSY'">
-                
-                <div class="calendar-nav">
-                    <button (click)="changeMonth(-1)">‹</button>
-                    <span>{{ currentDate | date:'MMMM yyyy' }}</span>
-                    <button (click)="changeMonth(1)">›</button>
-                </div>
-
-                <div class="weekdays-grid">
-                    @for (d of weekDays; track $index) {
-                        <span>{{ d }}</span>
-                    }
-                </div>
-
-                <div class="days-grid">
-                    @for (item of calendarDays; track $index) {
-                        <div class="day-cell" 
-                             [class.empty]="!item.day"
-                             [class.blocked]="item.fullDate && tempBlockedDates.includes(item.fullDate!)"
-                             (click)="toggleDate(item.fullDate)">
-                            {{ item.day }}
-                        </div>
-                    }
-                </div>
-                
-                <div class="legend">
-                    <span class="dot red"></span> Dias bloqueados
-                </div>
-            </div>
-
-            <button class="save-agenda-btn" (click)="saveAvailability()">
-                Salvar Alterações
-            </button>
-        </div>
+      <a [routerLink]="['/verification']" class="action-chip white">Verificar perfil</a>
     </div>
+  </header>
+
+  <section class="profile-content">
+    <div class="avatar-wrapper">
+      <img [src]="profile.avatarUrl" alt="Profile" />
+      <button class="camera-btn" *ngIf="isEditing"><span class="ph ph-fill ph-camera"></span></button>
+    </div>
+
+    <div class="main-info">
+      <h2 *ngIf="!isEditing">{{ profile.name }}</h2>
+      <input *ngIf="isEditing" [(ngModel)]="editForm.name" class="edit-input name-input" />
+      <p class="email">{{ profile.email }}</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat">
+        <span class="value"
+          ><span class="ph ph-fill ph-star star"></span>
+          {{ profile.rating | number : '1.1-1' }}</span
+        >
+        <span class="label">Avaliação</span>
+      </div>
+      <div class="divider"></div>
+      <div class="stat">
+        <span class="value">{{ profile.needsCount }}</span>
+        <span class="label">Necessidades</span>
+      </div>
+      <div class="divider"></div>
+      <div class="stat">
+        <span class="value">{{ profile.servicesCount }}</span>
+        <span class="label">Prestações</span>
+      </div>
+    </div>
+
+    <div class="location-status">
+      <div class="loc-info">
+        <span class="ph-fill ph-map-pin"></span>
+        <span *ngIf="!isEditing">{{ profile.address }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="editForm.address" class="edit-input" />
+      </div>
+
+      <button
+        class="status-badge"
+        [class.available]="profile.status === 'AVAILABLE'"
+        [class.busy]="profile.status === 'BUSY'"
+        (click)="openCalendar()"
+      >
+        {{ profile.status === 'AVAILABLE' ? 'Disponível' : 'Indisponível' }}
+        <span class="ph-fill ph-gear"></span>
+      </button>
+    </div>
+
+    <div class="section">
+      <h3>Sobre mim</h3>
+      <p *ngIf="!isEditing">{{ profile.bio }}</p>
+      <textarea *ngIf="isEditing" [(ngModel)]="editForm.bio" rows="3" class="edit-input"></textarea>
+    </div>
+    <div class="section">
+      <h3>Habilidades</h3>
+      <div class="skills-container">
+        @for (skill of profile.skills; track $index) {
+        <span class="skill"><span class="ph ph-tag"></span> {{ skill }}</span>
+        }
+        <button *ngIf="isEditing" class="add-skill">+</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Minhas Necessidades</h3>
+      @for (item of profile.myNeeds; track item.id) {
+      <app-needcard
+        [id]="item.id"
+        [nick]="item.contractorNick"
+        [avatarUrl]="item.contractorAvatar"
+        [name]="item.contractorName"
+        [isVerified]="item.isVerified"
+        [price]="item.price"
+        [title]="item.title"
+        [address]="item.address"
+        [description]="item.description"
+        [images]="item.images"
+      />
+      }
+    </div>
+  </section>
+
+  <app-navbar></app-navbar>
+
+  <div class="modal-overlay" *ngIf="showCalendarModal">
+    <div class="modal-card">
+      <div class="modal-header-row">
+        <h3>Minha Disponibilidade</h3>
+        <button class="close-btn" (click)="closeCalendar()">✕</button>
+      </div>
+
+      <div
+        class="global-status-box"
+        [class.busy]="tempStatus === 'BUSY'"
+        (click)="toggleGlobalStatus()"
+      >
+        <div class="status-info">
+          <span class="label">Status Geral</span>
+          <span class="status-text">{{
+            tempStatus === 'AVAILABLE' ? 'Disponível para trabalho' : 'Indisponível (Férias/Folga)'
+          }}</span>
+        </div>
+        <div class="toggle-switch">
+          <div class="switch-ball"></div>
+        </div>
+      </div>
+
+      <div class="calendar-wrapper" [class.disabled]="tempStatus === 'BUSY'">
+        <div class="calendar-nav">
+          <button (click)="changeMonth(-1)">‹</button>
+          <span>{{ currentDate | date : 'MMMM yyyy' }}</span>
+          <button (click)="changeMonth(1)">›</button>
+        </div>
+
+        <div class="weekdays-grid">
+          @for (d of weekDays; track $index) {
+          <span>{{ d }}</span>
+          }
+        </div>
+
+        <div class="days-grid">
+          @for (item of calendarDays; track $index) {
+          <div
+            class="day-cell"
+            [class.empty]="!item.day"
+            [class.blocked]="item.fullDate && tempBlockedDates.includes(item.fullDate!)"
+            (click)="toggleDate(item.fullDate)"
+          >
+            {{ item.day }}
+          </div>
+          }
+        </div>
+
+        <div class="legend"><span class="dot red"></span> Dias bloqueados</div>
+      </div>
+
+      <button class="save-agenda-btn" (click)="saveAvailability()">Salvar Alterações</button>
+    </div>
+  </div>
 </main>

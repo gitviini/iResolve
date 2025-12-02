@@ -70,5 +70,5 @@ main {
   flex-flow: column;
   padding: var(--high);
   gap: var(--high);
-  padding-bottom: calc(var(--container-size) - var(--medium));
+  padding-bottom: calc(var(--container-size));
 }

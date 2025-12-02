@@ -36,12 +36,12 @@
   <section class="feed-container">
     @if (activeTab === 'PROVIDERS') { @for (provider of providers; track $index) {
     <app-providercard
-      [nick]="provider.nick"
+      [nick]="provider.nickname"
       [name]="provider.name"
       [avatarUrl]="provider.avatarUrl"
       [isVerified]="provider.isVerified"
       [rating]="provider.rating"
-      [location]="provider.location"
+      [location]="provider.neighborhood"
       [skills]="provider.skills"
     />
     } } @else { @for (item of opportunities; track $index) {
@@ -53,7 +53,7 @@
       [isVerified]="item.isVerified"
       [price]="item.price"
       [title]="item.title"
-      [location]="item.location"
+      [address]="item.address"
       [description]="item.description"
       [images]="item.images"
     />

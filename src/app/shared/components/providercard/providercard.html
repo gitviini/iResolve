@@ -6,7 +6,7 @@
       <span [class.ph-seal-check]="isVerified()" class="ph is-verified"></span>
       <div style="width: 100%"></div>
       <span class="ph-fill ph-star star"></span>
-      <span>{{rating()}}</span>
+      <span>{{ rating() }}</span>
     </header>
     <section class="body-providercard">
       <div class="container-location">
@@ -14,12 +14,10 @@
         <span>{{ location() }}</span>
       </div>
       <div class="container-skills">
-        @for (skill of skills(); track $index){
         <div class="skill">
-            <span class="ph ph-tag"></span>
-            <span>{{skill}}</span>
+          <span class="ph ph-tag"></span>
+          <span>{{ skills() }}</span>
         </div>
-        }
       </div>
     </section>
   </article>

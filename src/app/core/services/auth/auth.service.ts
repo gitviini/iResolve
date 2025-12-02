@@ -11,8 +11,7 @@ export class AuthService {
 
   // URL base (ajuste se necessário, ex: http://localhost:8080)
   // TODO : trocar link em produção
-  // private url = "http://localhost:8080/auth";
-  private url = "http://localhost:3000";
+  private url = "http://localhost:8080/auth";
 
   /**
    * Verifica se usuário está logado
@@ -56,5 +55,9 @@ export class AuthService {
     catch(error){
       return {data: {message: "Não foi possível realizar a ação! Tente novamente."}, status: 500};
     }
+  }
+
+  logout(){
+    localStorage.removeItem("authToken");
   }
 }

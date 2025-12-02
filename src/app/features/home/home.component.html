@@ -3,8 +3,8 @@
     <div class="container-profile-search-box">
       <a [routerLink]="['/profile']">
         <img
-          src="https://media.licdn.com/dms/image/v2/D4D03AQF9baYOEkwovw/profile-displayphoto-shrink_100_100/B4DZXQI2WRHwAU-/0/1742953735954?e=1766016000&v=beta&t=2efa-gGGTbd4tsNyVghMjdTLB_MySWfPmeHSV4CVLVM"
-          alt=""
+          [src]="profile?.avatarUrl"
+          alt="profile image"
           class="profile"
         />
       </a>
@@ -37,7 +37,7 @@
       [isVerified]="item.isVerified"
       [price]="item.price"
       [title]="item.title"
-      [location]="item.location"
+      [address]="item.address"
       [description]="item.description"
       [images]="item.images"
     />

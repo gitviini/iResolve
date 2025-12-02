@@ -8,7 +8,8 @@ export interface UserProfile {
     rating: number;
     needsCount: number;
     servicesCount: number;
-    location: string;
+    cep: string,
+    address: string,
     status: 'AVAILABLE' | 'BUSY';
     blockedDates: string[]; // MUDOU: Agora é lista de strings 'YYYY-MM-DD'
     bio: string;

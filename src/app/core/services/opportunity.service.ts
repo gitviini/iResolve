@@ -7,21 +7,26 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class OpportunityService {
-  private url = "http://localhost:3000/needs";
+  private url = "http://localhost:8080/needs";
   private http = inject(HttpClient);
 
   getOpportunities() : Observable<any> {
     // init page
-    const _page = 1;
-    return this.http.get<Opportunity[]>(`${this.url}?_page=${_page}&_per_page=10`);
-    //return this.opportunities$.asObservable();
+    const page = 1;
+    const params = {page: page, size: 10};
+    const authToken = localStorage.getItem("authToken");
+    const headers = {
+      "Authorization": `Bearer ${authToken}`
+    }
+    return this.http.get<Opportunity[]>(`${this.url}`, {params: params, headers: headers});
   }
 
   search(term: string, list: Opportunity[]): Observable<Opportunity[]> {
     const lowerTerm = term.toLowerCase();
     const filtered = list.filter(op => 
       op.title.toLowerCase().includes(lowerTerm) ||
-      op.location.toLowerCase().includes(lowerTerm) ||
+      op.cep.toLowerCase().includes(lowerTerm) ||
+      op.address.toLowerCase().includes(lowerTerm) ||
       op.description.toLowerCase().includes(lowerTerm)
     );
     const opportunities = new BehaviorSubject<Opportunity[]>([]);
@@ -32,6 +37,11 @@ export class OpportunityService {
   }
 
   loadMore(page: number): Observable<any> {
-    return this.http.get<Opportunity[]>(`${this.url}?_page=${page}&_per_page=10`);
+    const params = {page: page, size: 10};
+    const authToken = localStorage.getItem("authToken");
+    const headers = {
+      "Authorization": `Bearer ${authToken}`
+    }
+    return this.http.get<Opportunity[]>(`${this.url}`, {params: params, headers: headers});
   }
 }

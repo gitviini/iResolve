@@ -1,15 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { ProfileService } from '../../core/services/profile/profile.service';
 import { ToastService } from '../../core/services/toast/toast.service';
 import { UserProfile } from '../../core/models/interfaces/profile.interface';
 import { Navbar } from '../../core/components/navbar/navbar';
+import { Needcard } from '../../shared/components/needcard/needcard';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, FormsModule, Navbar],
+  imports: [CommonModule, FormsModule, RouterLink, Navbar, Needcard],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -33,7 +34,7 @@ export class ProfileComponent implements OnInit {
   weekDays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
 
   ngOnInit(): void {
-    this.profileService.getProfile().subscribe(data => {
+    this.profileService.getProfile().subscribe((data:any) => {
       this.profile = data;
       this.editForm = { ...data };
     });

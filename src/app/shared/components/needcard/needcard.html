@@ -1,4 +1,5 @@
-<a [routerLink]="['/chat', nick(), id()]">
+<!-- <a [routerLink]="['/chat', nick(), id()]"> -->
+<a [routerLink]="['/chat']">
   <article class="container-needcard">
     <header class="header-needcard">
       <img [src]="avatarUrl()" alt="" class="owner-image" />
@@ -11,7 +12,7 @@
       <h3 class="title">{{ title() }}</h3>
       <div class="container-location">
         <span class="ph ph-map-pin"></span>
-        <span>{{ location() }}</span>
+        <span>{{ address() }}</span>
       </div>
       <div class="container-description">
         <span class="ph ph-text-align-center"></span>

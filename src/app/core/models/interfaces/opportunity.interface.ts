@@ -6,7 +6,10 @@ export interface Opportunity {
     isVerified: boolean;
     title: string;
     price: number;
-    location: string;
+    skills: string;
+    /* location: string; */
+    cep: string;
+    address: string;
     description: string;
     images: string[];
     timePosted: string;

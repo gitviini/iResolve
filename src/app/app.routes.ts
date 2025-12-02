@@ -13,6 +13,8 @@ import { RateComponent } from './features/review/rate/rate.component'; // Atenç
 import { ChatComponent } from './features/chat/chat.component';
 import { VerificationComponent } from './features/verification/verification.component';
 import { Search } from './features/search/search';
+import { Logout } from './features/logout/logout';
+import { Contracts } from './features/contracts/contracts';
 
 export const routes: Routes = [
     // Redirecionamento inicial
@@ -106,12 +108,27 @@ export const routes: Routes = [
         title: "Avaliar Serviço"
     },
 
+    // CONTRATOS
+    {
+        path: "contracts",
+        component: Contracts,
+        canActivate: [authGuard],
+        title: "Avaliar Serviço"
+    },
+
     //UH12 - Perfil
     {
         path: "profile",
         component: ProfileComponent,
         canActivate: [authGuard],
         title: "Meu Perfil"
+    },
+
+    // LOGOUT
+    {
+        path: "logout",
+        component: Logout,
+        title: "Logout"
     }
 ];
 

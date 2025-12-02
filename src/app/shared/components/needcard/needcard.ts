@@ -19,7 +19,7 @@ export class Needcard {
   // need infos
   id = input<string>();
   title = input<string>();
-  location = input<string>();
+  address = input<string>();
   description = input<string>();
   category = input<string>();
   price = input<number>();

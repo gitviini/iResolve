@@ -7,15 +7,20 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ProviderService {
-  private url = 'http://localhost:3000/users';
+  private url = 'http://localhost:8080/users';
   private http = inject(HttpClient);
 
   private providers = new BehaviorSubject<Provider[]>([]);
   
   getProviders(): Observable<any> {
     // init page
-    const _page = 1;
-    return this.http.get<Provider[]>(`${this.url}?_page=${_page}&_per_page=10`);
+    const page = 0;
+    const params = {page: page, size: 10};
+    const authToken = localStorage.getItem("authToken");
+    const headers = {
+      "Authorization": `Bearer ${authToken}`
+    }
+    return this.http.get<Provider[]>(`${this.url}`, {params: params, headers: headers});
     //return this.opportunities$.asObservable();
   }
 
@@ -25,15 +30,19 @@ export class ProviderService {
       (pr) =>
         pr.name.toLowerCase().includes(lowerTerm) ||
         pr.location.toLowerCase().includes(lowerTerm) ||
-        pr.skills.filter(skill => skill.toLocaleLowerCase().includes(lowerTerm)).length
+        pr.skills.toLowerCase().includes(lowerTerm)
     );
     this.providers.next(filtered);
 
     return this.providers.asObservable();
-    //return this.http.get<Opportunity[]>(`${this.url}?q=${term}`);
   }
 
   loadMore(page: number): Observable<any> {
-    return this.http.get<Provider[]>(`${this.url}?_page=${page}&_per_page=10`);
+    const params = {page: page, size: 10};
+    const authToken = localStorage.getItem("authToken");
+    const headers = {
+      "Authorization": `Bearer ${authToken}`
+    }
+    return this.http.get<Provider[]>(`${this.url}`, {params: params, headers: headers});
   }
 }

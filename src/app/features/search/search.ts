@@ -25,12 +25,12 @@ export class Search {
   router = inject(Router);
 
   page = {
-    opportunities: 1,
-    providers: 1,
+    opportunities: 0,
+    providers: 0,
   };
   maxPage = {
-    opportunities: 1,
-    providers: 1,
+    opportunities: 0,
+    providers: 0,
   };
   activeTab: 'PROVIDERS' | 'NEEDS' = 'PROVIDERS';
   searchTerm: string = '';
@@ -53,18 +53,19 @@ export class Search {
     this.page.opportunities = 1;
     this.opportunityService.getOpportunities().subscribe({
       next: (_data) => {
-        const { data, pages } = _data;
-        this.maxPage.opportunities = pages;
-        this.opportunities = data;
+        const { content, totalPages } = _data;
+        this.maxPage.opportunities = totalPages;
+        this.opportunities = content;
       },
     });
 
     this.page.providers = 1;
     this.providerService.getProviders().subscribe({
       next: (_data) => {
-        const { data, pages } = _data;
-        this.maxPage.providers = pages;
-        this.providers = data;
+        const { content, totalPages } = _data;
+        console.log(_data);
+        this.maxPage.providers = totalPages;
+        this.providers = content;
       },
       error: (err) => {
         console.log(err)

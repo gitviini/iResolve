@@ -15,6 +15,6 @@ export class Providercard {
   avatarUrl = input<string>();
   rating = input<number>();
   location = input<string>();
-  skills = input<string[]>();
+  skills = input<string>();
   isVerified = input<boolean>();
 }

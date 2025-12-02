@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { UserProfile } from '../../models/interfaces/profile.interface';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProfileService {
+  http = inject(HttpClient)
+
+  private url = "http://localhost:3000/users"
 
   private mockProfile: UserProfile = {
     id: '1',
@@ -15,7 +19,8 @@ export class ProfileService {
     rating: 5.0,
     needsCount: 30,
     servicesCount: 15,
-    location: 'Torre - 50620-520',
+    cep: '50620-520',
+    address: "Torre",
     status: 'AVAILABLE',
     // Exemplo de datas bloqueadas (formato ISO)
     blockedDates: ['2023-11-15', '2023-11-20'], 
@@ -26,7 +31,9 @@ export class ProfileService {
         id: '101',
         title: 'Passear com cachorro',
         price: 100.00,
-        location: 'Torre',
+        address: "50620-520",
+        skills: "Babá",
+        cep: 'Torre',
         description: 'Preciso de alguém para passear com meu cachorro...',
         contractorNick: "vg",
         contractorName: 'Vinicius Gabriel',
@@ -38,16 +45,20 @@ export class ProfileService {
     ]
   };
 
-  private profile$ = new BehaviorSubject<UserProfile>(this.mockProfile);
+  private profile = new BehaviorSubject<UserProfile>(this.mockProfile);
 
-  getProfile() {
-    return this.profile$.asObservable();
+  getProfile(nick ?: string) {
+    if(nick){
+      return this.http.get(`${this.url}/${nick}`);
+    }
+
+    return this.profile.asObservable();
   }
 
   async updateProfile(updatedData: UserProfile): Promise<boolean> {
     await new Promise(resolve => setTimeout(resolve, 1000));
     this.mockProfile = updatedData;
-    this.profile$.next(this.mockProfile);
+    this.profile.next(this.mockProfile);
     return true;
   }
 
@@ -56,7 +67,7 @@ export class ProfileService {
     await new Promise(resolve => setTimeout(resolve, 500));
     this.mockProfile.status = status;
     this.mockProfile.blockedDates = dates;
-    this.profile$.next(this.mockProfile);
+    this.profile.next(this.mockProfile);
     return true;
   }
 }
