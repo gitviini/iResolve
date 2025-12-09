@@ -21,7 +21,8 @@ import com.project.app.config.filter.JwtFilter;
 @EnableWebSecurity
 public class SecurityConfig {
     // public urls
-    private String publicUrl = "/auth/**";
+    // [ALTERADO] Agora é um Array que inclui o H2
+    private String[] publicUrl = { "/auth/**", "/h2-console/**" };
 
     @Autowired
     private JwtFilter jwtFilter;
@@ -33,12 +34,12 @@ public class SecurityConfig {
         // but should it use XSS protection
         http
                 .csrf(csrf -> csrf.disable())
+                // [NOVO] Necessário para liberar os Frames do H2 Console
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(publicUrl)
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated())
+                        .requestMatchers(publicUrl).permitAll()
+                        .anyRequest().authenticated())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
