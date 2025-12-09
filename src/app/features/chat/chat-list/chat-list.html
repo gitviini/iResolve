@@ -1,0 +1,56 @@
+<main>
+    <div class="desktop-container">
+        <header class="hub-header">
+            <h1>Mensagens</h1>
+        </header>
+
+        <div class="search-container">
+            <div class="search-box">
+                <span class="ph ph-magnifying-glass"></span>
+                <input 
+                    type="text" 
+                    placeholder="Pesquisar conversa"
+                    [(ngModel)]="searchTerm"
+                    (input)="filterChat()">
+            </div>
+        </div>
+
+        <h2 class="section-title">Conversas</h2>
+
+        <section class="conversation-list">
+            @for (chat of filteredConversations; track chat.id) {
+                <div class="chat-card" (click)="openChat(chat.id)">
+                    <div class="avatar-area">
+                        <img [src]="chat.targetAvatar" [alt]="chat.targetName">
+                        @if (chat.unreadCount > 0) {
+                            <div class="unread-badge">{{ chat.unreadCount }}</div>
+                        }
+                    </div>
+                    
+                    <div class="chat-info">
+                        <div class="info-top">
+                            <span class="name">
+                                {{ chat.targetName }}
+                                @if (chat.isVerified) {
+                                    <span class="ph-fill ph-seal-check verified-icon"></span>
+                                }
+                            </span>
+                            <span class="time">{{ chat.time }}</span>
+                        </div>
+                        <div class="info-bottom">
+                            <p class="last-message">{{ chat.lastMessage }}</p>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+            @if (filteredConversations.length === 0) {
+                <div style="text-align: center; color: #888; margin-top: 20px;">
+                    Nenhuma conversa encontrada.
+                </div>
+            }
+        </section>
+    </div>
+
+    <app-navbar></app-navbar>
+</main>

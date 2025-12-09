@@ -6,15 +6,18 @@ import { ProfileComponent } from './features/profile/profile.component';
 
 // Import dos Componentes das Features
 import { HomeComponent } from './features/home/home.component';
-import { PublishComponent } from './features/needs/publish/publish.component'; // <--- O erro era a falta deste
+import { PublishComponent } from './features/needs/publish/publish.component';
 import { PaymentComponent } from './features/payment/payment.component';
 import { CheckoutComponent } from './features/payment/checkout/checkout.component';
-import { RateComponent } from './features/review/rate/rate.component'; // Atenção: 'review' no singular
+import { RateComponent } from './features/review/rate/rate.component';
 import { ChatComponent } from './features/chat/chat.component';
 import { VerificationComponent } from './features/verification/verification.component';
 import { Search } from './features/search/search';
 import { Logout } from './features/logout/logout';
 import { Contracts } from './features/contracts/contracts';
+
+// [NOVO] Import da Lista
+import { ChatList } from './features/chat/chat-list/chat-list';
 
 export const routes: Routes = [
     // Redirecionamento inicial
@@ -46,19 +49,17 @@ export const routes: Routes = [
     // UH10 - Home (Mural)
     {
         path: "home",
-        component: HomeComponent, // Agora aponta para o arquivo correto!
+        component: HomeComponent,
         canActivate: [authGuard],
         title: "Início"
     },
 
-    
     {
         path: "search",
-        component: Search, // Agora aponta para o arquivo correto!
+        component: Search,
         canActivate: [authGuard],
         title: "Pesquisar"
     },
-
 
     // UH3 - Publicar
     {
@@ -76,12 +77,20 @@ export const routes: Routes = [
         title: "Verificar Identidade"
     },
 
-    // UH9 - Chat
+    // UH 14 - Hub de Chats
     {
         path: "chat",
-        component: ChatComponent,
+        component: ChatList,
         canActivate: [authGuard],
-        title: "Chat"
+        title: "Mensagens"
+    },
+
+    // [NOVO] Rota para a conversa específica (Sala)
+    {
+        path: "chat/room",
+        component: ChatComponent, 
+        canActivate: [authGuard],
+        title: "Conversa"
     },
 
     // UH6 - Contrato/Pagamento

@@ -54,6 +54,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   goBack() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/chat']);
   }
 }

@@ -1,0 +1,156 @@
+main {
+    width: 100%;
+    min-height: 100dvh;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 80px; 
+}
+
+.desktop-container {
+    width: 100%;
+    max-width: 600px;
+    padding: var(--medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--medium);
+}
+
+.hub-header {
+    text-align: center;
+    padding: var(--medium) 0;
+}
+
+.hub-header h1 {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--foreground);
+}
+
+/* Search Box igual ao Search Component */
+.search-container {
+    padding: 0 var(--small);
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: var(--white);
+    border: 1px solid var(--foreground);
+    border-radius: 30px;
+    padding: 10px 15px;
+    gap: 10px;
+}
+
+.search-box .ph {
+    font-size: 20px;
+    color: #333;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    background: transparent;
+    font-size: 14px;
+    padding-left: 10px; 
+    color: #333;
+}
+
+/* Lista */
+.section-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: var(--small);
+    color: #333;
+}
+
+.conversation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Card da Conversa */
+.chat-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #333; 
+    border-radius: 20px;
+    background-color: var(--white);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    gap: 15px;
+}
+
+.chat-card:hover {
+    background-color: #f9f9f9;
+}
+
+/* Avatar e Badge */
+.avatar-area {
+    position: relative;
+}
+
+.avatar-area img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.unread-badge {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    background-color: var(--red); /* Usando var global */
+    color: white;
+    font-size: 10px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+}
+
+/* Informações */
+.chat-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.verified-icon {
+    color: var(--blue);
+    font-size: 16px;
+}
+
+.time {
+    font-size: 12px;
+    color: #666;
+}
+
+.last-message {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+}

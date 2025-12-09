@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ChatMessage, ChatUser } from '../../models/interfaces/chat.interface';
-import { BehaviorSubject } from 'rxjs';
+import { ChatMessage, ChatUser, ChatSummary } from '../../models/interfaces/chat.interface'; // [NOVO] Import do ChatSummary
+import { BehaviorSubject, Observable, of } from 'rxjs'; // [NOVO] Import do 'of'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  // Mock do Usuário com quem estamos falando
+  // Mock do Usuário com quem estamos falando (na tela de conversa individual)
   targetUser: ChatUser = {
     name: 'Jorge Lucio',
     avatarUrl: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Jorge',
@@ -39,6 +39,48 @@ export class ChatService {
   // Observable para o componente "assistir" as mensagens
   messages$ = new BehaviorSubject<ChatMessage[]>(this.initialMessages);
 
+  // --- [NOVO] LÓGICA DA LISTA DE CONVERSAS (HUB) ---
+
+  // Mock da lista
+  private mockConversations: ChatSummary[] = [
+    {
+      id: '1',
+      targetName: 'Jorge',
+      targetAvatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Jorge',
+      lastMessage: 'Passear com cachorro',
+      time: '27min',
+      unreadCount: 0,
+      isVerified: true
+    },
+    {
+      id: '2',
+      targetName: 'Maria',
+      targetAvatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Maria',
+      lastMessage: 'Cuidar de Hamster',
+      time: '1h10min',
+      unreadCount: 0,
+      isVerified: false
+    },
+    {
+      id: '3',
+      targetName: 'Matheus',
+      targetAvatar: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Matheus',
+      lastMessage: 'Olá, tudo bem?',
+      time: '2d',
+      unreadCount: 3,
+      isVerified: true
+    }
+  ];
+
+  // --- MÉTODOS ---
+
+  // [NOVO] Retorna a lista de conversas
+  getConversations(): Observable<ChatSummary[]> {
+    // Retorna os dados mockados como um Observable (simulando API)
+    return of(this.mockConversations);
+  }
+
+  // Retorna as mensagens do chat atual
   getMessages() {
     return this.messages$.asObservable();
   }

@@ -12,3 +12,13 @@ export interface ChatUser {
     avatarUrl: string;
     isVerified: boolean;
 }
+
+export interface ChatSummary {
+    id: string;
+    targetName: string;
+    targetAvatar: string;
+    lastMessage: string;
+    time: string;
+    unreadCount: number;
+    isVerified: boolean;
+}
