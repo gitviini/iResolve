@@ -3,7 +3,7 @@
     <div class="container-profile-search-box">
       <a [routerLink]="['/profile']">
         <img
-          [src]="profile?.avatarUrl"
+          [src]="profile?.avatarUrl ?? 'logo.svg'"
           alt="profile image"
           class="profile"
         />

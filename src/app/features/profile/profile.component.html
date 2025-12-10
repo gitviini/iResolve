@@ -1,13 +1,10 @@
 <main *ngIf="profile">
   <header class="pattern-header">
-    <div class="header-actions">
+    <div *ngIf="!isEditing && ownProfile" class="header-actions">
       <!-- <a [routerLink]="['/contracts']" class="action-chip white"><span class="ph ph-file-text"></span> Contratos</a> -->
 
       <button class="action-chip white" (click)="toggleEdit()" *ngIf="!isEditing">
         <span class="ph ph-pencil"></span> Editar
-      </button>
-      <button class="action-chip save" (click)="save()" *ngIf="isEditing" [disabled]="isLoading">
-        {{ isLoading ? '...' : 'Salvar' }}
       </button>
 
       <a [routerLink]="['/verification']" class="action-chip white">Verificar perfil</a>
@@ -18,32 +15,37 @@
 
   <section class="profile-content">
     <div class="avatar-wrapper">
-      <img [src]="profile.avatarUrl" alt="Profile" />
-      <button class="camera-btn" *ngIf="isEditing"><span class="ph ph-fill ph-camera"></span></button>
+      <img
+        [src]="profile.avatarUrl ?? 'logo.svg'"
+        alt="Profile" 
+      />
+      <label for="profile-image" class="camera-btn" *ngIf="isEditing"><span class="ph ph-fill ph-camera"></span></label>
+      <input id="profile-image" style="display: none;" name="profile-image" (change)="changeImage($event)" type="file">
     </div>
 
     <div class="main-info">
       <h2 *ngIf="!isEditing">{{ profile.name }}</h2>
       <input *ngIf="isEditing" [(ngModel)]="editForm.name" class="edit-input name-input" />
-      <p class="email">{{ profile.email }}</p>
+      <p *ngIf="!isEditing" class="email">{{ profile.email ?? "*Clique em editar para adicionar email" }}</p>
+      <input *ngIf="isEditing" [(ngModel)]="editForm.email" class="edit-input name-input" />
     </div>
 
     <div class="stats-row">
       <div class="stat">
         <span class="value"
           ><span class="ph ph-fill ph-star star"></span>
-          {{ profile.rating | number : '1.1-1' }}</span
+          {{ profile.rating ?? 0 | number : '1.1-1' }}</span
         >
         <span class="label">Avaliação</span>
       </div>
       <div class="divider"></div>
       <div class="stat">
-        <span class="value">{{ profile.needsCount }}</span>
+        <span class="value">{{ profile.needsCount ?? profile.needs.length ?? 0 }}</span>
         <span class="label">Necessidades</span>
       </div>
       <div class="divider"></div>
       <div class="stat">
-        <span class="value">{{ profile.servicesCount }}</span>
+        <span class="value">{{ profile.servicesCount ?? 0 }}</span>
         <span class="label">Prestações</span>
       </div>
     </div>
@@ -51,39 +53,56 @@
     <div class="location-status">
       <div class="loc-info">
         <span class="ph-fill ph-map-pin"></span>
-        <span *ngIf="!isEditing">{{ profile.address }}</span>
-        <input *ngIf="isEditing" [(ngModel)]="editForm.address" class="edit-input" />
+        <span *ngIf="!isEditing">{{ profile.neighborhood ?? "*Clique em editar para adicionar localização" }}</span>
+        <input *ngIf="isEditing" [(ngModel)]="editForm.neighborhood" class="edit-input" />
       </div>
 
       <button
+        *ngIf="!isEditing"
         class="status-badge"
         [class.available]="profile.status === 'AVAILABLE'"
-        [class.busy]="profile.status === 'BUSY'"
+        [class.busy]="profile.status != 'AVAILABLE'"
         (click)="openCalendar()"
       >
         {{ profile.status === 'AVAILABLE' ? 'Disponível' : 'Indisponível' }}
-        <span class="ph-fill ph-gear"></span>
+        <span *ngIf="ownProfile" class="ph-fill ph-gear"></span>
       </button>
     </div>
 
     <div class="section">
       <h3>Sobre mim</h3>
-      <p *ngIf="!isEditing">{{ profile.bio }}</p>
-      <textarea *ngIf="isEditing" [(ngModel)]="editForm.bio" rows="3" class="edit-input"></textarea>
+      <p *ngIf="!isEditing">{{ profile.biography ?? "*Clique em editar para adicionar biografia"}}</p>
+      <textarea *ngIf="isEditing" [(ngModel)]="editForm.biography" rows="3" class="edit-input"></textarea>
     </div>
     <div class="section">
       <h3>Habilidades</h3>
       <div class="skills-container">
-        @for (skill of profile.skills; track $index) {
-        <span class="skill"><span class="ph ph-tag"></span> {{ skill }}</span>
+        @if(!profile.skills.length){
+          <span>Sem habilidades registradas.</span>
         }
-        <button *ngIf="isEditing" class="add-skill">+</button>
+
+        @for (skill of profile.skills; track $index) {
+          <span class="skill" (click)="removeSkill($index)" ><span [class.ph-tag]="!isEditing" [class.ph-x]="isEditing" class="ph"></span> {{ skill }}</span>
+        }
+
+        <button *ngIf="isEditing && !isAddSkill" (click)="toggleAddSkill()" class="add-skill">+</button>
+
+      </div>
+      <div *ngIf="isAddSkill" class="container-add-skill">
+        <input id="add-skill" placeholder="Habilidade" [(ngModel)]="addSkillContent" type="text">
+        <div class="container-add-skill-options">
+          <button (click)="toggleAddSkill()" class="primary cancel">Cancelar</button>
+          <button (click)="addSkillSave()" class="primary">Adicionar</button>
+        </div>
       </div>
     </div>
 
     <div class="section">
       <h3>Minhas Necessidades</h3>
-      @for (item of profile.myNeeds; track item.id) {
+      @if(!profile.needs){
+          <span>Sem necessidades registradas.</span>
+      }
+      @for (item of profile.needs; track item.id) {
       <app-needcard
         [id]="item.id"
         [nick]="item.contractorNick"
@@ -100,9 +119,14 @@
     </div>
   </section>
 
+  <footer *ngIf="isEditing" class="bottom-edit-options">
+    <button class="primary cancel" (click)="cancel()">Cancelar</button>
+    <button class="primary" (click)="save()">Salvar</button>
+  </footer>
+
   <app-navbar></app-navbar>
 
-  <div class="modal-overlay" *ngIf="showCalendarModal">
+  <div class="modal-overlay" *ngIf="showCalendarModal && ownProfile">
     <div class="modal-card">
       <div class="modal-header-row">
         <h3>Minha Disponibilidade</h3>

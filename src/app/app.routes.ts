@@ -116,9 +116,17 @@ export const routes: Routes = [
         title: "Avaliar Serviço"
     },
 
-    //UH12 - Perfil
+    /* //UH12 - Perfil
     {
         path: "profile",
+        component: ProfileComponent,
+        canActivate: [authGuard],
+        title: "Meu Perfil"
+    }, */
+
+    //UH16 - other profile
+    {
+        path: "profile/:nickname",
         component: ProfileComponent,
         canActivate: [authGuard],
         title: "Meu Perfil"

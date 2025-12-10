@@ -12,7 +12,7 @@ export class OpportunityService {
 
   getOpportunities() : Observable<any> {
     // init page
-    const page = 1;
+    const page = 0;
     const params = {page: page, size: 10};
     const authToken = localStorage.getItem("authToken");
     const headers = {

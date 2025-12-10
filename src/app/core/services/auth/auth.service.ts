@@ -18,7 +18,7 @@ export class AuthService {
    * Retorna o token se existir
    */
   isLogged(){
-    return localStorage.getItem("authToken");
+    return localStorage.getItem("authToken") && localStorage.getItem("user");
   }
 
   // [UH2] Método de Login
