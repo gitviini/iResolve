@@ -1,6 +1,8 @@
 package com.project.app.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -45,11 +47,21 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    private String email;
+
+    private String status;
+
+    private List<LocalDate> blockedDates;
+
     private String neighborhood; // Ex: "Torre"
 
-    private String skills; // Ex: "Pedreiro, Pintor"
+    private List<String> skills; // Ex: "Pedreiro, Pintor"
 
     private Double rating; // Ex: 4.5
+
+    private Double servicesCount;
+
+    private Double needsCount;
 
     private boolean isVerified; // Para o selo azul
 

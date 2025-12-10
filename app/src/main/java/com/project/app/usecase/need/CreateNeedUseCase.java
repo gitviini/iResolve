@@ -45,6 +45,9 @@ public class CreateNeedUseCase {
         need.setAddress(dto.getAddress());
         need.setImageBase64(dto.getImageBase64());
         need.setUser(user);
+        need.setContractorNick(user.getNickname());
+        need.setContractorName(user.getName());
+        need.setContractorAvatar(user.getAvatarUrl());
 
         // Converte a lista de tags ["Casa", "Limpeza"] em string "Casa,Limpeza"
         if (dto.getTags() != null) {

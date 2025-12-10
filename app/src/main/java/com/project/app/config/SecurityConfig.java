@@ -21,7 +21,8 @@ import com.project.app.config.filter.JwtFilter;
 @EnableWebSecurity
 public class SecurityConfig {
     // public urls
-    private String publicUrl = "/auth/**";
+    /* private String publicUrl = "/auth/**"; */
+    private String publicUrl = "/**";
 
     @Autowired
     private JwtFilter jwtFilter;
@@ -32,14 +33,16 @@ public class SecurityConfig {
         // localStorage
         // but should it use XSS protection
         http
+                // TODO: remove in production
+                .headers(headers -> headers.frameOptions(frame-> frame.disable()))
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(publicUrl)
                         .permitAll()
                         .anyRequest()
-                        .authenticated())
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                        .authenticated());
         return http.build();
     }
 

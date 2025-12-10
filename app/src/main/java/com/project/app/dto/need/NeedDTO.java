@@ -1,7 +1,6 @@
 package com.project.app.dto.need;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import com.project.app.entity.Need;
 
@@ -12,9 +11,8 @@ import lombok.Data;
 @Data
 public class NeedDTO {
 
+    @NotBlank(message = "O nick do usuário é obrigatório")
     private String contractorNick;
-    private String contractorName;
-    private String contractorAvatar;
 
     @NotBlank(message = "O CPF do usuário é obrigatório")
     private String userCpf;
@@ -39,8 +37,6 @@ public class NeedDTO {
 
     public static NeedDTO toDTO(Need need) {
         NeedDTO needDTO = new NeedDTO();
-        needDTO.setContractorAvatar(need.getContractorAvatar());
-        needDTO.setContractorName(need.getContractorName());
         needDTO.setContractorNick(need.getContractorNick());
         needDTO.setUserCpf(need.getUser().getCpf());
         needDTO.setTitle(need.getTitle());
