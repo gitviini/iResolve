@@ -25,19 +25,19 @@
         
         @for (msg of messages; track msg.id) {
             
-            @if (msg.isServiceCard) {
+            @if (msg.isServiceCard && msg.serviceDetails) {
                 <div class="message-row me">
                     <div class="service-card-bubble">
                         <div class="card-header">
-                            <span class="service-title">🔗 Passear com cachorro</span>
-                            <span class="service-price">R$100,00</span>
+                            <span class="service-title">🔗 {{ msg.serviceDetails.title }}</span>
+                            <span class="service-price">{{ msg.serviceDetails.price | currency:'BRL' }}</span>
                         </div>
                         <div class="card-details">
-                            <span>📍 Torre</span>
-                            <span>📅 Sair p/ 3 dias...</span>
+                            <span>📍 {{ msg.serviceDetails.location }}</span>
+                            <span>📅 {{ msg.serviceDetails.shortDesc }}</span>
                         </div>
                         <div class="card-divider"></div>
-                        <span class="card-footer">Olá, que horas seria o passeio?</span>
+                        <span class="card-footer">Olá, gostaria de negociar este serviço.</span>
                     </div>
                 </div>
             } 
@@ -56,6 +56,8 @@
                     </div>
                 </div>
             }
+
+            
         }
 
     </section>

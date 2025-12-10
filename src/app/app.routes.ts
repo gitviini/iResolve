@@ -16,6 +16,8 @@ import { Search } from './features/search/search';
 import { Logout } from './features/logout/logout';
 import { Contracts } from './features/contracts/contracts';
 
+import { NeedDetailsComponent } from './features/needs/need-details/need-details.component';
+
 export const routes: Routes = [
     // Redirecionamento inicial
     {
@@ -116,7 +118,22 @@ export const routes: Routes = [
         title: "Avaliar Serviço"
     },
 
-    /* //UH12 - Perfil
+    {
+        path: "needs/:id", // [NOVO] Rota dinâmica
+        component: NeedDetailsComponent,
+        canActivate: [authGuard],
+        title: "Detalhes"
+    },
+
+        // [UH15] Sala de Conversa (Para onde o botão 'Negociar' vai)
+    { 
+        path: "chat/room", 
+        component: ChatComponent, 
+        canActivate: [authGuard], 
+        title: "Conversa" 
+    },
+
+    //UH12 - Perfil
     {
         path: "profile",
         component: ProfileComponent,
