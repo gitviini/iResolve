@@ -29,7 +29,9 @@
         white-space: nowrap;
     }
     .owner-image{
-        width: var(--small-image);
+        max-width: var(--small-image);
+        max-height: var(--small-image);
+        height: var(--small-image);
         border-radius: 100%;
     }
 

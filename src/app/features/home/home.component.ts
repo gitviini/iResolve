@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   toastService = inject(ToastService);
   router = inject(Router);
 
-  page = 1;
+  page = 0;
   maxPage = 1;
   searchTerm: string = '';
 
@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
 
   // --- INIT OPPORTUNITIES ---
   setOpportunities() {
-    this.page = 1;
+    this.page = 0;
     this.opportunityService.getOpportunities().subscribe({
       next: (_data) => {
         const { content, totalPages } = _data;
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     // if page isn't smaller than maxPage: do nothing
     onscroll = (event: any) => {
       if(!event.target) return;
-      if (!this.isLoadingMore && this.page < this.maxPage) {
+      if (!this.isLoadingMore && this.page < this.maxPage - 1 && this.opportunities.length > 0) {
         const element = event.target.scrollingElement;
         // Verifica se chegou no final do scroll (com uma margem de 50px)
         if (element.scrollHeight - element.scrollTop <= element.clientHeight + 70) {
@@ -104,9 +104,8 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.opportunityService.loadMore(this.page).subscribe({
         next: (_data) => {
-          const { data } = _data;
-
-          this.opportunities = [...this.opportunities, ...data];
+          const { content } = _data;
+          this.opportunities = [...this.opportunities, ...content];
         },
         error: (err) => {
           this.toastService.add("Erro ao carregar mais necessidades", 'error');

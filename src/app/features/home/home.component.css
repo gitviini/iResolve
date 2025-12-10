@@ -24,7 +24,9 @@ main {
   align-items: center;
 
   .profile {
-    width: var(--medium-image);
+    max-width: var(--medium-image);
+    max-height: var(--medium-image);
+    height: var(--medium-image);
     border: 1px solid var(--gray);
     border-radius: 100%;
     background-color: var(--white);

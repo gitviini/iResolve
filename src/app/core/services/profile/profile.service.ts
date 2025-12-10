@@ -4,29 +4,29 @@ import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
-  http = inject(HttpClient)
+  http = inject(HttpClient);
 
-  private url = "http://localhost:3000/users"
+  private url = 'http://localhost:8080/users';
 
-  private mockProfile: UserProfile = {
-    id: '1',
-    name: 'Vinicius Gabriel',
-    email: 'vgsb@cesar.school',
+  /* private mockProfile: UserProfile = {
+    name: '...',
+    cpf: "...",
+    nickname: "...",
+    email: '...',
     avatarUrl: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Vinicius',
-    rating: 5.0,
-    needsCount: 30,
-    servicesCount: 15,
-    cep: '50620-520',
-    address: "Torre",
+    rating: 0,
+    needsCount: 0,
+    servicesCount: 0,
+    neighborhood: "",
     status: 'AVAILABLE',
     // Exemplo de datas bloqueadas (formato ISO)
-    blockedDates: ['2023-11-15', '2023-11-20'], 
-    bio: 'Me chamo Vinicius Gabriel, curso ADS na Cesar School e adoro música.',
+    blockedDates: ['2023-11-15', '2023-11-20'],
+    biography: "",
     skills: ['Pedreiro', 'Pintor'],
-    myNeeds: [
+    needs: [
       {
         id: '101',
         title: 'Passear com cachorro',
@@ -43,31 +43,46 @@ export class ProfileService {
         timePosted: 'Agora'
       }
     ]
-  };
+  }; */
 
-  private profile = new BehaviorSubject<UserProfile>(this.mockProfile);
+  private profile = new BehaviorSubject<UserProfile>(
+    JSON.parse(localStorage.getItem('user') ?? '{}')
+  );
 
-  getProfile(nick ?: string) {
-    if(nick){
-      return this.http.get(`${this.url}/${nick}`);
-    }
+  getProfile(nickname?: string) {
+    const authToken = localStorage.getItem('authToken');
+    const headers = {
+      Authorization: `Bearer ${authToken}`,
+    };
 
-    return this.profile.asObservable();
+    const user: UserProfile = JSON.parse(localStorage.getItem('user') ?? '{}');
+    return this.http.get(`${this.url}/${nickname ?? user.nickname}`, { headers: headers });
   }
 
-  async updateProfile(updatedData: UserProfile): Promise<boolean> {
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    this.mockProfile = updatedData;
-    this.profile.next(this.mockProfile);
-    return true;
+  updateProfile(updatedData: UserProfile) {
+    const authToken = localStorage.getItem('authToken');
+    const headers = {
+      "Authorization": `Bearer ${authToken}`,
+      "Content-Type": "application/json",
+    };
+
+    const user: UserProfile = JSON.parse(localStorage.getItem('user') ?? '{}');
+    return this.http.put(`${this.url}/${user.nickname}`, JSON.stringify(updatedData), { headers: headers });
   }
 
   // [UH11] Atualizado para aceitar string[]
-  async updateAvailability(status: 'AVAILABLE' | 'BUSY', dates: string[]): Promise<boolean> {
-    await new Promise(resolve => setTimeout(resolve, 500));
-    this.mockProfile.status = status;
-    this.mockProfile.blockedDates = dates;
-    this.profile.next(this.mockProfile);
-    return true;
+  updateAvailability(status: 'AVAILABLE' | 'BUSY', dates: string[]) {
+    const body = {
+      status: status,
+      blockedDates: dates,
+    };
+    const authToken = localStorage.getItem('authToken');
+    const headers = {
+      "Authorization": `Bearer ${authToken}`,
+      "Content-Type": "application/json",
+    };
+
+    const user: UserProfile = JSON.parse(localStorage.getItem('user') ?? '{}');
+    return this.http.put(`${this.url}/${user.nickname}`, JSON.stringify(body), { headers: headers });
   }
 }
