@@ -1,6 +1,8 @@
 package com.project.app.dto.need;
 
 import java.math.BigDecimal;
+import java.util.UUID;
+import java.util.List;
 
 import com.project.app.entity.Need;
 
@@ -10,6 +12,8 @@ import lombok.Data;
 
 @Data
 public class NeedDTO {
+
+    private UUID id; // [NOVO] Adiciona Campo ID
 
     @NotBlank(message = "O nick do usuário é obrigatório")
     private String contractorNick;
@@ -37,7 +41,16 @@ public class NeedDTO {
 
     public static NeedDTO toDTO(Need need) {
         NeedDTO needDTO = new NeedDTO();
+
+        needDTO.setId(need.getId()); // [NOVO] Seta o ID
+
         needDTO.setContractorNick(need.getContractorNick());
+
+        // Trata null pointer se user não vier carregado
+        if (need.getUser() != null) {
+            needDTO.setUserCpf(need.getUser().getCpf());
+        }
+
         needDTO.setUserCpf(need.getUser().getCpf());
         needDTO.setTitle(need.getTitle());
         needDTO.setDescription(need.getDescription());

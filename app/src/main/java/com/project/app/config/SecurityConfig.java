@@ -36,13 +36,16 @@ public class SecurityConfig {
                 // TODO: remove in production
                 .headers(headers -> headers.frameOptions(frame-> frame.disable()))
                 .csrf(csrf -> csrf.disable())
+                // [NOVO] Necessário para liberar os Frames do H2 Console
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .cors(Customizer.withDefaults())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(publicUrl)
                         .permitAll()
                         .anyRequest()
-                        .authenticated());
+                        .authenticated())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

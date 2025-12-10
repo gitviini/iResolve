@@ -28,5 +28,5 @@ log.txt
 Thumbs.db
 
 # --- BANCO DE DADOS LOCAL ---
-#/data
-#*.db
+/data
+*.db
