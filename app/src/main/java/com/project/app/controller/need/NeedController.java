@@ -3,6 +3,9 @@ package com.project.app.controller.need;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.UUID; // [Importante]
+import java.util.Optional; // [Importante]
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -62,26 +65,22 @@ public class NeedController {
     @Autowired
     private NeedRepository needRepository;
 
-    @GetMapping
-    public ResponseEntity<?> searchProviders(
-            @RequestParam(required = false) String term,
-            @RequestParam(required = false) String tag,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "30") int size
-    ) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getNeedById(@PathVariable UUID id) {
         try {
-            PageRequest pageable = PageRequest.of(page, size);
-            
-            Page<Need> result = needRepository.searchNeeds(term, tag, pageable);
+            Optional<Need> needOptional = needRepository.findById(id);
 
-            var need = new NeedDTO();
+            if (needOptional.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Map.of("message", "Necessidade não encontrada."));
+            }
 
-            Page<NeedDTO> dtos = result.map(NeedDTO::toDTO);
-
-            return ResponseEntity.ok(dtos);
+            Need need = needOptional.get();
+            return ResponseEntity.ok(NeedDTO.toDTO(need));
 
         } catch (Exception e) {
-            return ResponseEntity.status(500).body("Falha ao pesquisar prestadores");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("message", "Erro ao buscar necessidade: " + e.getMessage()));
         }
     }
 
