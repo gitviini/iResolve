@@ -50,7 +50,10 @@ export class Login implements OnInit {
     // Sucesso (Status 200 a 299)
     if (status >= 200 && status < 300) {
       // Salva o token e redireciona
-      if (data.token) localStorage.setItem("authToken", data.token);
+      if (data.token && data.user) {
+        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+      };
       
       this.authService.toastService.add("Login realizado com sucesso!", "sucess");
       this.router.navigate(['/']); 

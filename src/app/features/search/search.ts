@@ -50,7 +50,7 @@ export class Search {
   // --- INIT SET PROVIDERS AND OPPORTUNITIES ---
 
   setProvidersAndOpportunities() {
-    this.page.opportunities = 1;
+    this.page.opportunities = 0;
     this.opportunityService.getOpportunities().subscribe({
       next: (_data) => {
         const { content, totalPages } = _data;
@@ -59,7 +59,7 @@ export class Search {
       },
     });
 
-    this.page.providers = 1;
+    this.page.providers = 0;
     this.providerService.getProviders().subscribe({
       next: (_data) => {
         const { content, totalPages } = _data;
@@ -87,7 +87,7 @@ export class Search {
           break;
       }
 
-      if (!this.isLoadingMore && canLoadingMore) {
+      if (!this.isLoadingMore && canLoadingMore && (this.providers.length > 0 || this.opportunities.length > 0)) {
         const element = event.target.scrollingElement;
         // Verifica se chegou no final do scroll (com uma margem de 50px)
         if (element.scrollHeight - element.scrollTop <= element.clientHeight + 70) {
@@ -143,11 +143,11 @@ export class Search {
     setTimeout(() => {
       this.providerService.loadMore(this.page.providers).subscribe({
         next: (_data) => {
-          const { data } = _data;
+          const { content } = _data;
 
-          console.log(data)
+          console.log(content)
 
-          this.providers = [...this.providers, ...data];
+          this.providers = [...this.providers, ...content];
         },
         error: (err) => {
           console.error('Erro ao carregar provedores:', err);
@@ -165,9 +165,9 @@ export class Search {
     setTimeout(() => {
       this.opportunityService.loadMore(this.page.opportunities).subscribe({
         next: (_data) => {
-          const { data } = _data;
+          const { content } = _data;
 
-          this.opportunities = [...this.opportunities, ...data];
+          this.opportunities = [...this.opportunities, ...content];
         },
         error: (err) => {
           console.error('Erro ao carregar necessidades:', err);

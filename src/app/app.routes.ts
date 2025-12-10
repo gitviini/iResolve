@@ -139,6 +139,14 @@ export const routes: Routes = [
         component: ProfileComponent,
         canActivate: [authGuard],
         title: "Meu Perfil"
+    }, */
+
+    //UH16 - other profile
+    {
+        path: "profile/:nickname",
+        component: ProfileComponent,
+        canActivate: [authGuard],
+        title: "Meu Perfil"
     },
 
     // LOGOUT

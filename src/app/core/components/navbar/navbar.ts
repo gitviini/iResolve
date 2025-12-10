@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { UserProfile } from '../../models/interfaces/profile.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,8 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class Navbar {
   router = inject(Router);
+
+  user : UserProfile = JSON.parse(localStorage.getItem("user") ?? "{}")
 
   linkList = [
     {
@@ -28,7 +31,7 @@ export class Navbar {
     },
     {
       "icon": "ph-user",
-      "href": "/profile",
+      "href": `/profile/${this.user.nickname}`,
       "active": false
     }
   ];

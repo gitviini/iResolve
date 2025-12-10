@@ -122,6 +122,10 @@ button {
         }
     }
 
+    &.cancel {
+        background-color: var(--red);
+    }
+
     &.deactivate {
         opacity: 0.5;
     }
