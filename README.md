@@ -57,5 +57,8 @@ link: [trello iResolve](https://trello.com/invite/b/68d1d3b16aae0205c2c07d29/ATT
 ## :bookmark: Relato programação adaptada
 link: [Relato](https://docs.google.com/document/d/1F64CkXrqLRMOaH-vpo6EcGsP7bv1XS18gri3NqSjUpU/edit?usp=sharing)
 
+## :scroll: Contributing
+[↪ Descrição](CONTRIBUTING.md)
+
 ## :scroll: Dev Documentation
 link: [Documentação do projeto](https://docs.google.com/document/d/1f4NxQz_QvtPDz8-lhgybyDI0kk3L76br2evO7AL-GtA/edit?usp=sharing)
