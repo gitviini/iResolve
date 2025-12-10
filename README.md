@@ -30,7 +30,7 @@ O iResolve é uma plataforma de micro-trabalhos, desenhada para criar um ecossis
 
 ## :play_or_pause_button: Screencast
 
-<a href="https://drive.google.com/file/d/1Z96b5DC-VthR6tXtd6-uh1292Y8Sm98j/view?usp=sharing" target="_blank"> 
+<a href="https://drive.google.com/file/d/1-5ImgUApb2UUrsksjYPfsZ1bvtsT7MN0/view?usp=sharing" target="_blank"> 
 
 ![Video Preview](./iresolve_video_preview.png)
 
