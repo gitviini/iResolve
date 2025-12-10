@@ -1,14 +1,32 @@
 export interface ChatMessage {
     id: string;
-    senderId: string; // 'ME' ou 'OTHER'
+    senderId: string;
     text?: string;
-    imageUrl?: string; // Opcional, para fotos
+    imageUrl?: string; 
     timestamp: Date;
-    isServiceCard?: boolean; // Para renderizar aquele card de "Passear com cachorro"
+    
+    // [NOVOS CAMPOS UH15]
+    isServiceCard?: boolean; 
+    serviceDetails?: {
+        title: string;
+        price: number;
+        location: string;
+        shortDesc: string;
+    };
 }
 
 export interface ChatUser {
     name: string;
     avatarUrl: string;
+    isVerified: boolean;
+}
+
+export interface ChatSummary {
+    id: string;
+    targetName: string;
+    targetAvatar: string;
+    lastMessage: string;
+    time: string;
+    unreadCount: number;
     isVerified: boolean;
 }

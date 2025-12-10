@@ -1,0 +1,50 @@
+<main *ngIf="need">
+  <header class="simple-header">
+    <button (click)="goBack()" class="back-btn">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <h2>Anúncio</h2>
+    <div style="width: 24px"></div>
+  </header>
+
+  <section class="scroll-content">
+    <div class="user-row">
+      <img [src]="need.contractorAvatar" class="avatar">
+      <span class="name">{{ need.contractorName }}</span>
+      <img *ngIf="need.isVerified" src="/icons/sucess.svg" width="16">
+    </div>
+
+    <h1 class="page-title">{{ need.title }}</h1>
+
+    <div class="gallery">
+      <img *ngFor="let img of need.images" [src]="img" class="gallery-img">
+    </div>
+
+    <div class="info-pill location">
+      <span>📍 {{ need.address }}</span>
+    </div>
+
+    <div class="tags-row">
+      <div class="info-pill tag">🏷️ {{ need.skills }}</div>
+      <div class="info-pill tag">📦 {{ need.category || 'Serviço' }}</div>
+    </div>
+
+    <div class="price-pill">
+      💲 {{ need.price | currency:'BRL' }} <span class="info-i">ℹ️</span>
+    </div>
+
+    <div class="desc-box">
+      <span class="desc-icon">≡</span>
+      <p>{{ need.description }}</p>
+    </div>
+  </section>
+
+  <footer class="actions-footer">
+    <button class="icon-btn">❤️</button>
+    <button class="icon-btn">🔗</button>
+    
+    <button class="negotiate-btn" (click)="startNegotiation()">
+      Negociar ✈️
+    </button>
+  </footer>
+</main>
