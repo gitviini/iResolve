@@ -10,11 +10,15 @@ import org.springframework.data.repository.query.Param;
 
 import com.project.app.entity.Need;
 import com.project.app.entity.User;
+import java.util.List;
+
 
 public interface NeedRepository extends JpaRepository<Need, UUID> {
     // Verifica se já existe uma necessidade com este título para este usuário
     // (Regra: "Caso necessidade já exista")
     boolean existsByTitleAndUser(String title, User user);
+
+    List<Need> findByContractorNick(String contractorNick);
 
     @Query("SELECT n FROM Need n WHERE " +
             "(:term IS NULL OR " +

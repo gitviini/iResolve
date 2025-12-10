@@ -24,14 +24,8 @@ import jakarta.validation.Valid;
 @RequestMapping("/needs")
 public class NeedController {
 
-    private final UserController userController;
-
     @Autowired
     private CreateNeedUseCase createNeedUseCase;
-
-    NeedController(UserController userController) {
-        this.userController = userController;
-    }
 
     @PostMapping
     public ResponseEntity<?> createNeed(@Valid @RequestBody NeedDTO needDTO) {
@@ -41,7 +35,7 @@ public class NeedController {
             // Sucesso (201 Created)
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Necessidade criada com sucesso!");
-            response.put("needId", createdNeed.getId());
+            response.put("need", createdNeed);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
@@ -73,8 +67,6 @@ public class NeedController {
             PageRequest pageable = PageRequest.of(page, size);
             
             Page<Need> result = needRepository.searchNeeds(term, tag, pageable);
-
-            var need = new NeedDTO();
 
             Page<NeedDTO> dtos = result.map(NeedDTO::toDTO);
 
