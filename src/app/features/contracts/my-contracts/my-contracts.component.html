@@ -1,0 +1,63 @@
+<main>
+    <header class="header">
+        <button class="back-btn" (click)="goBack()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6" />
+            </svg>
+        </button>
+        <h2>Meus Contratos</h2>
+    </header>
+
+    <div class="tabs-container">
+        <div class="tabs">
+            <button class="tab-btn" [class.active]="activeTab === 'ACTIVE'" (click)="switchTab('ACTIVE')">
+                Em Andamento
+            </button>
+            <button class="tab-btn" [class.active]="activeTab === 'HISTORY'" (click)="switchTab('HISTORY')">
+                Histórico
+            </button>
+        </div>
+    </div>
+
+    <section class="list-container">
+        @for (contract of filteredContracts; track contract.id) {
+            <div class="contract-card" (click)="openDetails(contract.id)">
+                
+                <div class="card-top">
+                    <div class="user-row">
+                        <img [src]="contract.counterpartyAvatar" class="avatar">
+                        <div class="info">
+                            <span class="role-label">
+                                {{ contract.role === 'CONTRACTOR' ? 'Contratado:' : 'Cliente:' }}
+                            </span>
+                            <strong>{{ contract.counterpartyName }}</strong>
+                        </div>
+                    </div>
+                    <div class="status-badge" [ngClass]="contract.status">
+                        {{ contract.status === 'IN_PROGRESS' ? 'Executando' : 
+                           contract.status === 'PENDING' ? 'Pendente' :
+                           contract.status === 'COMPLETED' ? 'Concluído' : 'Cancelado' }}
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <h3>{{ contract.title }}</h3>
+                    <p>{{ contract.description }}</p>
+                    
+                    <div class="meta-info">
+                        <span class="date">📅 {{ contract.startDate }}</span>
+                        <span class="price">R$ {{ contract.price | number:'1.2-2' }}</span>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+        @if (filteredContracts.length === 0) {
+            <div class="empty-state">
+                <span style="font-size: 40px; margin-bottom: 10px;">📭</span>
+                <p>Nenhum contrato encontrado nesta aba.</p>
+            </div>
+        }
+    </section>
+</main>

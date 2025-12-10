@@ -1,7 +1,7 @@
 <main *ngIf="profile">
     <header class="pattern-header">
         <div class="header-actions">
-            <button class="action-chip white">
+            <button class="action-chip white" [routerLink]="['/contracts']">
                 📄 Contratos
             </button>
             
@@ -76,19 +76,56 @@
         </div>
 
         <div class="section">
-            <h3>Minhas Necessidades</h3>
-            @for (item of profile.myNeeds; track item.id) {
-                <div class="mini-card">
-                    <div class="mini-header">
-                        <img [src]="item.contractorAvatar" class="mini-avatar">
-                        <div class="mini-info">
-                            <strong>{{ item.contractorName }}</strong>
-                            <small>{{ item.timePosted }}</small>
+            <div class="profile-tabs">
+                <button 
+                    class="p-tab" 
+                    [class.active]="activeProfileTab === 'MY_NEEDS'"
+                    (click)="activeProfileTab = 'MY_NEEDS'">
+                    Publicadas ({{ profile.myNeeds.length }})
+                </button>
+                <button 
+                    class="p-tab" 
+                    [class.active]="activeProfileTab === 'APPLICATIONS'"
+                    (click)="activeProfileTab = 'APPLICATIONS'">
+                    Candidaturas ({{ profile.myApplications.length }})
+                </button>
+            </div>
+
+            @if (activeProfileTab === 'MY_NEEDS') {
+                @for (item of profile.myNeeds; track item.id) {
+                    <div class="mini-card">
+                        <div class="mini-header">
+                            <img [src]="item.contractorAvatar" class="mini-avatar">
+                            <div class="mini-info">
+                                <strong>{{ item.contractorName }}</strong>
+                                <small>{{ item.timePosted }}</small>
+                            </div>
+                            <strong class="price">R$ {{ item.price }}</strong>
                         </div>
-                        <strong class="price">R$ {{ item.price }}</strong>
+                        <p class="mini-title">{{ item.title }}</p>
                     </div>
-                    <p class="mini-title">{{ item.title }}</p>
-                </div>
+                }
+            }
+
+            @if (activeProfileTab === 'APPLICATIONS') {
+                @for (app of profile.myApplications; track app.id) {
+                    <div class="mini-card application-card">
+                        <div class="mini-header">
+                            <img [src]="app.contractorAvatar" class="mini-avatar">
+                            <div class="mini-info">
+                                <strong>{{ app.contractorName }}</strong>
+                                <div class="status-tag pending">Aguardando</div>
+                            </div>
+                            <strong class="price">R$ {{ app.price }}</strong>
+                        </div>
+                        <p class="mini-title">{{ app.title }}</p>
+                    </div>
+                }
+                @if (profile.myApplications.length === 0) {
+                    <p style="text-align: center; color: #999; font-size: 12px; margin-top: 10px;">
+                        Você ainda não se candidatou a nenhuma vaga.
+                    </p>
+                }
             }
         </div>
     </section>

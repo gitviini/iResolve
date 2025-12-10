@@ -2,16 +2,17 @@ import { Routes } from '@angular/router';
 import { Register } from "./features/auth/register/register";
 import { Login } from "./features/auth/login/login";
 import { authGuard } from './core/guards/auth-guard';
-import { ProfileComponent } from './features/profile/profile.component';
 
 // Import dos Componentes das Features
 import { HomeComponent } from './features/home/home.component';
-import { PublishComponent } from './features/needs/publish/publish.component'; // <--- O erro era a falta deste
+import { PublishComponent } from './features/needs/publish/publish.component';
 import { PaymentComponent } from './features/payment/payment.component';
 import { CheckoutComponent } from './features/payment/checkout/checkout.component';
-import { RateComponent } from './features/review/rate/rate.component'; // Atenção: 'review' no singular
+import { RateComponent } from './features/review/rate/rate.component';
 import { ChatComponent } from './features/chat/chat.component';
 import { VerificationComponent } from './features/verification/verification.component';
+import { ProfileComponent } from './features/profile/profile.component';
+import { MyContractsComponent } from './features/contracts/my-contracts/my-contracts.component'; // <--- Import Novo
 
 export const routes: Routes = [
     // Redirecionamento inicial
@@ -40,10 +41,10 @@ export const routes: Routes = [
 
     // --- ROTAS PRIVADAS (Protegidas) ---
     
-    // UH10 - Home (Mural)
+    // UH10/UH5/UH13 - Home (Mural)
     {
         path: "home",
-        component: HomeComponent, // Agora aponta para o arquivo correto!
+        component: HomeComponent,
         canActivate: [authGuard],
         title: "Início"
     },
@@ -96,12 +97,20 @@ export const routes: Routes = [
         title: "Avaliar Serviço"
     },
 
-    //UH12 - Perfil
+    // UH12/UH11 - Perfil
     {
         path: "profile",
         component: ProfileComponent,
         canActivate: [authGuard],
         title: "Meu Perfil"
+    },
+
+    // NOVA ROTA - Meus Contratos
+    {
+        path: "contracts",
+        component: MyContractsComponent,
+        canActivate: [authGuard],
+        title: "Meus Contratos"
     }
 ];
 

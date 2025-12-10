@@ -10,8 +10,9 @@ export interface UserProfile {
     servicesCount: number;
     location: string;
     status: 'AVAILABLE' | 'BUSY';
-    blockedDates: string[]; // MUDOU: Agora é lista de strings 'YYYY-MM-DD'
+    blockedDates: string[];
     bio: string;
     skills: string[];
     myNeeds: Opportunity[];
+    myApplications: Opportunity[];
 }
