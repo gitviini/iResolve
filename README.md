@@ -45,5 +45,8 @@ O iResolve é uma plataforma de micro-trabalhos, desenhada para criar um ecossis
 link: [trello iResolve](https://trello.com/invite/b/68d1d3b16aae0205c2c07d29/ATTIb0afe195adb4e00e5b0fb60bbca4226d9C51A98A/iresolve)
 ![Trello Project Image](./trello.png)
 
+## :bar_chart: Sprint 1
+![Trello Sprint1 Image]()
+
 ## :scroll: Dev Documentation
 link: [Documentação do projeto](https://docs.google.com/document/d/1f4NxQz_QvtPDz8-lhgybyDI0kk3L76br2evO7AL-GtA/edit?usp=sharing)
